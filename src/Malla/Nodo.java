@@ -6,7 +6,7 @@ public class Nodo {
 	private String type, color;
 	
 	public Nodo(int size){
-		this.next = null
+		this.next = null;
 		this.up = null;
 		this.down = null;
 		this.left = null;

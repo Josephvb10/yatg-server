@@ -19,23 +19,29 @@ public class LinkedMatrix {
 
 	public Nodo simpleUnlinkedList(){
 		int i, j;
+		int nodos =0;
 		
 		Nodo temp = this.head;
 		while(nodos < this.numNodes) {
-			for(i; i < numRows; i++){
-				for(j = 1; j< numCols +1; j++){
+			for(i =0; i < numRows; i++){
+				if(i==0)j=1;
+				else{j=0;}
+				for(j = 1; j< numCols ; j++){
 					Nodo nuevoNodo = new Nodo(30);
 					nuevoNodo.setIndex(i, j);
 					temp.setNext(nuevoNodo);
-					temp = temp.getNext;
+					temp = temp.getNext();
+					nodos ++;
 					
 			}
 			
 		}
 		
 	}
+		System.out.println("holi");
+		this.head.getNext().getNext().getIndex();
 		displayList(this.head);
-		return this.head;
+		return this.head;}
 		
 		
 		
@@ -60,7 +66,7 @@ public class LinkedMatrix {
 		Nodo temp = this.head;
 		while(temp != null){
 			temp.getIndex();
-			temp = temp.next;
+			temp = temp.getNext();
 		}
 	}
 	
