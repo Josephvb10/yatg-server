@@ -9,7 +9,7 @@ public class LinkedMatrix {
 		this.head = null;
 		this.numRows = numRows;
 		this.numCols = numCols;
-		this.numNodes = numCols * numRows;
+
 		initRowOne();
 		
 	}
