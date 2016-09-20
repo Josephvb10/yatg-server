@@ -9,11 +9,36 @@ public class LinkedMatrix {
 		this.head = null;
 		this.numRows = numRows;
 		this.numCols = numCols;
+		this.numNodes = numRows * numCols;
 
 		initRowOne();
+		simpleUnlinkedList();
 		
 	}
 	
+
+	public Nodo simpleUnlinkedList(){
+		int i, j;
+		
+		Nodo temp = this.head;
+		while(nodos < this.numNodes) {
+			for(i; i < numRows; i++){
+				for(j = 1; j< numCols +1; j++){
+					Nodo nuevoNodo = new Nodo(30);
+					nuevoNodo.setIndex(i, j);
+					temp.setNext(nuevoNodo);
+					temp = temp.getNext;
+					
+			}
+			
+		}
+		
+	}
+		displayList(this.head);
+		return this.head;
+		
+		
+		
 	
 	public void insertLast(Nodo nodo){
 		if(this.head==null){
@@ -31,10 +56,11 @@ public class LinkedMatrix {
 	}
 	
 	
-	public void displayLists(){
+	public void displayList(Nodo lista){
 		Nodo temp = this.head;
 		while(temp != null){
-			
+			temp.getIndex();
+			temp = temp.next;
 		}
 	}
 	

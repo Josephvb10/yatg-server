@@ -1,11 +1,12 @@
 package Malla;
 
 public class Nodo {
-	private Nodo up, down, left, right;
+	private Nodo up, down, left, right, next;
 	private int indexI, indexJ, size;
 	private String type, color;
 	
 	public Nodo(int size){
+		this.next = null
 		this.up = null;
 		this.down = null;
 		this.left = null;
@@ -18,6 +19,14 @@ public class Nodo {
 		
 	}
 
+	public Nodo getNext(){
+		return next;
+	}
+	
+	public void setNext(Nodo nodo){
+		this.next = nodo;
+	}
+	
 	public Nodo getUp() {
 		return up;
 	}
