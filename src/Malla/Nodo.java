@@ -64,7 +64,7 @@ public class Nodo {
 		this.indexJ = j;
 	}
 	
-	public void getIndex(){ System.out.print( "(" + this.indexI + " , " + this.indexJ + ")");
+	public void getIndex(){ System.out.print( "[" + this.indexI + " , " + this.indexJ + "]");
 
 	}
 

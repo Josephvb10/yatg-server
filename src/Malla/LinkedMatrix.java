@@ -11,20 +11,15 @@ public class LinkedMatrix {
 		this.numCols = numCols;
 		this.numNodes = numRows * numCols;
 
-
-		simpleUnlinkedList();
-		
+		simpleUnlinkedList();	
+		return;
 	}
 	
-
 	public Nodo simpleUnlinkedList(){
-		System.out.println(this.numNodes);
 		int i, jj;
-		int deb = 101;
 		int nodos =1;
 		this.head = new Nodo(30);
 		Nodo temp = this.head;
-		temp.setType("Yo soy la cabeza");
 		while(nodos < this.numNodes) {
 			for(i =0; i < this.numRows; i++){
 				if(i==0)jj=1;
@@ -32,24 +27,14 @@ public class LinkedMatrix {
 				for(int j = jj; j< this.numCols ; j++){
 					Nodo nuevoNodo = new Nodo(30);
 					nuevoNodo.setIndex(i, j);
-					nuevoNodo.setType("Soy el nodo " + deb );
 					temp.setNext(nuevoNodo);
 					temp = temp.getNext();
 					nodos ++;
-					deb ++;
 					if(nodos == this.numNodes)break;
 			}
-				System.out.println("despues del ciclo j hay" + nodos + "nodos");
-				if(nodos == this.numNodes)break;
-			
-		}
-			System.out.println("despues del ciclo i hay" + nodos + "nodos");
-		
+				if(nodos == this.numNodes)break;			
+		}		
 	}
-		System.out.println(this.numCols + this.numRows);
-		
-		System.out.println("holi");
-		this.head.getNext().getIndex();
 		displayList(this.head);
 		fourWayLinkedList();
 		return this.head;}
@@ -62,22 +47,15 @@ public class LinkedMatrix {
 				result = temp;
 				break;
 			}
-			temp = temp.getNext();
-			
+			temp = temp.getNext();		
 		}
 		if(result == null){
-			System.out.println("No esta el indice");
-			
+			System.out.println("No esta el indice");			
 		}
-
-		return result;
-		
-		
+		return result;		
 	}
 	
 	public void fourWayLinkedList(){
-		Nodo originalHead = new Nodo(30);
-		originalHead.setNext(this.head.getNext());
 		Nodo temp = this.head;
 		// up
 		while(temp != null){
@@ -122,18 +100,16 @@ public class LinkedMatrix {
 
 		}
 
-		
-		
-	
-
-	
-	
 	public void displayList(Nodo lista){
 		Nodo temp = this.head;
 		while(temp != null){
-			System.out.print(temp.getType());
-			temp.getIndex();
-			temp = temp.getNext();
+			for(int i =0; i<this.numRows; i++){
+				for(int j=0; j<this.numCols; j++){
+					temp.getIndex();
+					temp = temp.getNext();
+				}
+				System.out.println();
+			}		
 		}
 	}
 	
