@@ -48,5 +48,9 @@ class OutputMessage {
 	public void setMap(LinkedMatrix map) {
 		this.map = map;
 	}
+	public String getJson(){
+		String messageJson = JsonConverter.objectToJson(this);
+		return messageJson;
+	}
 	
 }
