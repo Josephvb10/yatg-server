@@ -2,14 +2,15 @@ package Malla;
 import Malla.*;
 
 public class LinkedMatrix {
-	private Nodo head;
-	private int numRows, numCols, numNodes;
+	public Nodo head;
+	public int numRows, numCols, numNodes, size;
 	
-	public LinkedMatrix(int numRows, int numCols){
+	public LinkedMatrix(int numRows, int numCols, int size){
 		this.head = null;
 		this.numRows = numRows;
 		this.numCols = numCols;
 		this.numNodes = numRows * numCols;
+		this.size = size;
 
 		simpleUnlinkedList();	
 		return;
@@ -18,14 +19,14 @@ public class LinkedMatrix {
 	public Nodo simpleUnlinkedList(){
 		int i, jj;
 		int nodos =1;
-		this.head = new Nodo(30);
+		this.head = new Nodo(size);
 		Nodo temp = this.head;
 		while(nodos < this.numNodes) {
 			for(i =0; i < this.numRows; i++){
 				if(i==0)jj=1;
 				else{jj=0;}
 				for(int j = jj; j< this.numCols ; j++){
-					Nodo nuevoNodo = new Nodo(30);
+					Nodo nuevoNodo = new Nodo(size);
 					nuevoNodo.setIndex(i, j);
 					temp.setNext(nuevoNodo);
 					temp = temp.getNext();
