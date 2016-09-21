@@ -59,7 +59,7 @@ public class OutputServer{
 			try {
 				Socket listenerSocket = new Socket(listenersIterator.next(), port);
 				DataOutputStream outputFlow = new DataOutputStream(listenerSocket.getOutputStream());
-				outputFlow.writeUTF(outputMessage.getJson())
+				outputFlow.writeUTF(outputMessage.getJson());
 				outputFlow.close();
 				listenerSocket.close();
 				
