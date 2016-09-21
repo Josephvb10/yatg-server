@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import Malla.*;
 
 @SuppressWarnings("serial")
-public class Screen extends JPanel implements MouseListener, KeyListener, Runnable{
+public class Screen extends JPanel implements KeyListener, Runnable{
 	public static final int SIZE=900;
 	public boolean RIGHT, LEFT, UP, DOWN, RUN;
 	public LinkedMatrix matrix;
@@ -26,7 +26,6 @@ public class Screen extends JPanel implements MouseListener, KeyListener, Runnab
 		setPreferredSize( new Dimension(SIZE, SIZE));
 		setFocusable(true);
 		requestFocus();
-		addMouseListener(this);
 		addKeyListener(this);
 		this.matrix = new LinkedMatrix(SIZE/50, SIZE/50, 50);
 		this.currentNode = this.matrix.getNodo(this.matrix.numRows/2, this.matrix.numCols/2);
@@ -35,9 +34,6 @@ public class Screen extends JPanel implements MouseListener, KeyListener, Runnab
 		this.DOWN=false;
 		this.UP=false;
 		this.RUN=true;
-		
-		
-
 		repaint();
 
 	}
@@ -68,39 +64,11 @@ public class Screen extends JPanel implements MouseListener, KeyListener, Runnab
 		
 	}
 	
-
-	
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		Nodo temp = matrix.head;
-		while(temp != null){
-			if(e.getX()>temp.getXL() && e.getX()<temp.getXR() && e.getY()< temp.getYR() && e.getY()>temp.getYL()){
-				temp.getIndex();
-				if(temp.getColor()==null){
-				temp.getRight().setColor(Color.blue);
-				temp.getLeft().setColor(Color.green);
-				temp.getUp().setColor(Color.CYAN);
-				temp.getDown().setColor(Color.magenta);
-				temp.setColor(Color.red);}
-				else{temp.setColor(Color.LIGHT_GRAY);}
-				repaint();
-				
-				
-				
-			}
-			temp = temp.getNext();
-				
-		}
-		
-	    }
 	
 	@Override
 	public void addNotify(){
-
 		super.addNotify();
 		thread = new Thread(this);
-		//thread.start();
 	}
 	
 	@Override
@@ -155,29 +123,8 @@ public class Screen extends JPanel implements MouseListener, KeyListener, Runnab
 			this.currentNode.setColor(Color.BLUE);
 			this.currentNode.getDown().setColor(Color.white);
 		}
-		currentNode.getIndex();
+		currentNode.getIndex();}
 		
-	}
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
 	@Override
 	public void keyPressed(KeyEvent key) {
 		int k = key.getKeyCode();
@@ -187,8 +134,6 @@ public class Screen extends JPanel implements MouseListener, KeyListener, Runnab
 		if(k == KeyEvent.VK_LEFT){LEFT=true;DOWN=false;UP=false;RIGHT=false;}
 		if(k == KeyEvent.VK_UP){UP=true;DOWN=false;LEFT=false;RIGHT=false;}
 		
-
-
 		
 	}
 	@Override
