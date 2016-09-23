@@ -9,9 +9,9 @@ public class Test {
 		nueva_lista.add("hola1");
 		nueva_lista.add("hola2");
 		nueva_lista.add("hola3");
-		String resultado = nueva_lista.getAtPosition(2);
-		System.out.println(resultado);
-		
+		nueva_lista.insertAtBeggining("hola0");
+		System.out.println(nueva_lista.getAtPosition(2));
+		System.out.println(nueva_lista.getAtPosition(0));		
 		
 	}
 
