@@ -11,13 +11,21 @@ public class GenericLinkedList<T> {
 		return head;
 	}
 
+	
 	public void setHead(GenericNode<T> head) {
 		this.head = head;
 	}
-
-	public void add(GenericNode<T> newNode) {
-		this.getLast().setNext(newNode);
+	public void add(T data) {
+		GenericNode<T> newNode = new GenericNode<>(data);
+		this.add(newNode);
 	}
+	public void add(GenericNode<T> newNode) {
+		if (this.head!=null){
+		this.getLast().setNext(newNode);
+	}else{
+		this.head=newNode;
+	}
+		}
 
 	private GenericNode<T> getLast() {
 		GenericNode<T> current = head;
@@ -40,7 +48,10 @@ public class GenericLinkedList<T> {
 		return cont;
 	}
 
-	public GenericNode<T> getAtPosition(int position) {
+	public T getAtPosition(int position) {
+		return this.getNodeAtPosition(position).getData();
+	}
+	public GenericNode<T> getNodeAtPosition(int position) {
 		GenericNode<T> current = head;
 		GenericNode<T> result = null;
 		int cont = 0;
@@ -55,7 +66,10 @@ public class GenericLinkedList<T> {
 
 		return result;
 	}
-
+	public boolean insertAtPosition(T data, int position) {
+		GenericNode<T> newNode = new GenericNode<>(data);
+		return this.insertAtPosition(newNode, position);
+	}
 	public boolean insertAtPosition(GenericNode<T> newNode, int position) {
 		GenericNode<T> current = head;
 		int cont = 0;
@@ -77,28 +91,28 @@ public class GenericLinkedList<T> {
 		return result;
 	}
 
-	public boolean deleteAtPosition(int position) {
+	public T deleteAtPosition(int position) {
 		GenericNode<T> current = head;
-		boolean result = false;
+		T result = null;
 		if (this.checkPosition(position)) {
 			if (position == 0) {
 				head = head.getNext();
-				result = true;
+				result = head.getData();
 			} else if (position == this.getSize() - 1) {
-				this.getAtPosition(position - 1).setNext(null);
+				this.getNodeAtPosition(position - 1).setNext(null);
 			}
 
 			else {
-				current = this.getAtPosition(position - 1);
+				
+				current = this.getNodeAtPosition(position - 1);
+				result = current.getNext().getData();
 				current.setNext(current.getNext().getNext());
 			}
 
-			result = true;
+			
 		}
 		return result;
 	}
-
-	
 
 	private boolean checkPosition(int position) {
 		return position >= 0 && position < this.getSize();
