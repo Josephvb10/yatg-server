@@ -117,7 +117,10 @@ public class GenericLinkedList<T> {
 	private boolean checkPosition(int position) {
 		return position >= 0 && position < this.getSize();
 	}
-
+	public void insertAtBeggining(T data) {
+		GenericNode<T> newNode = new GenericNode<>(data);
+		this.insertAtBeggining(newNode);
+	}
 	public void insertAtBeggining(GenericNode<T> newNode) {
 		newNode.setNext(this.head);
 		this.head = newNode;
