@@ -10,11 +10,11 @@ public class GameWindow {
 	public static void main(String[] args){
 	
 	JFrame frame = new JFrame("TRON");
-	frame.setContentPane(new TronGamePanel());
+	frame.setContentPane(new Screen());
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	frame.setResizable(false);
+	frame.setResizable(true);
 	frame.pack();
-	frame.setPreferredSize(new Dimension(TronGamePanel.SIZE, TronGamePanel.SIZE));
+	frame.setPreferredSize(new Dimension(Screen.SIZE, Screen.SIZE));
 	frame.setLocationRelativeTo(null);
 	frame.setVisible(true);
 	}

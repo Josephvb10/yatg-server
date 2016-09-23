@@ -4,7 +4,7 @@ import Malla.*;
 public class MainTron {
 
 	public static void main(String[] args) {
-		LinkedMatrix malla = new LinkedMatrix(5,5);
+		LinkedMatrix malla = new LinkedMatrix(10,10,50);
 
 		
 
