@@ -14,7 +14,7 @@ import Malla.*;
 
 @SuppressWarnings("serial")
 public class Screen extends JPanel implements KeyListener, Runnable{
-	public static final int SIZE=900;
+	public static final int SIZE=800;
 	public boolean RIGHT, LEFT, UP, DOWN, RUN;
 	public LinkedMatrix matrix;
 	public Nodo currentNode;
@@ -27,7 +27,7 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 		setFocusable(true);
 		requestFocus();
 		addKeyListener(this);
-		this.matrix = new LinkedMatrix(SIZE/50, SIZE/50, 50);
+		this.matrix = new LinkedMatrix(SIZE/20, SIZE/20, 20);
 		this.currentNode = this.matrix.getNodo(this.matrix.numRows/2, this.matrix.numCols/2);
 		this.RIGHT=false;
 		this.LEFT=false;
