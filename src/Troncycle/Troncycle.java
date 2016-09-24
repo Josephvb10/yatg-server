@@ -53,16 +53,14 @@ public class Troncycle {
 	public void addHead(){
 		if (this.head==null){
 			this.head = new Nodo(20);
-			this.head.setColor(Color.cyan);
+
 		}
 		else{
 			Nodo newHead = new Nodo(20);
 			newHead.setNext(this.head);
 			this.head = newHead;
-			this.head.setColor(Color.cyan);
-			
-			
 		}
+			this.head.setColor(Color.PINK);
 		this.lenght++;
 	}
 	

@@ -5,8 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 
 import javax.swing.JPanel;
 
@@ -20,6 +19,7 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 	public LinkedMatrix matrix;
 	public Nodo currentNode;
 	public Troncycle cycle;
+	public boolean cycleset, gameover;
 	
 	private Thread thread;
 
@@ -29,6 +29,7 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 		setFocusable(true);
 		requestFocus();
 		addKeyListener(this);
+		this.cycleset = false;
 		this.matrix = new LinkedMatrix(SIZE/20, SIZE/20, 20);
 		this.cycle=new Troncycle("Tavo");
 		this.cycle.head.setUnder(this.matrix.getNodo(this.matrix.numRows/2, this.matrix.numCols/2));
@@ -48,6 +49,10 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 	
 
 	public void paint(Graphics g){
+		if(gameover = true){
+			g.setColor(Color.WHITE);
+			g.drawString("GAME OVER", 400, 400);
+		}
 		g.setColor(Color.white);
 		g.clearRect(0, 0, SIZE, SIZE);
 		g.setColor(Color.BLACK);
@@ -64,6 +69,8 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 					temp.setColor(temp.getAbove().getColor());
 					
 				}
+				
+
 
 				
 				
@@ -98,6 +105,18 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 		long wait;
 		
 		while(RUN){
+			
+			if(cycleset==false){
+				if(LEFT){
+				this.cycle.getTail().setUnder(this.matrix.getNodo(this.matrix.numRows/2-2, this.matrix.numCols/2-2));
+				this.cycle.getAntTail().setUnder(this.matrix.getNodo(this.matrix.numRows/2, this.matrix.numCols/2-1));
+			}
+				else{
+					this.cycle.getTail().setUnder(this.matrix.getNodo(this.matrix.numRows/2, this.matrix.numCols/2+2));
+					this.cycle.getAntTail().setUnder(this.matrix.getNodo(this.matrix.numRows/2, this.matrix.numCols/2+1));	
+				}
+				this.cycleset=true;
+			}
 			startTime = System.nanoTime();
 			
 			updateGame();
@@ -121,14 +140,17 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 	}
 
 	private void updateGame() {
+		Nodo temp = this.cycle.head;
 		if(RIGHT){
-			Nodo temp = this.cycle.head;
-			System.out.println("mi cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
-			this.cycle.addHead();
+			
+
 			
 			
+			
+			this.cycle.addHead();			
 			temp.getUnder().getRight().setAbove(this.cycle.head);
 			this.cycle.head.setUnder(temp.getUnder().getRight());
+			this.cycle.head.getUnder().setType("Estela");
 			System.out.println("mi nueva cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
 			System.out.println("la cabeza esta encima del nodo " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
 			this.cycle.getTail().getUnder().setAbove(null);
@@ -139,7 +161,7 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 			this.cycle.getTail().setColor(Color.black);
 			this.cycle.deleteTail();
 			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
-			System.out.println(cycle.lenght);
+
 
 			
 			//this.cycle.head=(this.cycle.head.getRight());
@@ -156,11 +178,9 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 			//this.currentNode.getLeft().setColor(Color.white);
 		}
 		if(LEFT){
-			Nodo temp = this.cycle.head;
-			System.out.println("mi cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
+
+			
 			this.cycle.addHead();
-			
-			
 			temp.getUnder().getLeft().setAbove(this.cycle.head);
 			this.cycle.head.setUnder(temp.getUnder().getLeft());
 			System.out.println("mi nueva cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
@@ -176,11 +196,9 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 			System.out.println(cycle.lenght);
 		}
 		if(DOWN){
-			Nodo temp = this.cycle.head;
-			System.out.println("mi cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
+
+			
 			this.cycle.addHead();
-			
-			
 			temp.getUnder().getDown().setAbove(this.cycle.head);
 			this.cycle.head.setUnder(temp.getUnder().getDown());
 			System.out.println("mi nueva cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
@@ -196,11 +214,9 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 			System.out.println(cycle.lenght);
 		}
 		if(UP){
-			Nodo temp = this.cycle.head;
-			System.out.println("mi cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
+
+			
 			this.cycle.addHead();
-			
-			
 			temp.getUnder().getUp().setAbove(this.cycle.head);
 			this.cycle.head.setUnder(temp.getUnder().getUp());
 			System.out.println("mi nueva cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
@@ -216,12 +232,38 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 			System.out.println(cycle.lenght);
 		}
 		this.cycle.head.getIndex();}
+	
+	
+	public void grow(){
+		Nodo temp = this.cycle.head;
+		this.cycle.addHead();
+		if(UP){
+			temp.getUnder().getUp().setAbove(this.cycle.head);
+			this.cycle.head.setUnder(temp.getUnder().getUp());
+		}
+		if(DOWN){
+			temp.getUnder().getDown().setAbove(this.cycle.head);
+			this.cycle.head.setUnder(temp.getUnder().getDown());
+		}
+		if(LEFT){
+			temp.getUnder().getLeft().setAbove(this.cycle.head);
+			this.cycle.head.setUnder(temp.getUnder().getLeft());
+		}
+		if(RIGHT){
+			temp.getUnder().getRight().setAbove(this.cycle.head);
+			this.cycle.head.setUnder(temp.getUnder().getRight());
+		}
+			
+	}
+	
+
 		
 	@Override
 	public void keyPressed(KeyEvent key) {
 		int k = key.getKeyCode();
 		if(k == KeyEvent.VK_ENTER) thread.start();
-		if(k == KeyEvent.VK_SPACE) thread.stop();
+		if(k == KeyEvent.VK_SPACE) grow();
+
 		if(k == KeyEvent.VK_RIGHT){RIGHT=true;DOWN=false;LEFT=false;UP=false;}
 		if(k == KeyEvent.VK_DOWN){DOWN=true;LEFT=false;UP=false;RIGHT=false;}
 		if(k == KeyEvent.VK_LEFT){LEFT=true;DOWN=false;UP=false;RIGHT=false;}
