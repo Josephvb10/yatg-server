@@ -11,13 +11,15 @@ import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 
 import Malla.*;
+import Troncycle.Troncycle;
 
 @SuppressWarnings("serial")
 public class Screen extends JPanel implements KeyListener, Runnable{
-	public static final int SIZE=900;
+	public static final int SIZE=800;
 	public boolean RIGHT, LEFT, UP, DOWN, RUN;
 	public LinkedMatrix matrix;
 	public Nodo currentNode;
+	public Troncycle cycle;
 	
 	private Thread thread;
 
@@ -27,8 +29,14 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 		setFocusable(true);
 		requestFocus();
 		addKeyListener(this);
-		this.matrix = new LinkedMatrix(SIZE/50, SIZE/50, 50);
-		this.currentNode = this.matrix.getNodo(this.matrix.numRows/2, this.matrix.numCols/2);
+		this.matrix = new LinkedMatrix(SIZE/20, SIZE/20, 20);
+		this.cycle=new Troncycle("Tavo");
+		this.cycle.head.setUnder(this.matrix.getNodo(this.matrix.numRows/2, this.matrix.numCols/2));
+		this.cycle.getTail().setUnder(this.matrix.getNodo(this.matrix.numRows/2, this.matrix.numCols/2+2));
+		this.cycle.getAntTail().setUnder(this.matrix.getNodo(this.matrix.numRows/2, this.matrix.numCols/2+1));
+		
+		//this.cycle.head.setNext(this.matrix.getNodo(this.matrix.numRows/2, this.matrix.numCols/2+1));
+		//this.cycle.head.getNext().setNext(this.matrix.getNodo(this.matrix.numRows/2, this.matrix.numCols/2+2));
 		this.RIGHT=false;
 		this.LEFT=false;
 		this.DOWN=false;
@@ -37,6 +45,8 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 		repaint();
 
 	}
+	
+
 	public void paint(Graphics g){
 		g.setColor(Color.white);
 		g.clearRect(0, 0, SIZE, SIZE);
@@ -44,18 +54,26 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 		Nodo temp = matrix.head;
 		for(int y =0; y < SIZE; y+=matrix.size){
 			for(int x=0; x<SIZE; x+=matrix.size){
+				
 				temp.setVerticeUL(x, y);
 				temp.setVerticeDR(x + matrix.size, y + matrix.size);
 				temp.setSize(matrix.size);
+				
+				if(temp.getAbove() != null){
+					System.out.println(temp.getAbove());
+					temp.setColor(temp.getAbove().getColor());
+					
+				}
 
 				
-				if(temp.getColor() != null){
-					g.setColor(temp.getColor());
-					g.fillRect(x, y, matrix.size, matrix.size);
-					g.setColor(Color.black);}
 				
-				else{
-				g.fillRect(x, y, matrix.size, matrix.size);}
+					
+					
+				
+
+				g.setColor(temp.getColor());
+				//System.out.println(temp.getColor());
+				g.fillRect(x, y, matrix.size, matrix.size);
 				g.drawString("("+temp.getIndexI()+","+temp.getIndexJ()+")", x+10, y+10);
 				temp = temp.getNext();
 			}
@@ -104,31 +122,106 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 
 	private void updateGame() {
 		if(RIGHT){
-			this.currentNode = this.currentNode.getRight();
-			this.currentNode.setColor(Color.BLUE);
-			this.currentNode.getLeft().setColor(Color.white);
+			Nodo temp = this.cycle.head;
+			System.out.println("mi cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
+			this.cycle.addHead();
+			
+			
+			temp.getUnder().getRight().setAbove(this.cycle.head);
+			this.cycle.head.setUnder(temp.getUnder().getRight());
+			System.out.println("mi nueva cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
+			System.out.println("la cabeza esta encima del nodo " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
+			this.cycle.getTail().getUnder().setAbove(null);
+			this.cycle.getAntTail().setUnder(this.cycle.getTail().getUnder().getRight());
+			System.out.println(this.cycle.getAntTail().getColor());
+			this.cycle.getAntTail().getUnder().setAbove(this.cycle.getTail());
+			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
+			this.cycle.getTail().setColor(Color.black);
+			this.cycle.deleteTail();
+			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
+			System.out.println(cycle.lenght);
+
+			
+			//this.cycle.head=(this.cycle.head.getRight());
+			//System.out.println("red");
+			//this.cycle.getTail().setColor(Color.black);;
+			//this.cycle.head.setColor(Color.red);
+
+			
+			
+			//System.out.println(RUN);
+			
+			//this.currentNode = this.currentNode.getRight();
+			//this.currentNode.setColor(Color.BLUE);
+			//this.currentNode.getLeft().setColor(Color.white);
 		}
 		if(LEFT){
-			this.currentNode = this.currentNode.getLeft();
-			this.currentNode.setColor(Color.BLUE);
-			this.currentNode.getRight().setColor(Color.white);
+			Nodo temp = this.cycle.head;
+			System.out.println("mi cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
+			this.cycle.addHead();
+			
+			
+			temp.getUnder().getLeft().setAbove(this.cycle.head);
+			this.cycle.head.setUnder(temp.getUnder().getLeft());
+			System.out.println("mi nueva cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
+			System.out.println("la cabeza esta encima del nodo " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
+			this.cycle.getTail().getUnder().setAbove(null);
+			this.cycle.getAntTail().setUnder(this.cycle.getTail().getUnder().getLeft());
+			System.out.println(this.cycle.getAntTail().getColor());
+			this.cycle.getAntTail().getUnder().setAbove(this.cycle.getTail());
+			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
+			this.cycle.getTail().setColor(Color.black);
+			this.cycle.deleteTail();
+			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
+			System.out.println(cycle.lenght);
 		}
 		if(DOWN){
-			this.currentNode = this.currentNode.getDown();
-			this.currentNode.setColor(Color.BLUE);
-			this.currentNode.getUp().setColor(Color.white);
+			Nodo temp = this.cycle.head;
+			System.out.println("mi cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
+			this.cycle.addHead();
+			
+			
+			temp.getUnder().getDown().setAbove(this.cycle.head);
+			this.cycle.head.setUnder(temp.getUnder().getDown());
+			System.out.println("mi nueva cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
+			System.out.println("la cabeza esta encima del nodo " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
+			this.cycle.getTail().getUnder().setAbove(null);
+			this.cycle.getAntTail().setUnder(this.cycle.getTail().getUnder().getDown());
+			System.out.println(this.cycle.getAntTail().getColor());
+			this.cycle.getAntTail().getUnder().setAbove(this.cycle.getTail());
+			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
+			this.cycle.getTail().setColor(Color.black);
+			this.cycle.deleteTail();
+			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
+			System.out.println(cycle.lenght);
 		}
 		if(UP){
-			this.currentNode = this.currentNode.getUp();
-			this.currentNode.setColor(Color.BLUE);
-			this.currentNode.getDown().setColor(Color.white);
+			Nodo temp = this.cycle.head;
+			System.out.println("mi cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
+			this.cycle.addHead();
+			
+			
+			temp.getUnder().getUp().setAbove(this.cycle.head);
+			this.cycle.head.setUnder(temp.getUnder().getUp());
+			System.out.println("mi nueva cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
+			System.out.println("la cabeza esta encima del nodo " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
+			this.cycle.getTail().getUnder().setAbove(null);
+			this.cycle.getAntTail().setUnder(this.cycle.getTail().getUnder().getDown());
+			System.out.println(this.cycle.getAntTail().getColor());
+			this.cycle.getAntTail().getUnder().setAbove(this.cycle.getTail());
+			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
+			this.cycle.getTail().setColor(Color.black);
+			this.cycle.deleteTail();
+			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
+			System.out.println(cycle.lenght);
 		}
-		currentNode.getIndex();}
+		this.cycle.head.getIndex();}
 		
 	@Override
 	public void keyPressed(KeyEvent key) {
 		int k = key.getKeyCode();
 		if(k == KeyEvent.VK_ENTER) thread.start();
+		if(k == KeyEvent.VK_SPACE) thread.stop();
 		if(k == KeyEvent.VK_RIGHT){RIGHT=true;DOWN=false;LEFT=false;UP=false;}
 		if(k == KeyEvent.VK_DOWN){DOWN=true;LEFT=false;UP=false;RIGHT=false;}
 		if(k == KeyEvent.VK_LEFT){LEFT=true;DOWN=false;UP=false;RIGHT=false;}
