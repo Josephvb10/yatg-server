@@ -82,6 +82,8 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 				//System.out.println(temp.getColor());
 				g.fillRect(x, y, matrix.size, matrix.size);
 				g.drawString("("+temp.getIndexI()+","+temp.getIndexJ()+")", x+10, y+10);
+				g.setColor(Color.magenta);
+				g.drawRect(x, y, matrix.size, matrix.size);
 				temp = temp.getNext();
 			}
 			
@@ -256,6 +258,10 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 			
 	}
 	
+	private void setSpeed(int fps){
+		targetTime = 1000 / fps;
+	}
+	
 
 		
 	@Override
@@ -263,6 +269,7 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 		int k = key.getKeyCode();
 		if(k == KeyEvent.VK_ENTER) thread.start();
 		if(k == KeyEvent.VK_SPACE) grow();
+		if(k== KeyEvent.VK_BACK_SPACE)setSpeed(10);
 
 		if(k == KeyEvent.VK_RIGHT){RIGHT=true;DOWN=false;LEFT=false;UP=false;}
 		if(k == KeyEvent.VK_DOWN){DOWN=true;LEFT=false;UP=false;RIGHT=false;}
