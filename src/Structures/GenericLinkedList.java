@@ -124,5 +124,11 @@ public class GenericLinkedList<T> {
 		newNode.setNext(this.head);
 		this.head = newNode;
 	}
+	public boolean isEmpty(){
+		return head==null;
+		
+	}
+
+	
 
 }
