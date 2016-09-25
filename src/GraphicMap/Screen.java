@@ -23,7 +23,8 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 	
 	private Thread thread;
 
-	public long targetTime;
+	public long targetTime =105;
+	
 	public Screen(){
 		setPreferredSize( new Dimension(SIZE, SIZE));
 		setFocusable(true);
@@ -43,6 +44,7 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 		this.DOWN=false;
 		this.UP=false;
 		this.RUN=true;
+		setSpeed();
 		repaint();
 
 	}
@@ -65,7 +67,7 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 				temp.setSize(matrix.size);
 				
 				if(temp.getAbove() != null){
-					System.out.println(temp.getAbove());
+					//System.out.println(temp.getAbove());
 					temp.setColor(temp.getAbove().getColor());
 					
 				}
@@ -127,10 +129,10 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 			
 			
 			elapsed = System.nanoTime() - startTime;
-			wait = 100 - elapsed / 1000000;
+			wait = targetTime - elapsed / 1000000;
 			if(wait > 0){
 				try{
-						Thread.sleep(175);}
+						Thread.sleep(wait);}
 				catch(Exception e){
 					e.printStackTrace();
 				}
@@ -258,8 +260,9 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 			
 	}
 	
-	private void setSpeed(int fps){
-		targetTime = 1000 / fps;
+	private void setSpeed(){
+		targetTime -= 5;
+		System.out.print(targetTime);
 	}
 	
 
@@ -269,7 +272,7 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 		int k = key.getKeyCode();
 		if(k == KeyEvent.VK_ENTER) thread.start();
 		if(k == KeyEvent.VK_SPACE) grow();
-		if(k== KeyEvent.VK_BACK_SPACE)setSpeed(10);
+		if(k== KeyEvent.VK_BACK_SPACE)setSpeed();
 
 		if(k == KeyEvent.VK_RIGHT){RIGHT=true;DOWN=false;LEFT=false;UP=false;}
 		if(k == KeyEvent.VK_DOWN){DOWN=true;LEFT=false;UP=false;RIGHT=false;}
