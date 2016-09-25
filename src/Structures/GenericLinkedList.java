@@ -103,7 +103,6 @@ public class GenericLinkedList<T> {
 			}
 
 			else {
-				http://lineadecodigo.com/java/crear-una-pila-en-java/
 				current = this.getNodeAtPosition(position - 1);
 				result = current.getNext().getData();
 				current.setNext(current.getNext().getNext());
