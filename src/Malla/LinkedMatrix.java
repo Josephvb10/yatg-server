@@ -1,4 +1,6 @@
 package Malla;
+import java.awt.Color;
+
 import Malla.*;
 
 public class LinkedMatrix {
@@ -28,6 +30,7 @@ public class LinkedMatrix {
 				for(int j = jj; j< this.numCols ; j++){
 					Nodo nuevoNodo = new Nodo(size);
 					nuevoNodo.setIndex(i, j);
+					nuevoNodo.setColor(Color.black);
 					temp.setNext(nuevoNodo);
 					temp = temp.getNext();
 					nodos ++;

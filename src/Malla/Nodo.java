@@ -3,7 +3,7 @@ package Malla;
 import java.awt.Color;
 
 public class Nodo {
-	private Nodo up, down, left, right, next;
+	private Nodo up, down, left, right, next, above, under;
 	private int indexI, indexJ, size, xl, yl, xr, yr;
 	private String type;
 	private Color color;
@@ -14,6 +14,8 @@ public class Nodo {
 		this.down = null;
 		this.left = null;
 		this.right = null;
+		this.above = null;
+		this.under = null;
 		this.type = "Empty";
 		this.color = null;
 		this.indexI = 0;
@@ -23,6 +25,7 @@ public class Nodo {
 		this.yl=0;
 		this.xr=0;
 		this.yr=0;
+		
 		
 		
 	}
@@ -42,8 +45,20 @@ public class Nodo {
 	}
 	
 	
+	public Nodo getUnder(){
+		return this.under;
+	}
 	
-			
+	public void setUnder(Nodo nodo){
+		this.under = nodo;
+	}
+	
+	public Nodo getAbove(){
+		return this.above;
+	}
+	public void setAbove(Nodo nodo){
+		this.above = nodo;
+	}
 	
 	public Nodo getNext(){
 		return next;
