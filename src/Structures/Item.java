@@ -51,14 +51,14 @@ public class Item implements Comparable<Item>{
 	}
 	
 	public static enum Type {
-		bomb(1), fuel(2), increaseTail(3), shield(4), turbo(4);
+		bomb(1), fuel(2), increaseTail(3), shield(4), turbo(5);
 		private int value;
 		private Type(int value) {
 			this.value = value;
 		}
 	}
 	private static int randInt(int min, int max) {
-	    Random rand;
+	    Random rand = new Random();
 	    int randomNum = rand.nextInt((max - min) + 1) + min;
 	    return randomNum;
 	}
