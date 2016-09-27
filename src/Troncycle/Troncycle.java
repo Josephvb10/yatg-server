@@ -1,70 +1,95 @@
 package Troncycle;
 
-import java.awt.Color;
-
-import Malla.Nodo;
+import Structures.*;
 
 public class Troncycle {
-	public String ownerName;
-	public int fuel, lenght, speed;
-	//public PriorityQueue items;
-	//public Stack powerUps;
-	public Nodo tail, head;
-	
-	public Troncycle(String name){
-		this.ownerName =  name;
-		this.fuel = 100;
-		this.lenght = 0;
-		this.speed =5;
-		this.head=null;
-		this.tail=null;
-		addHead();
-		addHead();
-		addHead();
-	}
-	
-	
-	public void deleteTail(){
-		Nodo temp = this.head;
-		while(temp.getNext().getNext()!=null){
-			temp = temp.getNext();
-		}
-		temp.setNext(null);
-		this.lenght--;
-		
-	}
-	
-	public Nodo getTail(){
-		Nodo temp = this.head;
-		while(temp.getNext()!=null){
-			temp = temp.getNext();
-		}	
-		return temp;
-	}
-	
-	public Nodo getAntTail(){
-		Nodo temp = this.head;
-		while(temp.getNext().getNext()!=null){
-			temp = temp.getNext();
-		}	
-		return temp;	
-	}
-	
-	public void addHead(){
-		if (this.head==null){
-			this.head = new Nodo(20);
+	private Player owner;
+	private int fuel, lenght, speed;
+	// public PriorityQueue items;
+	// public Stack powerUps;
+	// public Nodo tail, head;
+	private GenericLinkedList<Item> trail;
+	private ItemsPriorityQueue itemsQueue = new ItemsPriorityQueue();
 
-		}
-		else{
-			Nodo newHead = new Nodo(20);
-			newHead.setNext(this.head);
-			this.head = newHead;
-		}
-			this.head.setColor(Color.PINK);
-		this.lenght++;
+	public Troncycle(Player owner) {
+		this.owner = owner;
+		this.fuel = 100;
+		this.speed = 5;
+		this.trail = new GenericLinkedList<>();
 	}
-	
-	
-	
-	
+
+	public Player getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Player owner) {
+		this.owner = owner;
+	}
+
+	public int getFuel() {
+		return fuel;
+	}
+
+	public void setFuel(int fuel) {
+		this.fuel = fuel;
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
+	public GenericNode<Item> getHead() {
+		return trail.getHead();
+	}
+
+	public void deleteTail() {
+		trail.deleteAtPosition(trail.getSize() - 1);
+	}
+
+	public Item getTail() {
+		return trail.getAtPosition(trail.getSize() - 1);
+	}
+
+	public void addHead(int indexI, int indexJ) {
+		Item newItem = new Item(ItemType.tronTrail, indexI, indexJ, true, this.owner);
+		addHead(newItem);
+	}
+
+	public void addHead(Item item) {
+		GenericNode<Item> newHead = new GenericNode<>(item);
+		trail.getHead().getData().setIsHead(false);
+		trail.setHead(newHead);
+	}
+
+	public void useItem() {
+		if (!itemsQueue.isEmpty()) {
+			Item itemToUse = itemsQueue.poll();
+			switch (itemToUse.getType()) {
+			case bomb:
+
+				break;
+			case bomb:
+
+				break;
+			case bomb:
+
+				break;
+			case bomb:
+
+				break;
+			case bomb:
+
+				break;
+
+			default:
+				break;
+			}
+		}
+
+	}
+
 }
