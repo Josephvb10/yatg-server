@@ -4,29 +4,34 @@ import java.util.Random;
 
 public class Item implements Comparable<Item>{
 	private Type type;
-	private int positionX;
-	private int positionY;
+	private int indexI;
+	private int indexJ;
 	private int value;
 
 	
-	public Item(Type type,int positionX, int positionY) {
+	public Item(Type type,int indexI, int indexJ) {
 		super();
 		setType(type);
-		this.positionX = positionX;
-		this.positionY = positionY;
+		this.indexI = indexI;
+		this.indexJ = indexJ;
 	}
-	public int getPositionX() {
-		return positionX;
+	
+	public int getIndexI() {
+		return indexI;
 	}
-	public void setPositionX(int positionX) {
-		this.positionX = positionX;
+
+	public void setIndexI(int indexI) {
+		this.indexI = indexI;
 	}
-	public int getPositionY() {
-		return positionY;
+
+	public int getIndexJ() {
+		return indexJ;
 	}
-	public void setPositionY(int positionY) {
-		this.positionY = positionY;
+
+	public void setIndexJ(int indexJ) {
+		this.indexJ = indexJ;
 	}
+
 	public int getValue() {
 		return value;
 	}
