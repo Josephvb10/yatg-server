@@ -17,7 +17,30 @@ public class Test {
 		while(colaPrioridad.size()>0){
 			System.out.println(colaPrioridad.poll().getMarca());
 		}
-		System.out.println(colaPrioridad);
+		int positionX= 1;
+		int positionY= 2;
+		Item item1 = new Item(Item.Type.bomb, positionX, positionY);
+		Item item2 = new Item(Item.Type.turbo, positionX, positionY);
+		Item item3 = new Item(Item.Type.fuel, positionX, positionY);
+		Item item4 = new Item(Item.Type.shield, positionX, positionY);
+		Item item5 = new Item(Item.Type.bomb, positionX, positionY);
+		System.out.println(item1.getValue());
+		System.out.println(item2.getValue());
+		System.out.println(item3.getValue());
+		System.out.println(item4.getValue());
+		System.out.println(item5.getValue());
+
+
+		ItemsPriorityQueue colatest =  new ItemsPriorityQueue();
+		colatest.add(item1);
+		colatest.add(item2);
+		colatest.add(item3);
+		colatest.add(item4);
+		colatest.add(item5);
+		while(!colatest.isEmpty()){
+			System.out.println(colatest.poll().getType());
+			
+		}
 	}
 
 }
