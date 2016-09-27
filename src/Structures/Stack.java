@@ -1,5 +1,4 @@
 package Structures;
-import Structures.*;
 
 public class Stack {
 	private SimpleNodo head;
