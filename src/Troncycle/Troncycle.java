@@ -96,7 +96,7 @@ public class Troncycle {
 	public Item getTail() {
 		return trail.getAtPosition(trail.getSize() - 1);
 	}
-
+/*
 	public void addHead() {
 		Item first = this.getHead().getData();
 		int indexI = first.getIndexI();
@@ -125,7 +125,7 @@ public class Troncycle {
 
 		Item newItem = new Item(ItemType.tronTrail, indexI, indexJ, true, this.owner);
 		addHead(newItem);
-	}
+	}*/
 
 	public void addHead(int indexI, int indexJ) {
 		Item newItem = new Item(ItemType.tronTrail, indexI, indexJ, true, this.owner);
@@ -139,9 +139,9 @@ public class Troncycle {
 		trail.setHead(newHead);
 	}
 
-	public Item move() {
+	public Item move(int indexI, int indexJ) {
 		Item deleted = null;
-		addHead();
+		addHead( indexI,  indexJ);
 		if (getExtraTrail() > 0) {
 			addExtraTrail(-1);
 		} else {
