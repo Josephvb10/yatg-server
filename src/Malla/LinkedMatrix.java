@@ -1,12 +1,13 @@
 package Malla;
 
 import Structures.*;
+import Troncycle.Troncycle;
 
 public class LinkedMatrix {
 	public Nodo head;
 	public int numRows, numCols, numNodes;
 	
-	public LinkedMatrix(int numRows, int numCols, int size){
+	public LinkedMatrix(int numRows, int numCols){
 		this.head = null;
 		this.numRows = numRows;
 		this.numCols = numCols;
@@ -157,6 +158,20 @@ public class LinkedMatrix {
 			result = true;
 		}
 		return result;
+	}
+	public void updatePlayer(Troncycle player){
+		GenericNode<Item> current = player.getTrail().getHead();
+		while(current != null){
+			this.resetNodeItem(current.getData());
+			current=current.getNext();
+		}
+		player.move();
+		current = player.getTrail().getHead();
+		while(current != null){
+			this.setNodeItem(current.getData());
+			System.out.println("i  "+current.getData().getIndexI()+"  j  "+current.getData().getIndexI());
+			current=current.getNext();
+		}
 	}
 	
 }

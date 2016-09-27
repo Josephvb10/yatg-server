@@ -13,11 +13,13 @@ public class Troncycle {
 	private GenericLinkedList<Item> trail;
 	private ItemsPriorityQueue itemsQueue = new ItemsPriorityQueue();
 
-	public Troncycle(Player owner) {
+	public Troncycle(Player owner,int indexI, int indexJ) {
 		this.owner = owner;
 		this.fuel = 100;
 		this.speed = 1;
 		this.trail = new GenericLinkedList<>();
+		this.extraTrail = 3;
+		this.addHead(indexI, indexJ);
 	}
 
 	public Player getOwner() {
@@ -55,6 +57,15 @@ public class Troncycle {
 	public void setCurrentDirection(Direction currentDirection) {
 		this.currentDirection = currentDirection;
 	}
+	
+
+	public GenericLinkedList<Item> getTrail() {
+		return trail;
+	}
+
+	public void setTrail(GenericLinkedList<Item> trail) {
+		this.trail = trail;
+	}
 
 	public int getExtraTrail() {
 		return extraTrail;
@@ -72,8 +83,14 @@ public class Troncycle {
 		return trail.getHead();
 	}
 
-	public void deleteTail() {
-		trail.deleteAtPosition(trail.getSize() - 1);
+	public Item deleteTail() {
+		Item deleted = null;
+
+		if (trail.getSize() > 1) {
+			
+			deleted = trail.deleteAtPosition(trail.getSize() - 1);
+		}
+		return deleted;
 	}
 
 	public Item getTail() {
@@ -117,17 +134,20 @@ public class Troncycle {
 
 	public void addHead(Item item) {
 		GenericNode<Item> newHead = new GenericNode<>(item);
-		trail.getHead().getData().setIsHead(false);
+		if(!trail.isEmpty()){
+		trail.getHead().getData().setIsHead(false);}
 		trail.setHead(newHead);
 	}
 
-	public void move() {
+	public Item move() {
+		Item deleted = null;
 		addHead();
 		if (getExtraTrail() > 0) {
 			addExtraTrail(-1);
 		} else {
-			deleteTail();
+			deleted = deleteTail();
 		}
+		return deleted;
 	}
 
 	public void useItem() {
