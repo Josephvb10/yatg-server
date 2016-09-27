@@ -13,6 +13,7 @@ public class GenericLinkedList<T> {
 
 	
 	public void setHead(GenericNode<T> head) {
+		head.setNext(this.getHead());
 		this.head = head;
 	}
 	public void add(T data) {
