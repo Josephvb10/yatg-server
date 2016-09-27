@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
+import java.time.temporal.TemporalQueries;
 
 import javax.swing.JPanel;
 
@@ -23,7 +23,7 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 	
 	private Thread thread;
 
-	public long targetTime =105;
+	public long targetTime =1000;
 	
 	public Screen(){
 		setPreferredSize( new Dimension(SIZE, SIZE));
@@ -155,7 +155,7 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 			temp.getUnder().getRight().setAbove(this.cycle.head);
 			this.cycle.head.setUnder(temp.getUnder().getRight());
 			this.cycle.head.getUnder().setType("Estela");
-			System.out.println("mi nueva cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
+			System.out.println("mi nueva cabeza esta en " + this.cycle.head.getUnder().getXL() + "," + this.cycle.head.getUnder().getYL());
 			System.out.println("la cabeza esta encima del nodo " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
 			this.cycle.getTail().getUnder().setAbove(null);
 			this.cycle.getAntTail().setUnder(this.cycle.getTail().getUnder().getRight());
@@ -165,6 +165,13 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 			this.cycle.getTail().setColor(Color.black);
 			this.cycle.deleteTail();
 			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
+			
+			Nodo temp1 = this.cycle.head;
+			while(temp1 != null){
+				System.out.println("Mi posicion en x es" + temp1.getUnder().getXL());
+				System.out.println("Mi posicion en y es" + temp1.getUnder().getYL());
+				temp1 = temp1.getNext();
+			}
 
 
 			
@@ -244,6 +251,7 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 		if(UP){
 			temp.getUnder().getUp().setAbove(this.cycle.head);
 			this.cycle.head.setUnder(temp.getUnder().getUp());
+			
 		}
 		if(DOWN){
 			temp.getUnder().getDown().setAbove(this.cycle.head);
@@ -256,13 +264,13 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 		if(RIGHT){
 			temp.getUnder().getRight().setAbove(this.cycle.head);
 			this.cycle.head.setUnder(temp.getUnder().getRight());
+			
 		}
 			
 	}
 	
 	private void setSpeed(){
-		targetTime -= 5;
-		System.out.print(targetTime);
+		targetTime -= 5;;
 	}
 	
 
@@ -271,7 +279,7 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 	public void keyPressed(KeyEvent key) {
 		int k = key.getKeyCode();
 		if(k == KeyEvent.VK_ENTER) thread.start();
-		if(k == KeyEvent.VK_SPACE) grow();
+		if(k == KeyEvent.VK_SPACE) {grow();grow();grow();grow();grow();}
 		if(k== KeyEvent.VK_BACK_SPACE)setSpeed();
 
 		if(k == KeyEvent.VK_RIGHT){RIGHT=true;DOWN=false;LEFT=false;UP=false;}
