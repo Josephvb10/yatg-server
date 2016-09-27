@@ -96,8 +96,9 @@ public class GenericLinkedList<T> {
 		T result = null;
 		if (this.checkPosition(position)) {
 			if (position == 0) {
-				head = head.getNext();
 				result = head.getData();
+				head = head.getNext();
+
 			} else if (position == this.getSize() - 1) {
 				this.getNodeAtPosition(position - 1).setNext(null);
 			}
