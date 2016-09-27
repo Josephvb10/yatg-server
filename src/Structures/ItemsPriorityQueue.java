@@ -35,7 +35,7 @@ public class ItemsPriorityQueue extends GenericLinkedList<Item> {
 		return getAtPosition(0);
 	}
 	public Item poll() {
-		Item headItem = getAtPosition(0)
+		Item headItem = getAtPosition(0);
 		deleteAtPosition(0);
 		return headItem;
 		
