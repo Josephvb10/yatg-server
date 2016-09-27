@@ -165,6 +165,7 @@ public class LinkedMatrix {
 			this.resetNodeItem(current.getData());
 			current=current.getNext();
 		}
+		
 		player.move();
 		current = player.getTrail().getHead();
 		while(current != null){
