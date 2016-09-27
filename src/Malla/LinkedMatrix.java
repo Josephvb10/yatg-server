@@ -1,18 +1,16 @@
 package Malla;
-import java.awt.Color;
 
-import Malla.*;
+import Structures.*;
 
 public class LinkedMatrix {
 	public Nodo head;
-	public int numRows, numCols, numNodes, size;
+	public int numRows, numCols, numNodes;
 	
 	public LinkedMatrix(int numRows, int numCols, int size){
 		this.head = null;
 		this.numRows = numRows;
 		this.numCols = numCols;
 		this.numNodes = numRows * numCols;
-		this.size = size;
 
 		simpleUnlinkedList();	
 		return;
@@ -21,16 +19,15 @@ public class LinkedMatrix {
 	public Nodo simpleUnlinkedList(){
 		int i, jj;
 		int nodos =1;
-		this.head = new Nodo(size);
+		this.head = new Nodo();
 		Nodo temp = this.head;
 		while(nodos < this.numNodes) {
 			for(i =0; i < this.numRows; i++){
 				if(i==0)jj=1;
 				else{jj=0;}
 				for(int j = jj; j< this.numCols ; j++){
-					Nodo nuevoNodo = new Nodo(size);
+					Nodo nuevoNodo = new Nodo();
 					nuevoNodo.setIndex(i, j);
-					nuevoNodo.setColor(Color.black);
 					temp.setNext(nuevoNodo);
 					temp = temp.getNext();
 					nodos ++;
@@ -116,4 +113,50 @@ public class LinkedMatrix {
 			}		
 		}
 	}
+	public Nodo getIndexNode(int indexI, int indexJ){
+		Nodo current = this.head;
+		if (checkIndexI(indexI)&& checkIndexJ(indexJ)){
+		while(indexI>0){
+			current = current.getDown();
+			indexI--;
+		}
+		while(indexJ>0){
+			current = current.getRight();
+			indexJ--;
+		}
+		}
+		return current;
+
+	}
+	public void setNodeItem(Item item){
+		int indexI = item.getIndexI();
+		int indexJ = item.getIndexJ();
+		getIndexNode(indexI, indexJ).setItem(item);
+	}
+	
+	public void resetNodeItem(int indexI, int indexJ){
+		getIndexNode(indexI, indexJ).setItem(null);
+	}
+	public void resetNodeItem(Item item){
+		int indexI = item.getIndexI();
+		int indexJ = item.getIndexJ();
+		getIndexNode(indexI, indexJ).setItem(null);
+	}
+	
+	public boolean checkIndexI(int indexI){
+		boolean result = false;
+		if(0<=indexI && indexI<this.numCols){
+			result = true;
+		}
+		return result;
+	}
+	
+	public boolean checkIndexJ(int indexJ){
+		boolean result = false;
+		if(0<=indexJ && indexJ<this.numCols){
+			result = true;
+		}
+		return result;
+	}
+	
 }
