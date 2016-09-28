@@ -37,7 +37,7 @@ public class LinkedMatrix {
 				if(nodos == this.numNodes)break;			
 		}		
 	}
-		displayList(this.head);
+
 		fourWayLinkedList();
 		return this.head;}
 	
@@ -63,7 +63,6 @@ public class LinkedMatrix {
 		while(temp != null){
 			if(temp.getIndexI() == 0) {temp.setUp(getNodo(this.numRows-1, temp.getIndexJ()));		}
 			else{temp.setUp(getNodo(temp.getIndexI()-1, temp.getIndexJ()));							}
-			System.out.println("El arriba de (" + temp.getIndexI() + "," + temp.getIndexJ() + ") es "+ temp.getUp().getIndexI() +","+temp.getUp().getIndexJ());
 			temp = temp.getNext();		
 		}
 		
@@ -72,7 +71,7 @@ public class LinkedMatrix {
 		while(temp != null){
 			if(temp.getIndexI() == this.numRows-1) {temp.setDown(getNodo(0, temp.getIndexJ()));		}
 			else{temp.setDown(getNodo(temp.getIndexI()+1, temp.getIndexJ()));						}
-			System.out.println("El abajo de (" + temp.getIndexI() + "," + temp.getIndexJ() + ") es "+ temp.getDown().getIndexI() +","+temp.getDown().getIndexJ());
+
 			temp = temp.getNext();		
 		}
 		
@@ -81,7 +80,7 @@ public class LinkedMatrix {
 		while(temp != null){
 			if(temp.getIndexJ() == this.numCols-1) {temp.setRight(getNodo(temp.getIndexI(), 0));		}
 			else{temp.setRight(getNodo(temp.getIndexI(), temp.getIndexJ()+1));							}
-			System.out.println("El derecha de (" + temp.getIndexI() + "," + temp.getIndexJ() + ") es "+ temp.getRight().getIndexI() +","+temp.getRight().getIndexJ());
+
 			temp = temp.getNext();		
 		}
 		
@@ -90,30 +89,27 @@ public class LinkedMatrix {
 		while(temp != null){
 			if(temp.getIndexJ() == 0) {temp.setLeft(getNodo(temp.getIndexI(), this.numCols-1));		}
 			else{temp.setLeft(getNodo(temp.getIndexI(), temp.getIndexJ()-1));							}
-			System.out.println("El izquierda de (" + temp.getIndexI() + "," + temp.getIndexJ() + ") es "+ temp.getLeft().getIndexI() +","+temp.getLeft().getIndexJ());
+
 			temp = temp.getNext();		
 		}
-		
-		
-		this.head.getUp().getIndex();
-		this.head.getDown().getIndex();
-		this.head.getRight().getIndex();
-		this.head.getLeft().getIndex();
+
 
 		}
 
-	public void displayList(Nodo lista){
-		Nodo temp = this.head;
-		while(temp != null){
+	public void displayList(){
+		//Nodo temp = this.head;
+		//while(temp != null){
 			for(int i =0; i<this.numRows; i++){
 				for(int j=0; j<this.numCols; j++){
-					temp.getIndex();
-					temp = temp.getNext();
+					getNodo(i, j).getIndex();
+					if(getNodo(i,j).getItem()!=null){
+						System.out.print(getNodo(i,j).getItem().getType());
+					}
 				}
 				System.out.println();
 			}		
 		}
-	}
+
 	public Nodo getIndexNode(int indexI, int indexJ){
 		Nodo current = this.head;
 		if (checkIndexI(indexI)&& checkIndexJ(indexJ)){
@@ -160,17 +156,47 @@ public class LinkedMatrix {
 		return result;
 	}
 	public void updatePlayer(Troncycle player){
+		System.out.println(player);
 		GenericNode<Item> current = player.getTrail().getHead();
+		Nodo result=null;
 		while(current != null){
 			this.resetNodeItem(current.getData());
 			current=current.getNext();
-		}
+		}	
+		 current = player.getTrail().getHead();
+		Item first = current.getData();
+		int indexI = first.getIndexI();
+		int indexJ = first.getIndexJ();
+
+		switch (player.getCurrentDirection()) {// necesario agregar casos especiales
+		case down:
+			result = this.getNodo(indexI, indexJ).getDown();
+			break;
+		case up:
+			result = this.getNodo(indexI, indexJ).getUp();
+
+			break;
+		case left:
+			result = this.getNodo(indexI, indexJ).getLeft();
+
+			break;
+		case right:
+			result = this.getNodo(indexI, indexJ).getRight();
+
+			break;
+
+		default:
+			break;
+			
 		
-		player.move();
+		}
+		int newI = result.getIndexI();
+		int newJ = result.getIndexJ();
+		player.move(newI, newJ);
 		current = player.getTrail().getHead();
 		while(current != null){
 			this.setNodeItem(current.getData());
-			System.out.println("i  "+current.getData().getIndexI()+"  j  "+current.getData().getIndexI());
+
 			current=current.getNext();
 		}
 	}
