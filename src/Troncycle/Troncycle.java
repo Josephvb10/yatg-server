@@ -78,10 +78,10 @@ public class Troncycle {
 	public void addExtraTrail(int extraTrail) {
 		this.extraTrail += extraTrail;
 	}
-
+/*
 	public GenericNode<Item> getHead() {
 		return trail.getHead();
-	}
+	}*/
 
 	public Item deleteTail() {
 		Item deleted = null;
@@ -93,9 +93,7 @@ public class Troncycle {
 		return deleted;
 	}
 
-	public Item getTail() {
-		return trail.getAtPosition(trail.getSize() - 1);
-	}
+	
 /*
 	public void addHead() {
 		Item first = this.getHead().getData();
@@ -148,6 +146,9 @@ public class Troncycle {
 			deleted = deleteTail();
 		}
 		return deleted;
+	}
+	public void addItem(Item newItem){
+		itemsQueue.add(newItem);
 	}
 
 	public void useItem() {
