@@ -12,14 +12,24 @@ public class Troncycle {
 	// public Nodo tail, head;
 	private GenericLinkedList<Item> trail;
 	private ItemsPriorityQueue itemsQueue = new ItemsPriorityQueue();
+	private boolean isDead;
 
 	public Troncycle(Player owner,int indexI, int indexJ) {
+		this.isDead = false;
 		this.owner = owner;
 		this.fuel = 100;
 		this.speed = 1;
 		this.trail = new GenericLinkedList<>();
 		this.extraTrail = 6;
 		this.addHead(indexI, indexJ);
+	}
+	
+	public boolean getIsDead(){
+		return this.isDead;
+	}
+	
+	public void setIsDead(boolean value){
+		this.isDead = value;
 	}
 
 	public Player getOwner() {

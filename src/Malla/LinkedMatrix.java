@@ -156,7 +156,6 @@ public class LinkedMatrix {
 		return result;
 	}
 	public void updatePlayer(Troncycle player){
-		System.out.println(player);
 		GenericNode<Item> current = player.getTrail().getHead();
 		Nodo result=null;
 		while(current != null){
@@ -192,6 +191,26 @@ public class LinkedMatrix {
 		}
 		int newI = result.getIndexI();
 		int newJ = result.getIndexJ();
+		
+		if(this.getNodo(newI, newJ).getItem()!=null){
+		
+		
+		if(this.getNodo(newI, newJ).getItem().getType()==ItemType.fuel || this.getNodo(newI, newJ).getItem().getType()==ItemType.increaseTail){
+			player.addItem(this.getNodo(newI, newJ).getItem());
+		}
+		
+		else if(this.getNodo(newI, newJ).getItem().getType()==ItemType.shield || this.getNodo(newI, newJ).getItem().getType()==ItemType.turbo){
+			////add stack() <3
+		}
+		
+		else if(this.getNodo(newI, newJ).getItem().getType()==ItemType.bomb){
+			player.setIsDead(true);
+			System.out.println("Me mori");
+		}
+		
+		}
+		
+		
 		player.move(newI, newJ);
 		current = player.getTrail().getHead();
 		while(current != null){
