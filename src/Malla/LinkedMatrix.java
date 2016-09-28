@@ -1,6 +1,7 @@
 package Malla;
 
 import Structures.*;
+import GraphicMap.*;
 import Troncycle.Troncycle;
 
 public class LinkedMatrix {
@@ -96,7 +97,7 @@ public class LinkedMatrix {
 
 		}
 
-	public void displayList(){
+	/*public void displayList(){
 		//Nodo temp = this.head;
 		//while(temp != null){
 			for(int i =0; i<this.numRows; i++){
@@ -108,9 +109,9 @@ public class LinkedMatrix {
 				}
 				System.out.println();
 			}		
-		}
+		}*/
 
-	public Nodo getIndexNode(int indexI, int indexJ){
+	/*public Nodo getIndexNode(int indexI, int indexJ){
 		Nodo current = this.head;
 		if (checkIndexI(indexI)&& checkIndexJ(indexJ)){
 		while(indexI>0){
@@ -124,22 +125,22 @@ public class LinkedMatrix {
 		}
 		return current;
 
-	}
+	}*/
 	public void setNodeItem(Item item){
 		int indexI = item.getIndexI();
 		int indexJ = item.getIndexJ();
-		getIndexNode(indexI, indexJ).setItem(item);
+		getNodo(indexI, indexJ).setItem(item);
 	}
 	
 	public void resetNodeItem(int indexI, int indexJ){
-		getIndexNode(indexI, indexJ).setItem(null);
+		getNodo(indexI, indexJ).setItem(null);
 	}
 	public void resetNodeItem(Item item){
 		int indexI = item.getIndexI();
 		int indexJ = item.getIndexJ();
-		getIndexNode(indexI, indexJ).setItem(null);
+		getNodo(indexI, indexJ).setItem(null);
 	}
-	
+/*	
 	public boolean checkIndexI(int indexI){
 		boolean result = false;
 		if(0<=indexI && indexI<this.numCols){
@@ -154,10 +155,31 @@ public class LinkedMatrix {
 			result = true;
 		}
 		return result;
-	}
+	}*/
 	public void updatePlayer(Troncycle player){
+		
+		if(player.getFuel() <=0){
+			player.setIsDead(true);
+			System.out.println("Me mori por combustible");
+			return;
+		}
+		
+		if(player.getPowerUpActivated()){
+			player.setPowerUpSteps(player.getPowerUpSteps()-1);
+			System.out.println("Me quedan este numero de pasos" + player.getPowerUpSteps());
+			if(player.getPowerUpSteps()==0){
+				player.setPowerUpActivated(false);
+				player.setSpeed(1);
+				System.out.println("Velocidad normal");
+			}
+		}
+		
+		
+		
 		GenericNode<Item> current = player.getTrail().getHead();
 		Nodo result=null;
+		
+		
 		while(current != null){
 			this.resetNodeItem(current.getData());
 			current=current.getNext();
@@ -195,22 +217,45 @@ public class LinkedMatrix {
 		if(this.getNodo(newI, newJ).getItem()!=null){
 		
 		
-		if(this.getNodo(newI, newJ).getItem().getType()==ItemType.fuel || this.getNodo(newI, newJ).getItem().getType()==ItemType.increaseTail){
-			player.addItem(this.getNodo(newI, newJ).getItem());
+			if(this.getNodo(newI, newJ).getItem().getType()==ItemType.fuel){
+				if(player.getFuel() == 100){
+					player.addItem(this.getNodo(newI, newJ).getItem());
+				}
+				int fuelBonus = this.getNodo(newI, newJ).getItem().getValue();
+				player.addFuel(fuelBonus);
+				System.out.println("Obtuve un bonus de " + fuelBonus);
+			
+			}
+			
+			else if(this.getNodo(newI, newJ).getItem().getType()==ItemType.increaseTail){
+				player.addItem(this.getNodo(newI, newJ).getItem());
+			}
+			
+			else if(this.getNodo(newI, newJ).getItem().getType()==ItemType.shield){
+				////add stack() <3
+			}
+			else if(this.getNodo(newI, newJ).getItem().getType()==ItemType.turbo){
+				////add stack() <3
+				int newSpeed = this.getNodo(newI, newJ).getItem().getValue();
+				player.setSpeed(newSpeed);
+				if(!player.getPowerUpActivated()){
+					player.setPowerUpActivated(true);
+					player.setPowerUpSteps(60);
+				}
+				System.out.println("Cambie velocidad a " + player.getSpeed());
+				
+			}
+			
+			else if(this.getNodo(newI, newJ).getItem().getType()==ItemType.bomb || this.getNodo(newI, newJ).getItem().getType()==ItemType.tronTrail){
+				player.setIsDead(true);
+				System.out.println("Me mori");
+				return;
+			}
+			System.out.println(getNodo(newI, newJ).getItem().getType());
 		}
 		
-		else if(this.getNodo(newI, newJ).getItem().getType()==ItemType.shield || this.getNodo(newI, newJ).getItem().getType()==ItemType.turbo){
-			////add stack() <3
-		}
-		
-		else if(this.getNodo(newI, newJ).getItem().getType()==ItemType.bomb){
-			player.setIsDead(true);
-			System.out.println("Me mori");
-		}
-		
-		}
-		
-		
+		player.setFuel(player.getFuel()-0.5);
+		System.out.println("Me queda este combustible" + player.getFuel());
 		player.move(newI, newJ);
 		current = player.getTrail().getHead();
 		while(current != null){

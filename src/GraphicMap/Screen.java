@@ -17,15 +17,15 @@ import Troncycle.Troncycle;
 public class Screen extends JPanel implements KeyListener, Runnable{
 	public static final int SIZE=800;
 	public static final int NODOSIZE = 20;
-	public boolean RIGHT, LEFT, UP, DOWN, RUN;
+	public static boolean RIGHT, LEFT, UP, DOWN, RUN, gameover;;
 	public LinkedMatrix matrix;
 	public Nodo currentNode;
 	public Troncycle player1;
-	public boolean cycleset, gameover;
+	
 	
 	private Thread thread;
 
-	public long targetTime =20;
+	public static long targetTime =200;
 	
 	public Screen(){
 		setPreferredSize( new Dimension(SIZE, SIZE));
@@ -41,6 +41,13 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 		Item item5 = new Item(ItemType.increaseTail, 1, 2);
 		Item item6 = new Item(ItemType.fuel, 5, 3);
 		Item item7 = new Item(ItemType.increaseTail, 1, 3);
+		Item item8 = new Item(ItemType.turbo, 4, 2);
+		Item item9 = new Item(ItemType.turbo, 8, 2);
+		Item item10 = new Item(ItemType.turbo, 6, 2);
+		Item item11 = new Item(ItemType.turbo, 14, 2);
+		Item item12 = new Item(ItemType.fuel, 30, 2);
+		Item item13 = new Item(ItemType.fuel, 26, 20);
+
 		
 		
 		this.matrix.setNodeItem(item1);
@@ -50,6 +57,14 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 		this.matrix.setNodeItem(item5);
 		this.matrix.setNodeItem(item6);
 		this.matrix.setNodeItem(item7);
+		this.matrix.setNodeItem(item8);
+		this.matrix.setNodeItem(item9);
+		this.matrix.setNodeItem(item10);
+		this.matrix.setNodeItem(item11);
+		this.matrix.setNodeItem(item12);
+		this.matrix.setNodeItem(item13);
+		
+		
 		
 		 this.player1 = new Troncycle(Player.player1, 0, 0);
 		 this.player1.setCurrentDirection(Direction.right);
@@ -63,12 +78,12 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 		
 		//this.cycle.head.setNext(this.matrix.getNodo(this.matrix.numRows/2, this.matrix.numCols/2+1));
 		//this.cycle.head.getNext().setNext(this.matrix.getNodo(this.matrix.numRows/2, this.matrix.numCols/2+2));
-		this.RIGHT=false;
-		this.LEFT=false;
-		this.DOWN=false;
-		this.UP=false;
-		this.RUN=true;
-		setSpeed();
+		RIGHT=false;
+		LEFT=false;
+		DOWN=false;
+		UP=false;
+		RUN=true;
+		
 		repaint();
 
 	}
@@ -181,108 +196,27 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 	}
 
 	private void updateDirection() {
-
-		if(RIGHT){
+		Direction prevDirection = player1.getCurrentDirection();
+		if(RIGHT && prevDirection != Direction.left){
 			player1.setCurrentDirection(Direction.right);
-			
 
-			
-			
-			
-			/*this.cycle.addHead();			
-			temp.getUnder().getRight().setAbove(this.cycle.head);
-			this.cycle.head.setUnder(temp.getUnder().getRight());
-			this.cycle.head.getUnder().setType("Estela");
-			System.out.println("mi nueva cabeza esta en " + this.cycle.head.getUnder().getXL() + "," + this.cycle.head.getUnder().getYL());
-			System.out.println("la cabeza esta encima del nodo " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
-			this.cycle.getTail().getUnder().setAbove(null);
-			this.cycle.getAntTail().setUnder(this.cycle.getTail().getUnder().getRight());
-			System.out.println(this.cycle.getAntTail().getColor());
-			this.cycle.getAntTail().getUnder().setAbove(this.cycle.getTail());
-			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
-			this.cycle.getTail().setColor(Color.black);
-			this.cycle.deleteTail();
-			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
-			
-			Nodo temp1 = this.cycle.head;
-			while(temp1 != null){
-				System.out.println("Mi posicion en x es" + temp1.getUnder().getXL());
-				System.out.println("Mi posicion en y es" + temp1.getUnder().getYL());
-				temp1 = temp1.getNext();
-			}
-
-
-			
-			//this.cycle.head=(this.cycle.head.getRight());
-			//System.out.println("red");
-			//this.cycle.getTail().setColor(Color.black);;
-			//this.cycle.head.setColor(Color.red);
-
-			
-			
-			//System.out.println(RUN);
-			
-			//this.currentNode = this.currentNode.getRight();
-			//this.currentNode.setColor(Color.BLUE);
-			//this.currentNode.getLeft().setColor(Color.white);*/
 		}
-		if(LEFT){
+		if(LEFT && prevDirection != Direction.right){
 			
 			player1.setCurrentDirection(Direction.left);
-			
-			/*this.cycle.addHead();
-			temp.getUnder().getLeft().setAbove(this.cycle.head);
-			this.cycle.head.setUnder(temp.getUnder().getLeft());
-			System.out.println("mi nueva cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
-			System.out.println("la cabeza esta encima del nodo " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
-			this.cycle.getTail().getUnder().setAbove(null);
-			this.cycle.getAntTail().setUnder(this.cycle.getTail().getUnder().getLeft());
-			System.out.println(this.cycle.getAntTail().getColor());
-			this.cycle.getAntTail().getUnder().setAbove(this.cycle.getTail());
-			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
-			this.cycle.getTail().setColor(Color.black);
-			this.cycle.deleteTail();
-			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
-			System.out.println(cycle.lenght);*/
+
 		}
-		if(DOWN){
+		if(DOWN && prevDirection != Direction.up){
 			player1.setCurrentDirection(Direction.down);
-			
-			/*this.cycle.addHead();
-			temp.getUnder().getDown().setAbove(this.cycle.head);
-			this.cycle.head.setUnder(temp.getUnder().getDown());
-			System.out.println("mi nueva cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
-			System.out.println("la cabeza esta encima del nodo " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
-			this.cycle.getTail().getUnder().setAbove(null);
-			this.cycle.getAntTail().setUnder(this.cycle.getTail().getUnder().getDown());
-			System.out.println(this.cycle.getAntTail().getColor());
-			this.cycle.getAntTail().getUnder().setAbove(this.cycle.getTail());
-			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
-			this.cycle.getTail().setColor(Color.black);
-			this.cycle.deleteTail();
-			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
-			System.out.println(cycle.lenght);*/
+
 		}
-		if(UP){
+		if(UP && prevDirection != Direction.down){
 
 			player1.setCurrentDirection(Direction.up);
-			/*this.cycle.addHead();
-			temp.getUnder().getUp().setAbove(this.cycle.head);
-			this.cycle.head.setUnder(temp.getUnder().getUp());
-			System.out.println("mi nueva cabeza esta en " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
-			System.out.println("la cabeza esta encima del nodo " + this.cycle.head.getUnder().getIndexI() + "," + this.cycle.head.getUnder().getIndexJ());
-			this.cycle.getTail().getUnder().setAbove(null);
-			this.cycle.getAntTail().setUnder(this.cycle.getTail().getUnder().getDown());
-			System.out.println(this.cycle.getAntTail().getColor());
-			this.cycle.getAntTail().getUnder().setAbove(this.cycle.getTail());
-			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
-			this.cycle.getTail().setColor(Color.black);
-			this.cycle.deleteTail();
-			System.out.println("mi cola esta en " + this.cycle.getTail().getUnder().getIndexI() + "," + this.cycle.getTail().getUnder().getIndexJ());
-			System.out.println(cycle.lenght);*/
+
 			}
 		}
-		//this.cycle.head.getIndex();}
+	
 	
 	
 	public void grow(){
@@ -309,8 +243,8 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 			
 	}
 	
-	private void setSpeed(){
-		targetTime -= 5;;
+	private static void setSpeed(int valor){
+		targetTime = 200/valor;
 	}
 	
 
@@ -320,7 +254,7 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 		int k = key.getKeyCode();
 		if(k == KeyEvent.VK_ENTER) thread.start();
 		if(k == KeyEvent.VK_SPACE) {grow();grow();grow();grow();grow();}
-		if(k== KeyEvent.VK_BACK_SPACE)setSpeed();
+
 
 		if(k == KeyEvent.VK_RIGHT){RIGHT=true;DOWN=false;LEFT=false;UP=false;}
 		if(k == KeyEvent.VK_DOWN){DOWN=true;LEFT=false;UP=false;RIGHT=false;}

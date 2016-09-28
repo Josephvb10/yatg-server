@@ -1,18 +1,20 @@
 package Troncycle;
 
+import GraphicMap.Screen;
 import Structures.*;
 
 public class Troncycle {
 	private Player owner;
-	private int fuel, speed;
+	private int speed;
+	private double fuel;
 	private Direction currentDirection;
-	private int extraTrail;
+	private int extraTrail, powerUpSteps;
 	// public PriorityQueue items;
 	// public Stack powerUps;
 	// public Nodo tail, head;
 	private GenericLinkedList<Item> trail;
 	private ItemsPriorityQueue itemsQueue = new ItemsPriorityQueue();
-	private boolean isDead;
+	private boolean isDead, powerUpActivated;
 
 	
 	public Troncycle() {
@@ -22,14 +24,32 @@ public class Troncycle {
 
 	public Troncycle(Player owner,int indexI, int indexJ) {
 		this.isDead = false;
+		this.powerUpActivated = false;
 		this.owner = owner;
 		this.fuel = 100;
 		this.speed = 1;
 		this.trail = new GenericLinkedList<>();
 		this.extraTrail = 6;
+		this.powerUpSteps = 0;
 		this.addHead(indexI, indexJ);
 	}
 	
+	
+	public void setPowerUpSteps(int value){
+		this.powerUpSteps=value;
+	}
+	
+	public int getPowerUpSteps(){
+		return this.powerUpSteps;
+	}
+	
+	public void setPowerUpActivated(boolean value){
+		this.powerUpActivated=value;
+	}
+	
+	public boolean getPowerUpActivated(){
+		return this.powerUpActivated;
+	}
 	
 	public boolean getIsDead(){
 		return this.isDead;
@@ -37,7 +57,12 @@ public class Troncycle {
 	
 	public void setIsDead(boolean value){
 		this.isDead = value;
+		if(value == true){
+			Screen.RUN = false;
+			
+		}
 	}
+
 
 	public Player getOwner() {
 		return owner;
@@ -47,16 +72,22 @@ public class Troncycle {
 		this.owner = owner;
 	}
 
-	public int getFuel() {
+	public double getFuel() {
 		return fuel;
 	}
 
-	public void setFuel(int fuel) {
+	public void setFuel(double fuel) {
 		this.fuel = fuel;
 	}
 
 	public void addFuel(int fuel) {
-		this.fuel += fuel;
+		if((this.fuel + fuel) > 100){
+			this.fuel = 100;
+		}
+		else{
+			this.fuel +=fuel;
+		}
+		
 	}
 
 	public int getSpeed() {
@@ -64,6 +95,7 @@ public class Troncycle {
 	}
 
 	public void setSpeed(int speed) {
+		Screen.targetTime = 200/speed;
 		this.speed = speed;
 	}
 
