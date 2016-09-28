@@ -14,6 +14,9 @@ public class Item implements Comparable<Item>{
 	
 
 	
+	public Item() {
+		super();
+	}
 	public Item(ItemType type) {
 		super();
 		setType(type);

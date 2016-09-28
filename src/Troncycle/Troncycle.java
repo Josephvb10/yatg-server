@@ -14,6 +14,12 @@ public class Troncycle {
 	private ItemsPriorityQueue itemsQueue = new ItemsPriorityQueue();
 	private boolean isDead;
 
+	
+	public Troncycle() {
+		super();
+	}
+
+
 	public Troncycle(Player owner,int indexI, int indexJ) {
 		this.isDead = false;
 		this.owner = owner;
@@ -23,6 +29,7 @@ public class Troncycle {
 		this.extraTrail = 6;
 		this.addHead(indexI, indexJ);
 	}
+	
 	
 	public boolean getIsDead(){
 		return this.isDead;
