@@ -156,17 +156,47 @@ public class LinkedMatrix {
 		return result;
 	}
 	public void updatePlayer(Troncycle player){
+		System.out.println(player);
 		GenericNode<Item> current = player.getTrail().getHead();
+		Nodo result=null;
 		while(current != null){
 			this.resetNodeItem(current.getData());
 			current=current.getNext();
-		}
+		}	
+		 current = player.getTrail().getHead();
+		Item first = current.getData();
+		int indexI = first.getIndexI();
+		int indexJ = first.getIndexJ();
+
+		switch (player.getCurrentDirection()) {// necesario agregar casos especiales
+		case down:
+			result = this.getNodo(indexI, indexJ).getDown();
+			break;
+		case up:
+			result = this.getNodo(indexI, indexJ).getUp();
+
+			break;
+		case left:
+			result = this.getNodo(indexI, indexJ).getLeft();
+
+			break;
+		case right:
+			result = this.getNodo(indexI, indexJ).getRight();
+
+			break;
+
+		default:
+			break;
+			
 		
-		player.move();
+		}
+		int newI = result.getIndexI();
+		int newJ = result.getIndexJ();
+		player.move(newI, newJ);
 		current = player.getTrail().getHead();
 		while(current != null){
 			this.setNodeItem(current.getData());
-			System.out.println("i  "+current.getData().getIndexI()+"  j  "+current.getData().getIndexI());
+
 			current=current.getNext();
 		}
 	}

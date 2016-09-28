@@ -29,11 +29,12 @@ public class test {
 		//malla.resetNodeItem(item6);
 		//System.out.println(malla.getNodo(0, 3).getItem());
 		Troncycle player1 = new	Troncycle(Player.player1, 0, 0);
+		player1.setCurrentDirection(Direction.up);
+		malla.updatePlayer(player1);
+		
+		malla.updatePlayer(player1);
 		player1.setCurrentDirection(Direction.right);
-		malla.updatePlayer(player1);
-		
-		malla.updatePlayer(player1);
-		
+
 		malla.updatePlayer(player1);
 		
 		malla.updatePlayer(player1);

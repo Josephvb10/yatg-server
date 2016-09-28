@@ -18,7 +18,7 @@ public class Troncycle {
 		this.fuel = 100;
 		this.speed = 1;
 		this.trail = new GenericLinkedList<>();
-		this.extraTrail = 3;
+		this.extraTrail = 6;
 		this.addHead(indexI, indexJ);
 	}
 
