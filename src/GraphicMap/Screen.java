@@ -25,7 +25,7 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 	
 	private Thread thread;
 
-	public long targetTime =100;
+	public long targetTime =20;
 	
 	public Screen(){
 		setPreferredSize( new Dimension(SIZE, SIZE));

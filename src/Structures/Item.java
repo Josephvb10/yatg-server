@@ -52,8 +52,11 @@ public class Item implements Comparable<Item>{
 		else if (type == ItemType.increaseTail){
 			setValue(randInt(1,10));
 		}
-		else if (type == ItemType.shield || type == ItemType.turbo){
+		else if (type == ItemType.shield){
 			setValue(randInt(5,20));
+		}
+		else if(type == ItemType.turbo){
+			setValue(randInt(1,10));
 		}
 	}
 	
