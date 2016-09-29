@@ -9,10 +9,8 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
-import Malla.*;
 import Structures.*;
-import Structures.Malla.LinkedMatrix;
-import Structures.Malla.Nodo;
+import Structures.Malla.*;
 
 @SuppressWarnings("serial")
 public class Screen1 extends JPanel implements KeyListener, Runnable{
@@ -90,7 +88,7 @@ public class Screen1 extends JPanel implements KeyListener, Runnable{
 		g.setColor(Color.white);
 		g.clearRect(0, 0, SIZE, SIZE);
 		g.setColor(Color.BLACK);
-		Nodo temp = matrix.head;
+		Nodo temp = matrix.getHead();
 		for(int y =0; y < SIZE; y+=NODOSIZE){
 			for(int x=0; x<SIZE; x+=NODOSIZE){
 

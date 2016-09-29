@@ -114,6 +114,26 @@ public class GenericLinkedList<T> {
 		}
 		return result;
 	}
+	public T deleteLast() {
+		GenericNode<T> current = head;
+		GenericNode<T> prev = head;
+		T result = null;
+		if(current.getNext()==null){
+			result = current.getData();
+			head=null;
+
+		}
+		else{
+			while(current.getNext()!=null){
+				prev=current;
+				current=current.getNext();
+				result = current.getData();
+			}
+			prev.setNext(null);
+			
+		}
+		return result;
+	}
 
 	private boolean checkPosition(int position) {
 		return position >= 0 && position < this.getSize();

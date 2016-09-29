@@ -1,11 +1,10 @@
 package Structures.Malla;
 
 import Structures.*;
-import GraphicMap.*;
 
 public class LinkedMatrix {
-	public Nodo head;
-	public int numRows, numCols, numNodes;
+	private Nodo head;
+	private int numRows, numCols, numNodes;
 	
 	public LinkedMatrix(int numRows, int numCols){
 		this.head = null;
@@ -17,6 +16,47 @@ public class LinkedMatrix {
 		return;
 	}
 	
+	
+	public Nodo getHead() {
+		return head;
+	}
+
+
+	public void setHead(Nodo head) {
+		this.head = head;
+	}
+
+
+	public int getNumRows() {
+		return numRows;
+	}
+
+
+	public void setNumRows(int numRows) {
+		this.numRows = numRows;
+	}
+
+
+	public int getNumCols() {
+		return numCols;
+	}
+
+
+	public void setNumCols(int numCols) {
+		this.numCols = numCols;
+	}
+
+
+	public int getNumNodes() {
+		return numNodes;
+	}
+
+
+	public void setNumNodes(int numNodes) {
+		this.numNodes = numNodes;
+	}
+
+
 	public Nodo simpleUnlinkedList(){
 		int i, jj;
 		int nodos =1;

@@ -135,7 +135,7 @@ public class Troncycle {
 
 		if (trail.getSize() > 1) {
 			
-			deleted = trail.deleteAtPosition(trail.getSize() - 1);
+			deleted = trail.deleteLast();
 		}
 		return deleted;
 	}
