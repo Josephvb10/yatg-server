@@ -1,49 +1,25 @@
 package Malla;
 
-import java.awt.Color;
+
+import Structures.Item;
 
 public class Nodo {
 	private Nodo up, down, left, right, next;
-	private int indexI, indexJ, size, xl, yl, xr, yr;
-	private String type;
-	private Color color;
+	private int indexI, indexJ;
+	private Item item;
 	
-	public Nodo(int size){
+	
+	public Nodo(){
 		this.next = null;
 		this.up = null;
 		this.down = null;
 		this.left = null;
-		this.right = null;
-		this.type = "Empty";
-		this.color = null;
+		this.right = null;	
 		this.indexI = 0;
 		this.indexJ = 0;
-		this.size = size;
-		this.xl =0;
-		this.yl=0;
-		this.xr=0;
-		this.yr=0;
-		
-		
+		this.item=null;
 	}
 
-	public int getXL(){ return this.xl;}
-	public int getYL(){ return this.yl;}
-	public void setVerticeUL(int xl, int yl){
-		this.xl = xl;
-		this.yl = yl;
-	}
-	
-	public int getXR(){ return this.xr;}
-	public int getYR(){ return this.yr;}
-	public void setVerticeDR(int xr, int yr){
-		this.xr = xr;
-		this.yr = yr;
-	}
-	
-	
-	
-			
 	
 	public Nodo getNext(){
 		return next;
@@ -110,29 +86,17 @@ public class Nodo {
 		this.indexJ = indexJ;
 	}
 
-	public String getType() {
-		return type;
+
+	public Item getItem() {
+		return item;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setItem(Item item) {
+		this.item = item;
 	}
 
-	public Color getColor() {
-		return color;
-	}
-
-	public void setColor(Color color) {
-		this.color = color;
-	}
 	
-	public int getSize() {return size;}
-	public void setSize(int size) {this.size = size;}
-	
-	}
-	
-	
-	
+}
 	
 	
 	
