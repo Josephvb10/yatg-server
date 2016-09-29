@@ -11,10 +11,10 @@ public class OutputServer{
 	
 	private int port;
 	private ArrayList<String> listeners;
-	private OutputMessage outputMessage;
+	private OutputMessage2 outputMessage;
 	private int maxTimeOut=10;
 	
-	public OutputServer(int port, ArrayList<String> listeners, OutputMessage outputMessage) {
+	public OutputServer(int port, ArrayList<String> listeners, OutputMessage2 outputMessage) {
 		super();
 		this.port = port;
 		this.listeners = listeners;
@@ -37,11 +37,11 @@ public class OutputServer{
 		this.listeners = listeners;
 	}
 
-	public OutputMessage getOutputMessage() {
+	public OutputMessage2 getOutputMessage() {
 		return outputMessage;
 	}
 
-	public void setOutpuMessage(OutputMessage outputMessage) {
+	public void setOutpuMessage(OutputMessage2 outputMessage) {
 		this.outputMessage = outputMessage;
 	}
 
@@ -53,7 +53,7 @@ public class OutputServer{
 		this.maxTimeOut = maxTimeOut;
 	}
 	
-	public void sendToAll(OutputMessage message){
+	public void sendToAll(OutputMessage2 message){
 	ListIterator<String> listenersIterator= listeners.listIterator();
 		while(listenersIterator.hasNext()){
 			try {
