@@ -27,7 +27,7 @@ public class Troncycle {
 		this.fuel = 100;
 		this.speed = 1;
 		this.trail = new GenericLinkedList<>();
-		this.extraTrail = 6;
+		this.extraTrail = 10;
 		this.powerUpSteps = 0;
 		this.addHead(indexI, indexJ);
 	}
@@ -133,13 +133,12 @@ public class Troncycle {
 	public Item deleteTail() {
 		Item deleted = null;
 
-		if (trail.getSize() > 1) {
 			if (getExtraTrail() > 0) {
 				addExtraTrail(-1);
 			} else {
 				deleted = trail.deleteLast();
 			}
-		}
+		
 		return deleted;
 		
 		

@@ -1,5 +1,6 @@
 package tests;
 
+import Comunication.JsonConverter;
 import Structures.*;
 import Structures.Malla.LinkedMatrix;
 
@@ -42,6 +43,12 @@ public class testMalla {
 		malla.updatePlayer(player1);
 		
 		malla.updatePlayer(player1);
+		System.out.println("hola");
+
+		String Jsonlist = JsonConverter.objectToJson(malla.getSimpleItemList());
+		System.out.println(Jsonlist);
+		System.out.println(malla.getSimpleItemList());
+		System.out.println("hola");
 		
 
 

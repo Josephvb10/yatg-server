@@ -261,10 +261,10 @@ public class LinkedMatrix {
 	 */
 
 	public void updatePlayer(Troncycle player) {
-		System.out.println("esta muerto  "+player.getIsDead());
-		
-		if ( player.getIsDead()==false) {
-			System.out.println("probando");
+		//System.out.println("esta muerto  " + player.getIsDead());
+
+		if (player.getIsDead() == false) {
+			//System.out.println("probando");
 			if (player.getFuel() <= 0) {
 				player.setIsDead(true);
 				System.out.println("Me mori por combustible");
@@ -348,38 +348,47 @@ public class LinkedMatrix {
 						|| nodoToCheck.getItem().getType() == ItemType.tronTrail) {
 					System.out.println("Me mori");
 					this.cleanDeadPlayer(player);
-					System.out.println("esta muerto  "+player.getIsDead());
+					System.out.println("esta muerto  " + player.getIsDead());
 
 					player.setIsDead(true);
-					System.out.println("esta muerto  cambiado"+player.getIsDead());
-
+					System.out.println("esta muerto  cambiado" + player.getIsDead());
 
 					return;
 				}
 				System.out.println(nodoToCheck.getItem().getType());
 			}
 
-			
-				player.setFuel(player.getFuel() - 0.5);
-				System.out.println("Me queda este combustible" + player.getFuel());
-				Item deleted = player.deleteTail();
-				if (deleted != null) {
-					this.resetNodeItem(deleted);
-				}
-				player.addHead(newI, newJ);
-				this.setNodeItem(player.getTrail().getHead().getData());
-
-			
+			player.setFuel(player.getFuel() - 0.5);
+			System.out.println("Me queda este combustible" + player.getFuel());
+			Item deleted = player.deleteTail();
+			if (deleted != null) {
+				this.resetNodeItem(deleted);
+			}
+			player.addHead(newI, newJ);
+			this.setNodeItem(player.getTrail().getHead().getData());
 
 		}
 	}
-	
-	private void cleanDeadPlayer(Troncycle player){
+
+	private void cleanDeadPlayer(Troncycle player) {
 		GenericNode<Item> current = player.getTrail().getHead();
 		while (current != null) {
 			this.resetNodeItem(current.getData());
 			current = current.getNext();
+
+		}
+	}
+	public GenericLinkedList<Item> getSimpleItemList(){
+		GenericLinkedList<Item> result = new GenericLinkedList<>();
+		Nodo current =  this.getHead();
+		while(current != null){
+			if(current.getItem()!=null){
+			result.add(current.getItem());
+			}
+			current = current.getNext();
+		}
+		return result;
 		
-	}}
-	
+	}
+
 }
