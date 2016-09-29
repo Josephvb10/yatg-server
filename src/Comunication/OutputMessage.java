@@ -1,7 +1,7 @@
 package Comunication;
 import Structures.*;
 
-public class OutMessage {
+public class OutputMessage {
 	private int id;
 	private static int nextid = 0;
 	private Troncycle player;
@@ -9,11 +9,11 @@ public class OutMessage {
 	
 	
 
-	public OutMessage() {
+	public OutputMessage() {
 		super();
 	}
 
-	public OutMessage(GenericLinkedList<Item> itemList, Troncycle player) {
+	public OutputMessage(GenericLinkedList<Item> itemList, Troncycle player) {
 		super();
 		this.id = getNextid();
 		this.player = player;
@@ -35,7 +35,7 @@ public class OutMessage {
 	}
 
 	public static void setNextid(int nextid) {
-		OutMessage.nextid = nextid;
+		OutputMessage.nextid = nextid;
 	}
 
 	public Troncycle getPlayer() {
