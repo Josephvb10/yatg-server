@@ -1,4 +1,4 @@
-package Malla;
+package Structures.Malla;
 
 
 import Structures.Item;

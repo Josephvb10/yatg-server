@@ -1,6 +1,5 @@
-package Troncycle;
+package Structures;
 
-import Structures.*;
 
 public class Troncycle {
 	private Player owner;
@@ -94,8 +93,8 @@ public class Troncycle {
 	}
 
 	public void setSpeed(int speed) {
-		Screen.targetTime = 200/speed;
-		this.speed = speed;
+		//Screen.targetTime = 200/speed;
+		//this.speed = speed;
 	}
 
 	public Direction getCurrentDirection() {

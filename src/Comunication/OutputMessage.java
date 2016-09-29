@@ -1,7 +1,7 @@
 package Comunication;
 import java.util.ArrayList;
 
-import Malla.LinkedMatrix;
+import Structures.Malla.LinkedMatrix;
 
 
 class OutputMessage {
