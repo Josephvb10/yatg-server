@@ -68,8 +68,8 @@ public class Screen1 extends JPanel implements KeyListener, Runnable{
 		 this.player1 = new Troncycle(Player.player1, 0, 0);
 		 this.player1.setCurrentDirection(Direction.right);
 		 
-		 this.player2 = new Troncycle(Player.player2, 20,0);
-		 this.player2.setCurrentDirection(Direction.right);
+		 //this.player2 = new Troncycle(Player.player2, 20,0);
+		 //this.player2.setCurrentDirection(Direction.right);
 
 		 
 		RIGHT=false;
@@ -148,8 +148,8 @@ public class Screen1 extends JPanel implements KeyListener, Runnable{
 			
 			updateDirection();
 			
-			this.matrix.updatePlayer(this.player2);
 			this.matrix.updatePlayer(this.player1);
+			//this.matrix.updatePlayer(this.player2);
 			
 			repaint();
 			
@@ -173,24 +173,24 @@ public class Screen1 extends JPanel implements KeyListener, Runnable{
 		Direction prevDirection = player1.getCurrentDirection();
 		if(RIGHT && prevDirection != Direction.left){
 			player1.setCurrentDirection(Direction.right);
-			player2.setCurrentDirection(Direction.right);
+			//player2.setCurrentDirection(Direction.right);
 
 		}
 		if(LEFT && prevDirection != Direction.right){
 			
 			player1.setCurrentDirection(Direction.left);
-			player2.setCurrentDirection(Direction.left);
+			//player2.setCurrentDirection(Direction.left);
 
 		}
 		if(DOWN && prevDirection != Direction.up){
 			player1.setCurrentDirection(Direction.down);
-			player2.setCurrentDirection(Direction.down);
+			//player2.setCurrentDirection(Direction.down);
 
 		}
 		if(UP && prevDirection != Direction.down){
 
 			player1.setCurrentDirection(Direction.up);
-			player2.setCurrentDirection(Direction.up);
+			//player2.setCurrentDirection(Direction.up);
 
 			}
 		}

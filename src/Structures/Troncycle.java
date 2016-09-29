@@ -54,11 +54,11 @@ public class Troncycle {
 	}
 	
 	public void setIsDead(boolean value){
-		/*this.isDead = value;
-		if(value == true){
-			Screen.RUN = false;
-			
-		}*/
+		this.isDead = value;
+		//if(value == true){
+		//	Screen.RUN = false;
+		//	
+		//}
 	}
 
 
