@@ -1,9 +1,9 @@
-package Malla;
+package tests;
 
 import Structures.*;
-import Troncycle.Troncycle;
+import Structures.Malla.LinkedMatrix;
 
-public class test {
+public class testMalla {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub		

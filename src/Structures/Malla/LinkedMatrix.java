@@ -1,8 +1,7 @@
-package Malla;
+package Structures.Malla;
 
 import Structures.*;
 import GraphicMap.*;
-import Troncycle.Troncycle;
 
 public class LinkedMatrix {
 	public Nodo head;

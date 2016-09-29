@@ -11,7 +11,8 @@ import javax.swing.JPanel;
 
 import Malla.*;
 import Structures.*;
-import Troncycle.Troncycle;
+import Structures.Malla.LinkedMatrix;
+import Structures.Malla.Nodo;
 
 @SuppressWarnings("serial")
 public class Screen1 extends JPanel implements KeyListener, Runnable{

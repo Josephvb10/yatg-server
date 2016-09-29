@@ -1,7 +1,5 @@
-package Troncycle;
+package Structures;
 
-import GraphicMap.Screen;
-import Structures.*;
 
 public class Troncycle {
 	private Player owner;
@@ -56,11 +54,11 @@ public class Troncycle {
 	}
 	
 	public void setIsDead(boolean value){
-		this.isDead = value;
+		/*this.isDead = value;
 		if(value == true){
 			Screen.RUN = false;
 			
-		}
+		}*/
 	}
 
 
@@ -95,8 +93,8 @@ public class Troncycle {
 	}
 
 	public void setSpeed(int speed) {
-		Screen.targetTime = 200/speed;
-		this.speed = speed;
+		//Screen.targetTime = 200/speed;
+		//this.speed = speed;
 	}
 
 	public Direction getCurrentDirection() {

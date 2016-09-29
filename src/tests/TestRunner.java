@@ -1,5 +1,5 @@
 
-package Comunication;
+package tests;
 
 import java.io.IOException;
 import java.util.PriorityQueue;
@@ -7,8 +7,8 @@ import java.util.PriorityQueue;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import Comunication.JsonConverter;
 import Structures.*;
-import Troncycle.Troncycle;
 
 public class TestRunner {
 
