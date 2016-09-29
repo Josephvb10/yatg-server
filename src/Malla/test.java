@@ -43,7 +43,7 @@ public class test {
 		
 		malla.updatePlayer(player1);
 		
-		malla.displayList();
+
 
 
 		
