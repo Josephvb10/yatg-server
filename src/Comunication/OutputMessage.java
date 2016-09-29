@@ -1,56 +1,66 @@
 package Comunication;
-import java.util.ArrayList;
+import Structures.*;
 
-import Structures.Malla.LinkedMatrix;
-
-
-class OutputMessage {
+public class OutputMessage {
 	private int id;
-	private static int nextid = 1;
-	private String player;
-	private String alert;
-	private LinkedMatrix map;
+	private static int nextid = 0;
+	private Troncycle player;
+	private GenericLinkedList<Item> itemList;
 	
-	public OutputMessage(String player, String alert, LinkedMatrix map) {
-		this.player = player;
-		this.alert = alert;
-		this.map = map;
-		this.id = nextid;
-		nextid++;
+	
+
+	public OutputMessage() {
+		super();
 	}
+
+	public OutputMessage(GenericLinkedList<Item> itemList, Troncycle player) {
+		super();
+		this.id = getNextid();
+		this.player = player;
+		this.itemList = itemList;
+	}
+	
+
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public static int getNextid() {
-		return nextid;
+
+	private static int getNextid() {
+		return ++nextid;
 	}
+
 	public static void setNextid(int nextid) {
 		OutputMessage.nextid = nextid;
 	}
-	public String getPlayer() {
+
+	public Troncycle getPlayer() {
 		return player;
 	}
-	public void setPlayer(String player) {
+
+	public void setPlayer(Troncycle player) {
 		this.player = player;
 	}
-	public String getAlert() {
-		return alert;
+
+	public GenericLinkedList<Item> getItemList() {
+		return itemList;
 	}
-	public void setAlert(String alert) {
-		this.alert = alert;
+
+	public void setItemList(GenericLinkedList<Item> itemList) {
+		this.itemList = itemList;
 	}
-	public LinkedMatrix getMap() {
-		return map;
-	}
-	public void setMap(LinkedMatrix map) {
-		this.map = map;
-	}
-	public String getJson(){
+
+	public String toJson() {
 		String messageJson = JsonConverter.objectToJson(this);
 		return messageJson;
 	}
-	
+
 }
+
+
+
+

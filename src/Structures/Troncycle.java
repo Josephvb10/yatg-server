@@ -27,7 +27,7 @@ public class Troncycle {
 		this.fuel = 100;
 		this.speed = 1;
 		this.trail = new GenericLinkedList<>();
-		this.extraTrail = 6;
+		this.extraTrail = 10;
 		this.powerUpSteps = 0;
 		this.addHead(indexI, indexJ);
 	}
@@ -54,11 +54,11 @@ public class Troncycle {
 	}
 	
 	public void setIsDead(boolean value){
-		/*this.isDead = value;
-		if(value == true){
-			Screen.RUN = false;
-			
-		}*/
+		this.isDead = value;
+		//if(value == true){
+		//	Screen.RUN = false;
+		//	
+		//}
 	}
 
 
@@ -133,11 +133,16 @@ public class Troncycle {
 	public Item deleteTail() {
 		Item deleted = null;
 
-		if (trail.getSize() > 1) {
-			
-			deleted = trail.deleteAtPosition(trail.getSize() - 1);
-		}
+			if (getExtraTrail() > 0) {
+				addExtraTrail(-1);
+			} else {
+				deleted = trail.deleteLast();
+			}
+		
 		return deleted;
+		
+		
+
 	}
 
 	
@@ -183,7 +188,7 @@ public class Troncycle {
 		trail.getHead().getData().setIsHead(false);}
 		trail.setHead(newHead);
 	}
-
+/*
 	public Item move(int indexI, int indexJ) {
 		Item deleted = null;
 		addHead( indexI,  indexJ);
@@ -193,7 +198,7 @@ public class Troncycle {
 			deleted = deleteTail();
 		}
 		return deleted;
-	}
+	}*/
 	public void addItem(Item newItem){
 		itemsQueue.add(newItem);
 	}
