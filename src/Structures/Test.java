@@ -19,11 +19,11 @@ public class Test {
 		}
 		int positionX= 1;
 		int positionY= 2;
-		Item item1 = new Item(Item.Type.bomb, positionX, positionY);
-		Item item2 = new Item(Item.Type.turbo, positionX, positionY);
-		Item item3 = new Item(Item.Type.fuel, positionX, positionY);
-		Item item4 = new Item(Item.Type.shield, positionX, positionY);
-		Item item5 = new Item(Item.Type.bomb, positionX, positionY);
+		Item item1 = new Item(ItemType.bomb, positionX, positionY);
+		Item item2 = new Item(ItemType.turbo, positionX, positionY);
+		Item item3 = new Item(ItemType.fuel, positionX, positionY);
+		Item item4 = new Item(ItemType.shield, positionX, positionY);
+		Item item5 = new Item(ItemType.bomb, positionX, positionY);
 		System.out.println(item1.getValue());
 		System.out.println(item2.getValue());
 		System.out.println(item3.getValue());
