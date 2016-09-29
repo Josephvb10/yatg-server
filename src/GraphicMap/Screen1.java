@@ -14,7 +14,7 @@ import Structures.*;
 import Troncycle.Troncycle;
 
 @SuppressWarnings("serial")
-public class Screen extends JPanel implements KeyListener, Runnable{
+public class Screen1 extends JPanel implements KeyListener, Runnable{
 	public static final int SIZE=800;
 	public static final int NODOSIZE = 20;
 	public static boolean RIGHT, LEFT, UP, DOWN, RUN, gameover;;
@@ -27,7 +27,7 @@ public class Screen extends JPanel implements KeyListener, Runnable{
 
 	public static long targetTime =200;
 	
-	public Screen(){
+	public Screen1(){
 		setPreferredSize( new Dimension(SIZE, SIZE));
 		setFocusable(true);
 		requestFocus();
