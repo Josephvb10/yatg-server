@@ -134,10 +134,16 @@ public class Troncycle {
 		Item deleted = null;
 
 		if (trail.getSize() > 1) {
-			
-			deleted = trail.deleteLast();
+			if (getExtraTrail() > 0) {
+				addExtraTrail(-1);
+			} else {
+				deleted = trail.deleteLast();
+			}
 		}
 		return deleted;
+		
+		
+
 	}
 
 	
@@ -183,7 +189,7 @@ public class Troncycle {
 		trail.getHead().getData().setIsHead(false);}
 		trail.setHead(newHead);
 	}
-
+/*
 	public Item move(int indexI, int indexJ) {
 		Item deleted = null;
 		addHead( indexI,  indexJ);
@@ -193,7 +199,7 @@ public class Troncycle {
 			deleted = deleteTail();
 		}
 		return deleted;
-	}
+	}*/
 	public void addItem(Item newItem){
 		itemsQueue.add(newItem);
 	}
