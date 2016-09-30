@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
-import Malla.*;
+//import Malla.*;
 import Structures.*;
 import Structures.Malla.LinkedMatrix;
 import Structures.Malla.Nodo;
