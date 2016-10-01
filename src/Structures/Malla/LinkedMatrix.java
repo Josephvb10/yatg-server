@@ -144,23 +144,6 @@ public class LinkedMatrix {
 
 	}
 
-	/*
-	 * public void displayList(){ //Nodo temp = this.head; //while(temp !=
-	 * null){ for(int i =0; i<this.numRows; i++){ for(int j=0; j<this.numCols;
-	 * j++){ getNodo(i, j).getIndex(); if(getNodo(i,j).getItem()!=null){
-	 * System.out.print(getNodo(i,j).getItem().getType()); } }
-	 * System.out.println(); } }
-	 */
-
-	/*
-	 * public Nodo getIndexNode(int indexI, int indexJ){ Nodo current =
-	 * this.head; if (checkIndexI(indexI)&& checkIndexJ(indexJ)){
-	 * while(indexI>0){ current = current.getDown(); indexI--; }
-	 * while(indexJ>0){ current = current.getRight(); indexJ--; } } return
-	 * current;
-	 * 
-	 * }
-	 */
 	public void setNodeItem(Item item) {
 		int indexI = item.getIndexI();
 		int indexJ = item.getIndexJ();
@@ -176,97 +159,14 @@ public class LinkedMatrix {
 		int indexJ = item.getIndexJ();
 		getNodo(indexI, indexJ).setItem(null);
 	}
-	/*
-	 * public boolean checkIndexI(int indexI){ boolean result = false;
-	 * if(0<=indexI && indexI<this.numCols){ result = true; } return result; }
-	 * 
-	 * public boolean checkIndexJ(int indexJ){ boolean result = false;
-	 * if(0<=indexJ && indexJ<this.numCols){ result = true; } return result; }
-	 */
-	/*
-	 * public void updatePlayer(Troncycle player){
-	 * 
-	 * if(player.getFuel() <=0){ player.setIsDead(true);
-	 * System.out.println("Me mori por combustible"); return; }
-	 * 
-	 * if(player.getPowerUpActivated()){
-	 * player.setPowerUpSteps(player.getPowerUpSteps()-1);
-	 * System.out.println("Me quedan este numero de pasos" +
-	 * player.getPowerUpSteps()); if(player.getPowerUpSteps()==0){
-	 * player.setPowerUpActivated(false); player.setSpeed(1);
-	 * System.out.println("Velocidad normal"); } }
-	 * 
-	 * 
-	 * 
-	 * GenericNode<Item> current = player.getTrail().getHead(); Nodo
-	 * result=null;
-	 * 
-	 * 
-	 * while(current != null){ this.resetNodeItem(current.getData());
-	 * current=current.getNext(); } current = player.getTrail().getHead(); Item
-	 * first = current.getData(); int indexI = first.getIndexI(); int indexJ =
-	 * first.getIndexJ();
-	 * 
-	 * switch (player.getCurrentDirection()) {// necesario agregar casos
-	 * especiales case down: result = this.getNodo(indexI, indexJ).getDown();
-	 * break; case up: result = this.getNodo(indexI, indexJ).getUp();
-	 * 
-	 * break; case left: result = this.getNodo(indexI, indexJ).getLeft();
-	 * 
-	 * break; case right: result = this.getNodo(indexI, indexJ).getRight();
-	 * 
-	 * break;
-	 * 
-	 * default: break;
-	 * 
-	 * 
-	 * } int newI = result.getIndexI(); int newJ = result.getIndexJ();
-	 * 
-	 * if(this.getNodo(newI, newJ).getItem()!=null){
-	 * 
-	 * 
-	 * if(this.getNodo(newI, newJ).getItem().getType()==ItemType.fuel){
-	 * if(player.getFuel() == 100){ player.addItem(this.getNodo(newI,
-	 * newJ).getItem()); } int fuelBonus = this.getNodo(newI,
-	 * newJ).getItem().getValue(); player.addFuel(fuelBonus);
-	 * System.out.println("Obtuve un bonus de " + fuelBonus);
-	 * 
-	 * }
-	 * 
-	 * else if(this.getNodo(newI,
-	 * newJ).getItem().getType()==ItemType.increaseTail){
-	 * player.addItem(this.getNodo(newI, newJ).getItem()); }
-	 * 
-	 * else if(this.getNodo(newI, newJ).getItem().getType()==ItemType.shield){
-	 * ////add stack() <3 } else if(this.getNodo(newI,
-	 * newJ).getItem().getType()==ItemType.turbo){ ////add stack() <3 int
-	 * newSpeed = this.getNodo(newI, newJ).getItem().getValue();
-	 * player.setSpeed(newSpeed); if(!player.getPowerUpActivated()){
-	 * player.setPowerUpActivated(true); player.setPowerUpSteps(60); }
-	 * System.out.println("Cambie velocidad a " + player.getSpeed());
-	 * 
-	 * }
-	 * 
-	 * else if(this.getNodo(newI, newJ).getItem().getType()==ItemType.bomb ||
-	 * this.getNodo(newI, newJ).getItem().getType()==ItemType.tronTrail){
-	 * player.setIsDead(true); System.out.println("Me mori"); return; }
-	 * System.out.println(getNodo(newI, newJ).getItem().getType()); }
-	 * 
-	 * player.setFuel(player.getFuel()-0.5);
-	 * System.out.println("Me queda este combustible" + player.getFuel());
-	 * player.move(newI, newJ); current = player.getTrail().getHead();
-	 * while(current != null){ this.setNodeItem(current.getData());
-	 * 
-	 * current=current.getNext(); } }
-	 */
+
 
 	public void updatePlayer(Troncycle player) {
-		//System.out.println("esta muerto  " + player.getIsDead());
 
 		if (player.getIsDead() == false) {
-			//System.out.println("probando");
 			if (player.getFuel() <= 0) {
 				player.setIsDead(true);
+				this.cleanDeadPlayer(player);
 				System.out.println("Me mori por combustible");
 				return;
 			}
@@ -328,6 +228,8 @@ public class LinkedMatrix {
 
 				else if (nodoToCheck.getItem().getType() == ItemType.increaseTail) {
 					player.addItem(nodoToCheck.getItem());
+					player.addExtraTrail(nodoToCheck.getItem().getValue());
+					System.out.println("Aumento de tamaño" + nodoToCheck.getItem().getValue());
 				}
 
 				else if (nodoToCheck.getItem().getType() == ItemType.shield) {
@@ -359,7 +261,7 @@ public class LinkedMatrix {
 			}
 
 			player.setFuel(player.getFuel() - 0.5);
-			System.out.println("Me queda este combustible" + player.getFuel());
+			System.out.println(player.getTrail().getSize());
 			Item deleted = player.deleteTail();
 			if (deleted != null) {
 				this.resetNodeItem(deleted);

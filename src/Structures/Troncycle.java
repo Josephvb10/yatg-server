@@ -1,4 +1,7 @@
 package Structures;
+import java.util.Random;
+
+import Structures.Item;
 
 
 public class Troncycle {
@@ -7,9 +10,6 @@ public class Troncycle {
 	private double fuel;
 	private Direction currentDirection;
 	private int extraTrail, powerUpSteps;
-	// public PriorityQueue items;
-	// public Stack powerUps;
-	// public Nodo tail, head;
 	private GenericLinkedList<Item> trail;
 	private ItemsPriorityQueue itemsQueue = new ItemsPriorityQueue();
 	private boolean isDead, powerUpActivated;
@@ -25,11 +25,13 @@ public class Troncycle {
 		this.powerUpActivated = false;
 		this.owner = owner;
 		this.fuel = 100;
-		this.speed = 1;
+		this.speed = generateSpeed();
 		this.trail = new GenericLinkedList<>();
-		this.extraTrail = 10;
+		this.extraTrail = 2;
 		this.powerUpSteps = 0;
 		this.addHead(indexI, indexJ);
+		;
+
 	}
 	
 	
@@ -55,10 +57,6 @@ public class Troncycle {
 	
 	public void setIsDead(boolean value){
 		this.isDead = value;
-		//if(value == true){
-		//	Screen.RUN = false;
-		//	
-		//}
 	}
 
 
@@ -84,17 +82,21 @@ public class Troncycle {
 		}
 		else{
 			this.fuel +=fuel;
-		}
-		
+		}	
 	}
 
 	public int getSpeed() {
 		return speed;
 	}
+	
+	public int generateSpeed() {
+		Random rand = new Random();
+		int newSpeed = rand.nextInt(9)+1;
+		return newSpeed;
+	}
 
 	public void setSpeed(int speed) {
-		//Screen.targetTime = 200/speed;
-		//this.speed = speed;
+		this.speed = speed;
 	}
 
 	public Direction getCurrentDirection() {
@@ -104,8 +106,6 @@ public class Troncycle {
 	public void setCurrentDirection(Direction currentDirection) {
 		this.currentDirection = currentDirection;
 	}
-	
-
 	public GenericLinkedList<Item> getTrail() {
 		return trail;
 	}
@@ -140,43 +140,8 @@ public class Troncycle {
 			}
 		
 		return deleted;
-		
-		
-
 	}
-
 	
-/*
-	public void addHead() {
-		Item first = this.getHead().getData();
-		int indexI = first.getIndexI();
-		int indexJ = first.getIndexJ();
-
-		switch (currentDirection) {// necesario agregar casos especiales
-		case down:
-			indexI--;
-			break;
-		case up:
-			indexI++;
-
-			break;
-		case left:
-			indexJ--;
-
-			break;
-		case right:
-			indexJ++;
-
-			break;
-
-		default:
-			break;
-		}
-
-		Item newItem = new Item(ItemType.tronTrail, indexI, indexJ, true, this.owner);
-		addHead(newItem);
-	}*/
-
 	public void addHead(int indexI, int indexJ) {
 		Item newItem = new Item(ItemType.tronTrail, indexI, indexJ, true, this.owner);
 		addHead(newItem);
@@ -188,17 +153,7 @@ public class Troncycle {
 		trail.getHead().getData().setIsHead(false);}
 		trail.setHead(newHead);
 	}
-/*
-	public Item move(int indexI, int indexJ) {
-		Item deleted = null;
-		addHead( indexI,  indexJ);
-		if (getExtraTrail() > 0) {
-			addExtraTrail(-1);
-		} else {
-			deleted = deleteTail();
-		}
-		return deleted;
-	}*/
+
 	public void addItem(Item newItem){
 		itemsQueue.add(newItem);
 	}
