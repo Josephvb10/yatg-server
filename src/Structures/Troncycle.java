@@ -2,7 +2,7 @@ package Structures;
 import java.util.Random;
 
 import Structures.Item;
-import Graphic
+
 
 public class Troncycle {
 	private Player owner;
@@ -10,9 +10,6 @@ public class Troncycle {
 	private double fuel;
 	private Direction currentDirection;
 	private int extraTrail, powerUpSteps;
-	// public PriorityQueue items;
-	// public Stack powerUps;
-	// public Nodo tail, head;
 	private GenericLinkedList<Item> trail;
 	private ItemsPriorityQueue itemsQueue = new ItemsPriorityQueue();
 	private boolean isDead, powerUpActivated;
@@ -30,10 +27,11 @@ public class Troncycle {
 		this.fuel = 100;
 		this.speed = generateSpeed();
 		this.trail = new GenericLinkedList<>();
-		this.extraTrail = 10;
+		this.extraTrail = 2;
 		this.powerUpSteps = 0;
 		this.addHead(indexI, indexJ);
-		Screen.targetTime = 300/this.speed;
+		;
+
 	}
 	
 	
