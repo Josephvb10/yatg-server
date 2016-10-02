@@ -16,11 +16,12 @@ public class Troncycle {
 	private GenericLinkedList<Item> trail;
 	private ItemsPriorityQueue itemsQueue = new ItemsPriorityQueue();
 	private boolean isDead, powerUpActivated, shieldActivated;
-    GenericStack<Item> powerUpStack = new GenericStack<>();
+    private GenericStack<Item> powerUpStack = new GenericStack<>();
 
 	public Troncycle() {
 		super();
 	}
+
 
 	public Troncycle(Player owner, int indexI, int indexJ) {
 		this.isDead = false;
@@ -176,6 +177,8 @@ public class Troncycle {
 	public void addItem(Item newItem) {
 		itemsQueue.add(newItem);
 		itemsQueue.displayQueue();
+		useItem();
+		itemsQueue.displayQueue();
 	}
 	
 	public void addPowerUp(Item newPowerUp){
@@ -190,8 +193,13 @@ public class Troncycle {
 
 				break;
 			case fuel:
+				if (this.getFuel() == 100) {
+					this.addItem(itemToUse);
+				}else{
+				System.out.println("Obtuve un bonus de " + itemToUse.getValue());
 				this.addFuel(itemToUse.getValue());
-
+				System.out.println("Mi nuevo combustible es" + this.fuel);
+				}
 				break;
 			case increaseTail:
 				this.addExtraTrail(itemToUse.getValue());
@@ -212,6 +220,14 @@ public class Troncycle {
 
 	public void setItemsQueue(ItemsPriorityQueue itemsQueue) {
 		this.itemsQueue = itemsQueue;
+	}
+	
+	public GenericStack<Item> getPowerUpStack() {
+		return powerUpStack;
+	}
+
+	public void setPowerUpStack(GenericStack<Item> powerUpStack) {
+		this.powerUpStack = powerUpStack;
 	}
 
 }

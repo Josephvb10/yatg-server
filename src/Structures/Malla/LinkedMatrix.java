@@ -218,12 +218,7 @@ public class LinkedMatrix {
 			if (nodoToCheck.getItem() != null) {
 
 				if (nodoToCheck.getItem().getType() == ItemType.fuel) {
-					if (player.getFuel() == 100) {
-						player.addItem(nodoToCheck.getItem());
-					}
-					int fuelBonus = nodoToCheck.getItem().getValue();
-					player.addFuel(fuelBonus);
-					System.out.println("Obtuve un bonus de " + fuelBonus);
+					player.addItem(nodoToCheck.getItem());
 
 				}
 

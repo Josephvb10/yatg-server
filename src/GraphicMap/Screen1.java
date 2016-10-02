@@ -130,7 +130,7 @@
 		@Override
 		public void addNotify(){
 			super.addNotify();
-			thread = new Thread(this);
+			this.thread = new Thread(this);
 		}
 		
 		@Override
@@ -142,6 +142,7 @@
 			long wait;
 			
 			while(RUN){
+				System.out.println("iniciado");
 
 				startTime = System.nanoTime();
 				
@@ -199,7 +200,7 @@
 		@Override
 		public void keyPressed(KeyEvent key) {
 			int k = key.getKeyCode();
-			if(k == KeyEvent.VK_ENTER) thread.start();
+			if(k == KeyEvent.VK_ENTER) this.thread.start();
 			if(k == KeyEvent.VK_RIGHT){RIGHT=true;DOWN=false;LEFT=false;UP=false;}
 			if(k == KeyEvent.VK_DOWN){DOWN=true;LEFT=false;UP=false;RIGHT=false;}
 			if(k == KeyEvent.VK_LEFT){LEFT=true;DOWN=false;UP=false;RIGHT=false;}
