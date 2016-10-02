@@ -190,4 +190,15 @@ public class Troncycle {
 
 	}
 
+
+	public ItemsPriorityQueue getItemsQueue() {
+		return itemsQueue;
+	}
+
+
+	public void setItemsQueue(ItemsPriorityQueue itemsQueue) {
+		this.itemsQueue = itemsQueue;
+	}
+	
+
 }
