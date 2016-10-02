@@ -14,7 +14,7 @@ public class GameWindow {
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setResizable(true);
 	frame.pack();
-	frame.setPreferredSize(new Dimension(Screen1.SIZE, Screen1.SIZE));
+	frame.setPreferredSize(new Dimension(Screen1.MALLASIZE, Screen1.MALLASIZE));
 	frame.setLocationRelativeTo(null);
 	frame.setVisible(true);
 	}
