@@ -1,6 +1,10 @@
-package Structures;
+package tests;
 
 import java.util.PriorityQueue;
+
+import Structures.Item;
+import Structures.ItemType;
+import Structures.ItemsPriorityQueue;
 
 public class Test {
 
