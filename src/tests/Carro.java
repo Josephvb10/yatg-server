@@ -1,7 +1,8 @@
 package tests;
 
 import Structures.ItemType;
-
+/****Clase Carro para pruebas
+*/
 public class Carro implements Comparable<Carro>{
 		private int placa;
 		private String marca;
@@ -12,6 +13,8 @@ public class Carro implements Comparable<Carro>{
 			super();
 			// TODO Auto-generated constructor stub
 		}
+		/****Constructor completo
+		*/
 		public Carro(int placa, String marca, Importancia importancia) {
 			super();
 			this.placa = placa;
@@ -38,6 +41,9 @@ public class Carro implements Comparable<Carro>{
 		public void setImportancia(Importancia importancia) {
 			this.importancia = importancia;
 		}
+		/**permite comparar los carros segun su tipo
+		 
+		*/
 		@Override
 		public int compareTo(Carro o) {
 			return this.importancia.compareTo(o.importancia);
@@ -48,13 +54,27 @@ public class Carro implements Comparable<Carro>{
 		public void setType(ItemType type) {
 			this.type = type;
 		}
+		/**Enum que contiene los tipos de carro
+		 
+		*/
 		public enum Importancia {
-			taxi(1), uber(2), patrulla(3), particular(4);
+			taxi(1), uber(2), patrulla(3), particular(4);/**asdsad */
 			private int value;
-
+			/**constructor privado
+			*/
 			private Importancia(int value) {
 				this.value = value;
 			}
 
+		}
+		/** Evita que la gente se atraviese
+		 * 
+		 * @param sonido		que tan duro suena
+		 * @param tiempo		cuanto dura sonando
+		 * @return				retorna tiempo*sonido
+		 */
+		public int pitar(int sonido, int tiempo){
+			System.out.println(sonido+"  "+tiempo);
+			return sonido*tiempo;
 		}
 }
