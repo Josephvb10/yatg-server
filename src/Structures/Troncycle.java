@@ -9,18 +9,20 @@ public class Troncycle {
 	 * 
 	 */
 	private Player owner;
-	private int speed;
+	private int speed, normalSpeed;
 	private double fuel;
 	private Direction currentDirection;
 	private int extraTrail, powerUpSteps;
 	private GenericLinkedList<Item> trail;
 	private ItemsPriorityQueue itemsQueue = new ItemsPriorityQueue();
 	private boolean isDead, powerUpActivated, shieldActivated;
-	GenericStack<Item> powerUpStack = new GenericStack<>();
+    private GenericStack<Item> powerUpStack = new GenericStack<>();
+
 
 	public Troncycle() {
 		super();
 	}
+
 
 	public Troncycle(Player owner, int indexI, int indexJ) {
 		this.isDead = false;
@@ -28,8 +30,9 @@ public class Troncycle {
 		this.owner = owner;
 		this.fuel = 100;
 		this.speed = generateSpeed();
+		this.normalSpeed = this.speed;
 		this.trail = new GenericLinkedList<>();
-		this.extraTrail = 2;
+		this.extraTrail =7;
 		this.powerUpSteps = 0;
 		this.addHead(indexI, indexJ);
 		;
@@ -102,6 +105,10 @@ public class Troncycle {
 		} else {
 			this.fuel += fuel;
 		}
+	}
+	
+	public int getNormalSpeed(){
+		return normalSpeed;
 	}
 
 	public int getSpeed() {
@@ -176,15 +183,50 @@ public class Troncycle {
 
 	public void addItem(Item newItem) {
 		itemsQueue.add(newItem);
-		// itemsQueue.displayQueue();
-		System.out.println(getItemsQueue());
+		System.out.println("Cola actual" + getItemsQueue());
+		useItem();
+		
+
+		
 	}
 
 	public void addPowerUp(Item newPowerUp) {
 		powerUpStack.push(newPowerUp);
+		System.out.println("Pila actual" + getPowerUpStack());
 	}
+	
+	public void usePowerUp(){
+		if(!powerUpStack.isEmpty()){
+			Item powerUpToUse = powerUpStack.pop();
+			switch (powerUpToUse.getType()){
+				case turbo:
+					int newSpeed = powerUpToUse.getValue();
+					this.setSpeed(newSpeed);
+					if (!this.getPowerUpActivated()) {
+						this.setPowerUpActivated(true);
+						this.setPowerUpSteps(60);
+						System.out.println("Cambie velocidad a " + this.getSpeed());
+					}
+					break;
+				case shield:
+					if (!this.getPowerUpActivated()) {
+						this.setPowerUpActivated(true);
+						this.setPowerUpSteps(60);
+						this.setShieldActivated(true);
+						System.out.println("Tengo escudo ");
+			}
+					break;
+					
+				default:
+					break;
+		}
+	}
+	}
+	
+	
 
 	public void useItem() {
+
 		if (!itemsQueue.isEmpty()) {
 			Item itemToUse = itemsQueue.poll();
 			switch (itemToUse.getType()) {
@@ -192,13 +234,20 @@ public class Troncycle {
 
 				break;
 			case fuel:
-				this.addFuel(itemToUse.getValue());
-
+				if (this.getFuel() > 99) {
+					this.addItem(itemToUse);
+				}else{
+					System.out.println("Mi viejo combustible es" + this.fuel);
+					System.out.println("Obtuve un bonus de " + itemToUse.getValue());
+					this.addFuel(itemToUse.getValue());
+					System.out.println("Mi nuevo combustible es" + this.fuel);
+				}
 				break;
+				
 			case increaseTail:
 				this.addExtraTrail(itemToUse.getValue());
-
 				break;
+				
 			default:
 				break;
 
@@ -214,6 +263,14 @@ public class Troncycle {
 
 	public void setItemsQueue(ItemsPriorityQueue itemsQueue) {
 		this.itemsQueue = itemsQueue;
+	}
+	
+	public GenericStack<Item> getPowerUpStack() {
+		return powerUpStack;
+	}
+
+	public void setPowerUpStack(GenericStack<Item> powerUpStack) {
+		this.powerUpStack = powerUpStack;
 	}
 
 }

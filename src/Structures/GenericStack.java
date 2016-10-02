@@ -39,18 +39,10 @@ public class GenericStack<T> {
 			return head;
 		}
 		
-		/*public void displayStack(){
-			if(this.getHead()==null){
-				System.out.println("No hay items en la pila");
-			}else{
-			GenericNode<Item>  current = getHead();
-			while(current != null){
-				System.out.println(current.getData().getType());
-				current = current.getNext();
-			}
-			
+		public boolean isEmpty(){
+			return head==null;			
 		}
-		}*/
+		
 
 		public void setHead(GenericNode<T> head) {
 			this.head = head;
