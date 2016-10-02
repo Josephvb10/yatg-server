@@ -114,6 +114,14 @@ public class Troncycle {
 	public int getSpeed() {
 		return speed;
 	}
+	
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+	
+	public void resetSpeed() {
+		this.speed = normalSpeed;
+	}
 
 	public int generateSpeed() {
 		Random rand = new Random();
@@ -121,9 +129,7 @@ public class Troncycle {
 		return newSpeed;
 	}
 
-	public void setSpeed(int speed) {
-		this.speed = speed;
-	}
+	
 
 	public Direction getCurrentDirection() {
 		return currentDirection;
@@ -271,6 +277,18 @@ public class Troncycle {
 
 	public void setPowerUpStack(GenericStack<Item> powerUpStack) {
 		this.powerUpStack = powerUpStack;
+	}
+	
+	public void reducePowerUp(){
+	if (getPowerUpActivated()) {
+		setPowerUpSteps(getPowerUpSteps() - 1);
+		System.out.println("Me quedan " + getPowerUpSteps() + "pasos de powerup");
+		if (getPowerUpSteps() == 0) {
+			setPowerUpActivated(false);
+			resetSpeed();
+			System.out.println("Velocidad normal");
+		}
+	}
 	}
 
 }
