@@ -142,7 +142,7 @@
 			long wait;
 			
 			while(RUN){
-				System.out.println("iniciado");
+
 
 				startTime = System.nanoTime();
 				

@@ -216,16 +216,8 @@ public class LinkedMatrix {
 			int newJ = result.getIndexJ();
 			Nodo nodoToCheck = this.getNodo(newI, newJ);
 			if (nodoToCheck.getItem() != null) {
-
-				if (nodoToCheck.getItem().getType() == ItemType.fuel) {
+				if (nodoToCheck.getItem().getType() == ItemType.fuel || nodoToCheck.getItem().getType() == ItemType.increaseTail) {
 					player.addItem(nodoToCheck.getItem());
-
-				}
-
-				else if (nodoToCheck.getItem().getType() == ItemType.increaseTail) {
-					player.addItem(nodoToCheck.getItem());
-					player.addExtraTrail(nodoToCheck.getItem().getValue());
-					System.out.println("Aumento de tama�o" + nodoToCheck.getItem().getValue());
 				}
 
 				else if (nodoToCheck.getItem().getType() == ItemType.shield) {
@@ -254,9 +246,7 @@ public class LinkedMatrix {
 				}
 				System.out.println(nodoToCheck.getItem().getType());
 			}
-
-			player.setFuel(player.getFuel() - 0.5);
-			System.out.println(player.getTrail().getSize());
+			player.setFuel(player.getFuel() - 0.2);
 			Item deleted = player.deleteTail();
 			if (deleted != null) {
 				this.resetNodeItem(deleted);

@@ -31,7 +31,7 @@ public class Troncycle {
 		this.fuel = 100;
 		this.speed = generateSpeed();
 		this.trail = new GenericLinkedList<>();
-		this.extraTrail = 2;
+		this.extraTrail =7;
 		this.powerUpSteps = 0;
 		this.addHead(indexI, indexJ);
 		;
@@ -178,8 +178,11 @@ public class Troncycle {
 
 	public void addItem(Item newItem) {
 		itemsQueue.add(newItem);
-
 		System.out.println(getItemsQueue());
+		useItem();
+		
+
+		
 	}
 
 	public void addPowerUp(Item newPowerUp) {
@@ -187,6 +190,7 @@ public class Troncycle {
 	}
 
 	public void useItem() {
+
 		if (!itemsQueue.isEmpty()) {
 			Item itemToUse = itemsQueue.poll();
 			switch (itemToUse.getType()) {
@@ -194,18 +198,20 @@ public class Troncycle {
 
 				break;
 			case fuel:
-				if (this.getFuel() == 100) {
+				if (this.getFuel() > 99) {
 					this.addItem(itemToUse);
 				}else{
-				System.out.println("Obtuve un bonus de " + itemToUse.getValue());
-				this.addFuel(itemToUse.getValue());
-				System.out.println("Mi nuevo combustible es" + this.fuel);
+					System.out.println("Mi viejo combustible es" + this.fuel);
+					System.out.println("Obtuve un bonus de " + itemToUse.getValue());
+					this.addFuel(itemToUse.getValue());
+					System.out.println("Mi nuevo combustible es" + this.fuel);
 				}
 				break;
+				
 			case increaseTail:
 				this.addExtraTrail(itemToUse.getValue());
-
 				break;
+				
 			default:
 				break;
 
