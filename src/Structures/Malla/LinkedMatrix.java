@@ -174,10 +174,10 @@ public class LinkedMatrix {
 
 			if (player.getPowerUpActivated()) {
 				player.setPowerUpSteps(player.getPowerUpSteps() - 1);
-				System.out.println("Me quedan este numero de pasos" + player.getPowerUpSteps());
+				System.out.println("Me quedan " + player.getPowerUpSteps() + "pasos de powerup");
 				if (player.getPowerUpSteps() == 0) {
 					player.setPowerUpActivated(false);
-					player.setSpeed(1);
+					player.setSpeed(player.getNormalSpeed());
 					System.out.println("Velocidad normal");
 				}
 			}
@@ -221,31 +221,30 @@ public class LinkedMatrix {
 				}
 
 				else if (nodoToCheck.getItem().getType() == ItemType.shield) {
-					player.addItem(nodoToCheck.getItem());
+					player.addPowerUp(nodoToCheck.getItem());
 				}
 
 				else if (nodoToCheck.getItem().getType() == ItemType.turbo) {
-					player.addItem(nodoToCheck.getItem());
-					int newSpeed = nodoToCheck.getItem().getValue();
-					player.setSpeed(newSpeed);
-					if (!player.getPowerUpActivated()) {
-						player.setPowerUpActivated(true);
-						player.setPowerUpSteps(60);
-					}
-					System.out.println("Cambie velocidad a " + player.getSpeed());
+					player.addPowerUp(nodoToCheck.getItem());
+
 				}
 
 				else if (nodoToCheck.getItem().getType() == ItemType.bomb
 						|| nodoToCheck.getItem().getType() == ItemType.tronTrail) {
 					System.out.println("Me mori");
-					this.cleanDeadPlayer(player);
-					System.out.println("esta muerto  " + player.getIsDead());
-					player.setIsDead(true);
-					System.out.println("esta muerto  cambiado" + player.getIsDead());
+					if(player.killPlayer()){
+						this.cleanDeadPlayer(player);
+						System.out.println("esta muerto  " + player.getIsDead());
+					
+						System.out.println("esta muerto  cambiado" + player.getIsDead());
+					}
+					//
+					
 					return;
 				}
 				System.out.println(nodoToCheck.getItem().getType());
 			}
+
 			player.setFuel(player.getFuel() - 0.2);
 			Item deleted = player.deleteTail();
 			if (deleted != null) {

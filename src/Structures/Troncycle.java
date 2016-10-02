@@ -9,7 +9,7 @@ public class Troncycle {
 	 * 
 	 */
 	private Player owner;
-	private int speed;
+	private int speed, normalSpeed;
 	private double fuel;
 	private Direction currentDirection;
 	private int extraTrail, powerUpSteps;
@@ -30,6 +30,7 @@ public class Troncycle {
 		this.owner = owner;
 		this.fuel = 100;
 		this.speed = generateSpeed();
+		this.normalSpeed = this.speed;
 		this.trail = new GenericLinkedList<>();
 		this.extraTrail =7;
 		this.powerUpSteps = 0;
@@ -105,6 +106,10 @@ public class Troncycle {
 			this.fuel += fuel;
 		}
 	}
+	
+	public int getNormalSpeed(){
+		return normalSpeed;
+	}
 
 	public int getSpeed() {
 		return speed;
@@ -178,7 +183,7 @@ public class Troncycle {
 
 	public void addItem(Item newItem) {
 		itemsQueue.add(newItem);
-		System.out.println(getItemsQueue());
+		System.out.println("Cola actual" + getItemsQueue());
 		useItem();
 		
 
@@ -187,7 +192,38 @@ public class Troncycle {
 
 	public void addPowerUp(Item newPowerUp) {
 		powerUpStack.push(newPowerUp);
+		System.out.println("Pila actual" + getPowerUpStack());
 	}
+	
+	public void usePowerUp(){
+		if(!powerUpStack.isEmpty()){
+			Item powerUpToUse = powerUpStack.pop();
+			switch (powerUpToUse.getType()){
+				case turbo:
+					int newSpeed = powerUpToUse.getValue();
+					this.setSpeed(newSpeed);
+					if (!this.getPowerUpActivated()) {
+						this.setPowerUpActivated(true);
+						this.setPowerUpSteps(60);
+						System.out.println("Cambie velocidad a " + this.getSpeed());
+					}
+					break;
+				case shield:
+					if (!this.getPowerUpActivated()) {
+						this.setPowerUpActivated(true);
+						this.setPowerUpSteps(60);
+						this.setShieldActivated(true);
+						System.out.println("Tengo escudo ");
+			}
+					break;
+					
+				default:
+					break;
+		}
+	}
+	}
+	
+	
 
 	public void useItem() {
 

@@ -205,6 +205,7 @@
 			if(k == KeyEvent.VK_DOWN){DOWN=true;LEFT=false;UP=false;RIGHT=false;}
 			if(k == KeyEvent.VK_LEFT){LEFT=true;DOWN=false;UP=false;RIGHT=false;}
 			if(k == KeyEvent.VK_UP){UP=true;DOWN=false;LEFT=false;RIGHT=false;}
+			if(k == KeyEvent.VK_P){player1.usePowerUp();}
 			
 			
 		}

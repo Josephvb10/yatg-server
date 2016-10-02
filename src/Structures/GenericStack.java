@@ -39,6 +39,10 @@ public class GenericStack<T> {
 			return head;
 		}
 		
+		public boolean isEmpty(){
+			return head==null;			
+		}
+		
 
 		public void setHead(GenericNode<T> head) {
 			this.head = head;
