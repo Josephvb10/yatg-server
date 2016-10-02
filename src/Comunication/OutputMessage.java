@@ -1,11 +1,19 @@
 package Comunication;
+
+import java.util.ArrayList;
+
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+
 import Structures.*;
 
 public class OutputMessage {
+	/**
+	 * 
+	 */
 	private int id;
 	private static int nextid = 0;
-	private Troncycle player;
-	private GenericLinkedList<Item> itemList;
+	private SimplePlayer player;
+	private ArrayList<Item> itemList;
 	
 	
 
@@ -13,13 +21,23 @@ public class OutputMessage {
 		super();
 	}
 
-	public OutputMessage(GenericLinkedList<Item> itemList, Troncycle player) {
+
+	public OutputMessage(SimplePlayer player, ArrayList<Item> itemList) {
 		super();
-		this.id = getNextid();
 		this.player = player;
 		this.itemList = itemList;
 	}
-	
+
+
+	public OutputMessage(Troncycle player, GenericLinkedList<Item> itemList) {
+		super();
+		id = getNextid();
+		importPlayer(player);
+		importItemList(itemList);
+	}
+
+
+
 
 
 	public int getId() {
@@ -38,26 +56,59 @@ public class OutputMessage {
 		OutputMessage.nextid = nextid;
 	}
 
-	public Troncycle getPlayer() {
+	public SimplePlayer getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(Troncycle player) {
+	public void setPlayer(SimplePlayer player) {
 		this.player = player;
 	}
-
-	public GenericLinkedList<Item> getItemList() {
-		return itemList;
+	
+	public void importPlayer(Troncycle player) {
+		SimplePlayer simplePlayer = new SimplePlayer(player.getOwner(), player.getSpeed(), player.getFuel(), player.getCurrentDirection(), player.getExtraTrail(), player.getPowerUpSteps(), player.getIsDead(), player.getPowerUpActivated());
+		importItemsPriorityQueue(player.getItemsQueue());
+		setPlayer(simplePlayer);
+		
 	}
 
-	public void setItemList(GenericLinkedList<Item> itemList) {
-		this.itemList = itemList;
+
+	public ArrayList<Item> getItemList() {
+		return itemList;
+	}
+	public void  setItemList(ArrayList<Item> itemList) {
+		this.itemList=itemList;
+		
+	}
+
+	public  void importItemList(GenericLinkedList<Item> itemList) {
+		GenericNode<Item> current = itemList.getHead();
+		ArrayList<Item> newItemList = new ArrayList<>();
+		while(current != null){
+			newItemList.add(current.getData());
+			
+			current = current.getNext();
+			
+		}
+		this.itemList = newItemList;
+	}
+	
+	public  void importItemsPriorityQueue(ItemsPriorityQueue itemsPriorityQueue) {
+		GenericNode<Item> current = itemsPriorityQueue.getHead();
+		ArrayList<Item> newItemsPriorityQueue = new ArrayList<>();
+		while(current != null){
+			newItemsPriorityQueue.add(current.getData());
+			
+			current = current.getNext();
+			
+		}
+		this.itemList = newItemsPriorityQueue;
 	}
 
 	public String toJson() {
 		String messageJson = JsonConverter.objectToJson(this);
 		return messageJson;
 	}
+	
 
 }
 

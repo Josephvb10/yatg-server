@@ -1,5 +1,12 @@
 package tests;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import Comunication.*;
 import Structures.*;
 import Structures.Malla.LinkedMatrix;
@@ -43,15 +50,76 @@ public class testMalla {
 		malla.updatePlayer(player1);
 		
 		malla.updatePlayer(player1);
-		//System.out.println("hola");
+		Carro carro1  = new Carro(1312, "toyota", Carro.Importancia.taxi);
+		carro1.setType(ItemType.bomb);
+		
+		String carroJson = JsonConverter.objectToJson(carro1);
+		ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
+		Carro newCarro = new Carro();
+		
+		try {
+			newCarro = mapper.readValue(carroJson, Carro.class);
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println(newCarro.getPlaca());
+		
+				
+		
+		
+		
+		String itemJson = JsonConverter.objectToJson(item1);
+		Item newItem = new Item();
+		System.out.println(itemJson);
 
-		//String Jsonlist = JsonConverter.objectToJson(malla.getSimpleItemList());
-		//System.out.println(Jsonlist);
-		//System.out.println(malla.getSimpleItemList());
-		//System.out.println("hola")
-		OutMessage mensaje = new OutMessage(malla.getSimpleItemList(), player1);
+		
+		try {
+			newItem = mapper.readValue(itemJson, Item.class);
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println(newItem.getType());
+		
+		
+		
+		
+	
+		//System.out.println("hola");
+		//mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+		String Jsonlist = JsonConverter.objectToJson(malla.getSimpleItemList());
+		System.out.println(Jsonlist);
+		System.out.println(malla.getSimpleItemList());
+		System.out.println("hola");
+		OutputMessage mensaje = new OutputMessage(player1,malla.getSimpleItemList());
 		String jsonMens = mensaje.toJson();
 		System.out.println(jsonMens);
+		
+	
+		
+		
+		
+		
+		
+		
+		String inputMessage = jsonMens;
+		System.out.println(inputMessage);
+		OutputMessage newMessage = new OutputMessage();
+		// IMPORTANT
+		// without this option set adding new fields breaks old code
+		//mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+		try {
+			newMessage = mapper.readValue(inputMessage, OutputMessage.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+			//e.printStackTrace();
+		}
+		newMessage.getId();
+		System.out.println(newMessage.getId());
+		
+
 	}
 
 }

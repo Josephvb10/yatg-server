@@ -1,5 +1,6 @@
 package Structures;
 
+
 public class GenericLinkedList<T> {
 	private GenericNode<T> head;
 
