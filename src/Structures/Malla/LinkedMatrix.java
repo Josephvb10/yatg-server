@@ -11,7 +11,6 @@ public class LinkedMatrix {
 		this.numRows = numRows;
 		this.numCols = numCols;
 		this.numNodes = numRows * numCols;
-
 		simpleUnlinkedList();
 		return;
 	}
@@ -160,7 +159,8 @@ public class LinkedMatrix {
 		getNodo(indexI, indexJ).setItem(null);
 	}
 
-
+	
+	
 	public void updatePlayer(Troncycle player) {
 
 		if (player.getIsDead() == false) {
@@ -168,6 +168,7 @@ public class LinkedMatrix {
 				player.setIsDead(true);
 				this.cleanDeadPlayer(player);
 				System.out.println("Me mori por combustible");
+				}
 				return;
 			}
 
@@ -229,13 +230,15 @@ public class LinkedMatrix {
 				else if (nodoToCheck.getItem().getType() == ItemType.increaseTail) {
 					player.addItem(nodoToCheck.getItem());
 					player.addExtraTrail(nodoToCheck.getItem().getValue());
-					System.out.println("Aumento de tamaño" + nodoToCheck.getItem().getValue());
+					System.out.println("Aumento de tamaï¿½o" + nodoToCheck.getItem().getValue());
 				}
 
 				else if (nodoToCheck.getItem().getType() == ItemType.shield) {
-					//// add stack() <3
-				} else if (nodoToCheck.getItem().getType() == ItemType.turbo) {
-					//// add stack() <3
+					player.addItem(nodoToCheck.getItem());
+				}
+
+				else if (nodoToCheck.getItem().getType() == ItemType.turbo) {
+					player.addItem(nodoToCheck.getItem());
 					int newSpeed = nodoToCheck.getItem().getValue();
 					player.setSpeed(newSpeed);
 					if (!player.getPowerUpActivated()) {
@@ -243,7 +246,6 @@ public class LinkedMatrix {
 						player.setPowerUpSteps(60);
 					}
 					System.out.println("Cambie velocidad a " + player.getSpeed());
-
 				}
 
 				else if (nodoToCheck.getItem().getType() == ItemType.bomb
@@ -251,10 +253,8 @@ public class LinkedMatrix {
 					System.out.println("Me mori");
 					this.cleanDeadPlayer(player);
 					System.out.println("esta muerto  " + player.getIsDead());
-
 					player.setIsDead(true);
 					System.out.println("esta muerto  cambiado" + player.getIsDead());
-
 					return;
 				}
 				System.out.println(nodoToCheck.getItem().getType());
@@ -270,7 +270,7 @@ public class LinkedMatrix {
 			this.setNodeItem(player.getTrail().getHead().getData());
 
 		}
-	}
+
 
 	private void cleanDeadPlayer(Troncycle player) {
 		GenericNode<Item> current = player.getTrail().getHead();
@@ -280,17 +280,18 @@ public class LinkedMatrix {
 
 		}
 	}
-	public GenericLinkedList<Item> getSimpleItemList(){
+
+	public GenericLinkedList<Item> getSimpleItemList() {
 		GenericLinkedList<Item> result = new GenericLinkedList<>();
-		Nodo current =  this.getHead();
-		while(current != null){
-			if(current.getItem()!=null){
-			result.add(current.getItem());
+		Nodo current = this.getHead();
+		while (current != null) {
+			if (current.getItem() != null) {
+				result.add(current.getItem());
 			}
 			current = current.getNext();
 		}
 		return result;
-		
+
 	}
 
 }
