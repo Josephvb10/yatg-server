@@ -28,10 +28,12 @@ public class GenericStack<T> {
 		
 		
 		public T pop(){
+			T result = null;
 			if (getHead() != null){
+				result = head.getData();
 				this.head = getHead().getNext();
 			}
-			return head.getData();
+			return result;
 		}
 
 		
