@@ -62,6 +62,8 @@ public class GenericStack<T> {
 			 GenericNode<T> current = this.getHead(); 
 			 while(current != null){
 		   result+=current.getData().toString()+", ";
+		   current=current.getNext();
+
 		    }
 			 result+=")";
 			return result;

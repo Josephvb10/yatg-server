@@ -163,14 +163,14 @@ public class LinkedMatrix {
 	
 	public void updatePlayer(Troncycle player) {
 
-		if (player.getIsDead() == false) {
+		if (player.getIsDead()==false) {
 			if (player.getFuel() <= 0) {
 				player.setIsDead(true);
 				this.cleanDeadPlayer(player);
 				System.out.println("Me mori por combustible");
-				}
-				return;
-			}
+				
+				return;}
+			
 
 			if (player.getPowerUpActivated()) {
 				player.setPowerUpSteps(player.getPowerUpSteps() - 1);
@@ -270,7 +270,7 @@ public class LinkedMatrix {
 			this.setNodeItem(player.getTrail().getHead().getData());
 
 		}
-
+	}
 
 	private void cleanDeadPlayer(Troncycle player) {
 		GenericNode<Item> current = player.getTrail().getHead();
