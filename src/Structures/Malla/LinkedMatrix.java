@@ -162,89 +162,63 @@ public class LinkedMatrix {
 	public void updatePlayer(Troncycle player) {
 
 		if (player.getIsDead() == false && checkPlayerFuel(player)) {
-			
-			if (player.getPowerUpActivated()) {
-				player.setPowerUpSteps(player.getPowerUpSteps() - 1);
-				System.out.println("Me quedan " + player.getPowerUpSteps() + "pasos de powerup");
-				if (player.getPowerUpSteps() == 0) {
-					player.setPowerUpActivated(false);
-					player.setSpeed(player.getNormalSpeed());
-					System.out.println("Velocidad normal");
-				}
-			}
+			player.reducePowerUp();
 
 			GenericNode<Item> current = player.getTrail().getHead();
-			Nodo result = null;
 
 			current = player.getTrail().getHead();
 			Item first = current.getData();
 			int indexI = first.getIndexI();
 			int indexJ = first.getIndexJ();
+			Nodo nodoToCheck = getNextNode(indexI, indexJ, player.getCurrentDirection());
+			Item itemToCheck = nodoToCheck.getItem();
+			if (itemToCheck != null) {
+				switch (itemToCheck.getType()) {
 
-			switch (player.getCurrentDirection()) {
-			case down:
-				result = this.getNodo(indexI, indexJ).getDown();
-				break;
-			case up:
-				result = this.getNodo(indexI, indexJ).getUp();
-
-				break;
-			case left:
-				result = this.getNodo(indexI, indexJ).getLeft();
-
-				break;
-			case right:
-				result = this.getNodo(indexI, indexJ).getRight();
-
-				break;
-
-			default:
-				break;
-
-			}
-			int newI = result.getIndexI();
-			int newJ = result.getIndexJ();
-			Nodo nodoToCheck = this.getNodo(newI, newJ);
-			if (nodoToCheck.getItem() != null) {
-				if (nodoToCheck.getItem().getType() == ItemType.fuel
-						|| nodoToCheck.getItem().getType() == ItemType.increaseTail) {
+				case increaseTail:
 					player.addItem(nodoToCheck.getItem());
-				}
 
-				else if (nodoToCheck.getItem().getType() == ItemType.shield) {
+					break;
+				case fuel:
+					player.addItem(nodoToCheck.getItem());
+
+					break;
+				case shield:
 					player.addPowerUp(nodoToCheck.getItem());
-				}
 
-				else if (nodoToCheck.getItem().getType() == ItemType.turbo) {
+					break;
+				case turbo:
 					player.addPowerUp(nodoToCheck.getItem());
 
-				}
-
-				else if (nodoToCheck.getItem().getType() == ItemType.bomb
-						|| nodoToCheck.getItem().getType() == ItemType.tronTrail) {
-					System.out.println("Me mori");
+					break;
+				case tronTrail:
 					if (player.killPlayer()) {
 						this.cleanDeadPlayer(player);
-						System.out.println("esta muerto  " + player.getIsDead());
-
-						System.out.println("esta muerto  cambiado" + player.getIsDead());
 					}
-					//
+					break;
+				case bomb:
+					if (player.killPlayer()) {
+						this.cleanDeadPlayer(player);
+					}
 
-					return;
+					break;
+
+				default:
+					break;
 				}
-				System.out.println(nodoToCheck.getItem().getType());
 			}
+			if (player.getIsDead() == false) {
+				player.setFuel(player.getFuel() - 0.2);
+				Item deleted = player.deleteTail();
+				if (deleted != null) {
+					this.resetNodeItem(deleted);
+				}
+				player.addHead(nodoToCheck.getIndexI(), nodoToCheck.getIndexJ());
+				this.setNodeItem(player.getTrail().getHead().getData());
 
-			player.setFuel(player.getFuel() - 0.2);
-			Item deleted = player.deleteTail();
-			if (deleted != null) {
-				this.resetNodeItem(deleted);
 			}
-			player.addHead(newI, newJ);
-			this.setNodeItem(player.getTrail().getHead().getData());
-
 		}
+
 	}
 
 	private void cleanDeadPlayer(Troncycle player) {
@@ -255,6 +229,7 @@ public class LinkedMatrix {
 
 		}
 	}
+
 	private boolean checkPlayerFuel(Troncycle player) {
 		boolean result = true;
 		if (player.getFuel() <= 0) {
@@ -275,6 +250,33 @@ public class LinkedMatrix {
 				result.add(current.getItem());
 			}
 			current = current.getNext();
+		}
+		return result;
+
+	}
+
+	public Nodo getNextNode(int indexI, int indexJ, Direction direction) {
+		Nodo currentNodo = this.getNodo(indexI, indexJ);
+		Nodo result = null;
+		switch (direction) {
+		case down:
+			result = currentNodo.getDown();
+			break;
+		case up:
+			result = currentNodo.getUp();
+
+			break;
+		case left:
+			result = currentNodo.getLeft();
+
+			break;
+		case right:
+			result = currentNodo.getRight();
+			break;
+
+		default:
+			break;
+
 		}
 		return result;
 
