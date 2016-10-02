@@ -49,6 +49,9 @@ public class Troncycle {
 
 	public void setPowerUpActivated(boolean value) {
 		this.powerUpActivated = value;
+		if(value==false){
+			setShieldActivated(value);
+		}
 	}
 
 	public boolean getPowerUpActivated() {
