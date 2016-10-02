@@ -1,7 +1,11 @@
 package Comunication;
+
 import Structures.*;
 
 public class OutputMessage {
+	/**
+	 * 
+	 */
 	private int id;
 	private static int nextid = 0;
 	private Troncycle player;
