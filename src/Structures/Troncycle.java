@@ -16,6 +16,7 @@ public class Troncycle {
 	private GenericLinkedList<Item> trail;
 	private ItemsPriorityQueue itemsQueue = new ItemsPriorityQueue();
 	private boolean isDead, powerUpActivated, shieldActivated;
+    GenericStack<Item> powerUpStack = new GenericStack<>();
 
 	public Troncycle() {
 		super();
@@ -174,6 +175,11 @@ public class Troncycle {
 
 	public void addItem(Item newItem) {
 		itemsQueue.add(newItem);
+		itemsQueue.displayQueue();
+	}
+	
+	public void addPowerUp(Item newPowerUp){
+		powerUpStack.push(newPowerUp);
 	}
 
 	public void useItem() {
@@ -191,16 +197,11 @@ public class Troncycle {
 				this.addExtraTrail(itemToUse.getValue());
 
 				break;
-			case shield:
-
-				break;
-			case turbo:
-
-				break;
-
 			default:
 				break;
+				
 			}
+			itemsQueue.displayQueue();
 		}
 
 	}
