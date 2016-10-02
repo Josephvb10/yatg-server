@@ -43,6 +43,17 @@ public class GenericStack<T> {
 			this.head = head;
 		}
 		
+		  @Override
+		  public String toString() {
+			 String result="(";
+			 GenericNode<T> current = this.getHead(); 
+			 while(current != null){
+		   result+=current.getData().toString()+", ";
+		    }
+			 result+=")";
+			return result;
+		  }
+		
 
 	}
 

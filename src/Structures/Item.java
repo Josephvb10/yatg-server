@@ -107,5 +107,11 @@ public class Item implements Comparable<Item>{
 	public void setOwner(Player owner) {
 		this.owner = owner;
 	}
+	  @Override
+	  public String toString() {
+			String result =getType().name();
+			//String result = "("+getType().name()+" "+getIndexI()+""+getIndexJ()+")";
+	    return result;
+	  }
 	
 }
