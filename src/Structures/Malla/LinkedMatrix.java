@@ -159,19 +159,10 @@ public class LinkedMatrix {
 		getNodo(indexI, indexJ).setItem(null);
 	}
 
-	
-	
 	public void updatePlayer(Troncycle player) {
 
-		if (player.getIsDead()==false) {
-			if (player.getFuel() <= 0) {
-				player.setIsDead(true);
-				this.cleanDeadPlayer(player);
-				System.out.println("Me mori por combustible");
-				
-				return;}
+		if (player.getIsDead() == false && checkPlayerFuel(player)) {
 			
-
 			if (player.getPowerUpActivated()) {
 				player.setPowerUpSteps(player.getPowerUpSteps() - 1);
 				System.out.println("Me quedan " + player.getPowerUpSteps() + "pasos de powerup");
@@ -190,8 +181,7 @@ public class LinkedMatrix {
 			int indexI = first.getIndexI();
 			int indexJ = first.getIndexJ();
 
-			switch (player.getCurrentDirection()) {// necesario agregar casos
-													// especiales
+			switch (player.getCurrentDirection()) {
 			case down:
 				result = this.getNodo(indexI, indexJ).getDown();
 				break;
@@ -216,7 +206,8 @@ public class LinkedMatrix {
 			int newJ = result.getIndexJ();
 			Nodo nodoToCheck = this.getNodo(newI, newJ);
 			if (nodoToCheck.getItem() != null) {
-				if (nodoToCheck.getItem().getType() == ItemType.fuel || nodoToCheck.getItem().getType() == ItemType.increaseTail) {
+				if (nodoToCheck.getItem().getType() == ItemType.fuel
+						|| nodoToCheck.getItem().getType() == ItemType.increaseTail) {
 					player.addItem(nodoToCheck.getItem());
 				}
 
@@ -232,14 +223,14 @@ public class LinkedMatrix {
 				else if (nodoToCheck.getItem().getType() == ItemType.bomb
 						|| nodoToCheck.getItem().getType() == ItemType.tronTrail) {
 					System.out.println("Me mori");
-					if(player.killPlayer()){
+					if (player.killPlayer()) {
 						this.cleanDeadPlayer(player);
 						System.out.println("esta muerto  " + player.getIsDead());
-					
+
 						System.out.println("esta muerto  cambiado" + player.getIsDead());
 					}
 					//
-					
+
 					return;
 				}
 				System.out.println(nodoToCheck.getItem().getType());
@@ -263,6 +254,17 @@ public class LinkedMatrix {
 			current = current.getNext();
 
 		}
+	}
+	private boolean checkPlayerFuel(Troncycle player) {
+		boolean result = true;
+		if (player.getFuel() <= 0) {
+			player.setIsDead(true);
+			this.cleanDeadPlayer(player);
+			System.out.println("Me mori por combustible");
+			result = false;
+
+		}
+		return result;
 	}
 
 	public GenericLinkedList<Item> getSimpleItemList() {
