@@ -153,7 +153,7 @@ public class Troncycle {
 	public void addHead(Item item) {
 		GenericNode<Item> newHead = new GenericNode<>(item);
 		if(!trail.isEmpty()){
-		trail.getHead().getData().setIsHead(false);}
+		trail.getHead().getData().setFirst(false);}
 		trail.setHead(newHead);
 	}
 

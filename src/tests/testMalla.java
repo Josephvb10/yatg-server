@@ -85,13 +85,13 @@ public class testMalla {
 		
 	
 		//System.out.println("hola");
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		//mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 		String Jsonlist = JsonConverter.objectToJson(malla.getSimpleItemList());
 		System.out.println(Jsonlist);
 		System.out.println(malla.getSimpleItemList());
 		System.out.println("hola");
-		OutputMessage mensaje = new OutputMessage(malla.getSimpleItemList(), player1);
+		OutputMessage mensaje = new OutputMessage(player1,malla.getSimpleItemList());
 		String jsonMens = mensaje.toJson();
 		System.out.println(jsonMens);
 		
@@ -118,8 +118,6 @@ public class testMalla {
 		}
 		newMessage.getId();
 		System.out.println(newMessage.getId());
-		GenericLinkedList<Item> listaItems = newMessage.getItemList();
-		System.out.println(listaItems.getHead().getNext());
 		
 
 	}

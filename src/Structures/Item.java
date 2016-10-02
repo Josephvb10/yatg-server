@@ -10,7 +10,7 @@ public class Item implements Comparable<Item> {
 	private int indexI;
 	private int indexJ;
 	private int value;
-	private boolean isHead;
+	private boolean first;
 	private Player owner;
 
 	public Item() {
@@ -29,12 +29,12 @@ public class Item implements Comparable<Item> {
 		this.setIndexJ(indexJ);
 	}
 
-	public Item(ItemType type, int indexI, int indexJ, boolean isHead, Player owner) {
+	public Item(ItemType type, int indexI, int indexJ, boolean first, Player owner) {
 		super();
 		this.type = type;
 		this.indexI = indexI;
 		this.indexJ = indexJ;
-		this.isHead = isHead;
+		this.first = first;
 		this.owner = owner;
 	}
 
@@ -91,12 +91,12 @@ public class Item implements Comparable<Item> {
 		this.indexJ = indexJ;
 	}
 
-	public boolean isHead() {
-		return isHead;
+	public boolean getFirst() {
+		return first;
 	}
 
-	public void setIsHead(boolean isHead) {
-		this.isHead = isHead;
+	public void setFirst(boolean first) {
+		this.first = first;
 	}
 
 	public Player getOwner() {
