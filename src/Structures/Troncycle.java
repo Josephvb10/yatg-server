@@ -18,6 +18,7 @@ public class Troncycle {
 	private boolean isDead, powerUpActivated, shieldActivated;
     private GenericStack<Item> powerUpStack = new GenericStack<>();
 
+
 	public Troncycle() {
 		super();
 	}
@@ -56,18 +57,19 @@ public class Troncycle {
 	public boolean getIsDead() {
 		return this.isDead;
 	}
+
 	public void setIsDead(boolean value) {
-			this.isDead = value;
-		
+		this.isDead = value;
+
 	}
+
 	public boolean killPlayer() {
-			if (getIsDead()==false){
-				if(this.isShieldActivated()){
-					setShieldActivated(false);
-				}
-				else{
-					this.isDead = true;
-				}
+		if (getIsDead() == false) {
+			if (this.isShieldActivated()) {
+				setShieldActivated(false);
+			} else {
+				this.isDead = true;
+			}
 		}
 		return getIsDead();
 	}
@@ -176,12 +178,11 @@ public class Troncycle {
 
 	public void addItem(Item newItem) {
 		itemsQueue.add(newItem);
-		itemsQueue.displayQueue();
-		useItem();
-		itemsQueue.displayQueue();
+
+		System.out.println(getItemsQueue());
 	}
-	
-	public void addPowerUp(Item newPowerUp){
+
+	public void addPowerUp(Item newPowerUp) {
 		powerUpStack.push(newPowerUp);
 	}
 
@@ -207,9 +208,9 @@ public class Troncycle {
 				break;
 			default:
 				break;
-				
+
 			}
-			itemsQueue.displayQueue();
+			System.out.println(this.getItemsQueue());
 		}
 
 	}

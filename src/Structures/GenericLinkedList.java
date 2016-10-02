@@ -151,7 +151,17 @@ public class GenericLinkedList<T> {
 		return head==null;
 		
 	}
-
+	@Override
+	  public String toString() {
+		 String result="(";
+		 GenericNode<T> current = this.getHead(); 
+		 while(current != null){
+	   result+=current.getData().toString()+", ";
+	   current=current.getNext();
+	    }
+		 result+=")";
+		return result;
+	  }
 	
 
 }

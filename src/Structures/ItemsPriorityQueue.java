@@ -40,7 +40,7 @@ public class ItemsPriorityQueue extends GenericLinkedList<Item> {
 		return headItem;
 		
 	}
-	public void displayQueue(){
+	/*public void displayQueue(){
 		if(getHead()==null){
 			System.out.println("No hay items en la cola");
 		}else{
@@ -51,5 +51,6 @@ public class ItemsPriorityQueue extends GenericLinkedList<Item> {
 		}
 		
 	}
-	}
+	}*/
+	
 }
