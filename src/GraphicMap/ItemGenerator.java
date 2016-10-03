@@ -7,49 +7,51 @@ import java.util.Random;
 import Structures.*;
 
 public class ItemGenerator extends Thread {
-	private static ItemGenerator instance;
-	private static LinkedMatrix matrix;
-	private static int maxItems, numRows, numCols;
-	private static GenericQueue<Item> currentItemQueue;
+	private ItemGenerator instance;
+	private LinkedMatrix matrix;
+	private int maxItems, numRows, numCols;
+	private GenericQueue<Item> currentItemQueue;
+	private int waitTime = 5000;
 
-	protected ItemGenerator(){
-		for(int i = 0; i<=5; i++){
+	public ItemGenerator() {
+
+		for (int i = 0; i <= 5; i++) {
 			currentItemQueue.enqueue(randomItem());
 		}
 	}
 
-	public static ItemGenerator getInstance() {
+	public ItemGenerator getInstance() {
 		if (instance == null) {
 			instance = new ItemGenerator();
 		}
 		return instance;
 	}
 
-	public static LinkedMatrix getMatrix() {
+	public LinkedMatrix getMatrix() {
 		return matrix;
 	}
 
-	public static void setMatrix(LinkedMatrix matrix) {
-		ItemGenerator.matrix = matrix;
+	public void setMatrix(LinkedMatrix matrix) {
+		this.matrix = matrix;
 	}
 
-	public static int getMaxItems() {
+	public int getMaxItems() {
 		return maxItems;
 	}
 
-	public static void setMaxItems(int maxItems) {
-		ItemGenerator.maxItems = maxItems;
+	public void setMaxItems(int maxItems) {
+		this.maxItems = maxItems;
 	}
 
-	public static GenericQueue<Item> getCurrentItemQueue() {
+	public GenericQueue<Item> getCurrentItemQueue() {
 		return currentItemQueue;
 	}
 
-	public static void setCurrentItemQueue(GenericQueue<Item> currentItemQueue) {
-		ItemGenerator.currentItemQueue = currentItemQueue;
+	public void setCurrentItemQueue(GenericQueue<Item> currentItemQueue) {
+		this.currentItemQueue = currentItemQueue;
 	}
 
-	private static Item randomItem() {
+	private Item randomItem() {
 		int indexI = randInt(0, numRows - 1);
 		int indexJ = randInt(0, numCols - 1);
 		Item newItem = new Item();
@@ -79,35 +81,36 @@ public class ItemGenerator extends Thread {
 		return newItem;
 	}
 
-	private static int randInt(int min, int max) {
+	private int randInt(int min, int max) {
 		Random rand = new Random();
 		int randomNum = rand.nextInt((max - min) + 1) + min;
 		return randomNum;
 	}
 
-	private static void removeMatrixItem(Item itemToRemove) {
+	private void removeMatrixItem(Item itemToRemove) {
 		Nodo currentNodo = matrix.getNodo(itemToRemove.getIndexI(), itemToRemove.getIndexJ());
 		if (currentNodo.getItem() == itemToRemove) {
 			currentNodo.setItem(null);
 		}
 	}
 
-	private static boolean addMatrixItem(Item itemToAdd) {
-		boolean result=false;
+	private boolean addMatrixItem(Item itemToAdd) {
+		boolean result = false;
 		Nodo currentNodo = matrix.getNodo(itemToAdd.getIndexI(), itemToAdd.getIndexJ());
-		if (currentNodo.getItem()==null) {
+		if (currentNodo.getItem() == null) {
 			currentNodo.setItem(itemToAdd);
-			result=true;
+			result = true;
 		}
 		return result;
 	}
-	private static Item tryPlaceItem(){
+
+	private Item tryPlaceItem() {
 		Item itemToPlace = randomItem();
-		while(!addMatrixItem(itemToPlace)){
-		int indexI = randInt(0, numRows - 1);
-		int indexJ = randInt(0, numCols - 1);
-		itemToPlace.setIndexI(indexI);
-		itemToPlace.setIndexJ(indexJ);
+		while (!addMatrixItem(itemToPlace)) {
+			int indexI = randInt(0, numRows - 1);
+			int indexJ = randInt(0, numCols - 1);
+			itemToPlace.setIndexI(indexI);
+			itemToPlace.setIndexJ(indexJ);
 		}
 		return itemToPlace;
 	}
@@ -119,7 +122,7 @@ public class ItemGenerator extends Thread {
 			currentItemQueue.enqueue(tryPlaceItem());
 			removeMatrixItem(currentItemQueue.dequeue());
 			try {
-				this.wait(15);
+				this.wait(waitTime);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				System.out.println(e.getMessage());
