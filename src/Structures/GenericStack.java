@@ -1,5 +1,7 @@
 package Structures;
 
+
+
 public class GenericStack<T> {
 
 		private GenericNode<T> head;
@@ -28,20 +30,51 @@ public class GenericStack<T> {
 		
 		
 		public T pop(){
+			T result = null;
 			if (getHead() != null){
+				result = head.getData();
 				this.head = getHead().getNext();
 			}
-			return head.getData();
+			return result;
 		}
 
 		
 		public GenericNode<T> getHead() {
 			return head;
 		}
+		
+		public boolean isEmpty(){
+			return head==null;			
+		}
+		
+		public void addLast(T data){	
+			if(this.head != null){
+				GenericNode<T> temp = this.head;
+				while(temp.getNext() != null){
+					temp = temp.getNext();
+				}
+				GenericNode<T> newNodo = new GenericNode<T>(data);
+				temp.setNext(newNodo);
+			}	
+		}
+		
 
 		public void setHead(GenericNode<T> head) {
 			this.head = head;
 		}
+		
+		  @Override
+		  public String toString() {
+			 String result="(";
+			 GenericNode<T> current = this.getHead(); 
+			 while(current != null){
+		   result+=current.getData().toString()+", ";
+		   current=current.getNext();
+
+		    }
+			 result+=")";
+			return result;
+		  }
 		
 
 	}

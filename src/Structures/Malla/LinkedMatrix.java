@@ -1,5 +1,6 @@
 package Structures.Malla;
 
+import GraphicMap.Screen1;
 import Structures.*;
 
 public class LinkedMatrix {
@@ -159,118 +160,68 @@ public class LinkedMatrix {
 		getNodo(indexI, indexJ).setItem(null);
 	}
 
-	
-	
 	public void updatePlayer(Troncycle player) {
-
-		if (player.getIsDead() == false) {
-			if (player.getFuel() <= 0) {
-				player.setIsDead(true);
-				this.cleanDeadPlayer(player);
-				System.out.println("Me mori por combustible");
-				}
-				return;
-			}
-
-			if (player.getPowerUpActivated()) {
-				player.setPowerUpSteps(player.getPowerUpSteps() - 1);
-				System.out.println("Me quedan este numero de pasos" + player.getPowerUpSteps());
-				if (player.getPowerUpSteps() == 0) {
-					player.setPowerUpActivated(false);
-					player.setSpeed(1);
-					System.out.println("Velocidad normal");
-				}
-			}
+		int threadTime = 300/player.getSpeed();
+		Screen1.targetTime = threadTime;
+		if (player.getIsDead() == false && checkPlayerFuel(player)) {
+			player.reducePowerUp();
 
 			GenericNode<Item> current = player.getTrail().getHead();
-			Nodo result = null;
 
 			current = player.getTrail().getHead();
 			Item first = current.getData();
 			int indexI = first.getIndexI();
 			int indexJ = first.getIndexJ();
+			Nodo nodoToCheck = getNextNode(indexI, indexJ, player.getCurrentDirection());
+			Item itemToCheck = nodoToCheck.getItem();
+			if (itemToCheck != null) {
+				switch (itemToCheck.getType()) {
 
-			switch (player.getCurrentDirection()) {// necesario agregar casos
-													// especiales
-			case down:
-				result = this.getNodo(indexI, indexJ).getDown();
-				break;
-			case up:
-				result = this.getNodo(indexI, indexJ).getUp();
+				case increaseTail:
+					player.addItem(nodoToCheck.getItem());
 
-				break;
-			case left:
-				result = this.getNodo(indexI, indexJ).getLeft();
+					break;
+				case fuel:
+					player.addItem(nodoToCheck.getItem());
 
-				break;
-			case right:
-				result = this.getNodo(indexI, indexJ).getRight();
+					break;
+				case shield:
+					player.addPowerUp(nodoToCheck.getItem());
 
-				break;
+					break;
+				case turbo:
+					player.addPowerUp(nodoToCheck.getItem());
 
-			default:
-				break;
-
-			}
-			int newI = result.getIndexI();
-			int newJ = result.getIndexJ();
-			Nodo nodoToCheck = this.getNodo(newI, newJ);
-			if (nodoToCheck.getItem() != null) {
-
-				if (nodoToCheck.getItem().getType() == ItemType.fuel) {
-					if (player.getFuel() == 100) {
-						player.addItem(nodoToCheck.getItem());
+					break;
+				case tronTrail:
+					if (player.killPlayer()) {
+						this.cleanDeadPlayer(player);
 					}
-					int fuelBonus = nodoToCheck.getItem().getValue();
-					player.addFuel(fuelBonus);
-					System.out.println("Obtuve un bonus de " + fuelBonus);
-
-				}
-
-				else if (nodoToCheck.getItem().getType() == ItemType.increaseTail) {
-					player.addItem(nodoToCheck.getItem());
-					player.addExtraTrail(nodoToCheck.getItem().getValue());
-					System.out.println("Aumento de tama�o" + nodoToCheck.getItem().getValue());
-				}
-
-				else if (nodoToCheck.getItem().getType() == ItemType.shield) {
-					player.addItem(nodoToCheck.getItem());
-				}
-
-				else if (nodoToCheck.getItem().getType() == ItemType.turbo) {
-					player.addItem(nodoToCheck.getItem());
-					int newSpeed = nodoToCheck.getItem().getValue();
-					player.setSpeed(newSpeed);
-					if (!player.getPowerUpActivated()) {
-						player.setPowerUpActivated(true);
-						player.setPowerUpSteps(60);
+					break;
+				case bomb:
+					if (player.killPlayer()) {
+						this.cleanDeadPlayer(player);
 					}
-					System.out.println("Cambie velocidad a " + player.getSpeed());
+
+					break;
+
+				default:
+					break;
 				}
-
-				else if (nodoToCheck.getItem().getType() == ItemType.bomb
-						|| nodoToCheck.getItem().getType() == ItemType.tronTrail) {
-					System.out.println("Me mori");
-					this.cleanDeadPlayer(player);
-					System.out.println("esta muerto  " + player.getIsDead());
-					player.setIsDead(true);
-					System.out.println("esta muerto  cambiado" + player.getIsDead());
-					return;
+			}
+			if (player.getIsDead() == false) {
+				player.setFuel(player.getFuel() - 0.2);
+				Item deleted = player.deleteTail();
+				if (deleted != null) {
+					this.resetNodeItem(deleted);
 				}
-				System.out.println(nodoToCheck.getItem().getType());
-			}
+				player.addHead(nodoToCheck.getIndexI(), nodoToCheck.getIndexJ());
+				this.setNodeItem(player.getTrail().getHead().getData());
 
-			player.setFuel(player.getFuel() - 0.5);
-			System.out.println(player.getTrail().getSize());
-			Item deleted = player.deleteTail();
-			if (deleted != null) {
-				this.resetNodeItem(deleted);
 			}
-			player.addHead(newI, newJ);
-			this.setNodeItem(player.getTrail().getHead().getData());
-
 		}
 
+	}
 
 	private void cleanDeadPlayer(Troncycle player) {
 		GenericNode<Item> current = player.getTrail().getHead();
@@ -281,6 +232,18 @@ public class LinkedMatrix {
 		}
 	}
 
+	private boolean checkPlayerFuel(Troncycle player) {
+		boolean result = true;
+		if (player.getFuel() <= 0) {
+			player.setIsDead(true);
+			this.cleanDeadPlayer(player);
+			System.out.println("Me mori por combustible");
+			result = false;
+
+		}
+		return result;
+	}
+
 	public GenericLinkedList<Item> getSimpleItemList() {
 		GenericLinkedList<Item> result = new GenericLinkedList<>();
 		Nodo current = this.getHead();
@@ -289,6 +252,33 @@ public class LinkedMatrix {
 				result.add(current.getItem());
 			}
 			current = current.getNext();
+		}
+		return result;
+
+	}
+
+	public Nodo getNextNode(int indexI, int indexJ, Direction direction) {
+		Nodo currentNodo = this.getNodo(indexI, indexJ);
+		Nodo result = null;
+		switch (direction) {
+		case down:
+			result = currentNodo.getDown();
+			break;
+		case up:
+			result = currentNodo.getUp();
+
+			break;
+		case left:
+			result = currentNodo.getLeft();
+
+			break;
+		case right:
+			result = currentNodo.getRight();
+			break;
+
+		default:
+			break;
+
 		}
 		return result;
 

@@ -9,7 +9,9 @@ import java.io.IOException;
 import javax.swing.*;
 import java.net.*;
 
+/****This is a sample Java Comment**
 
+*/
 public class testClient {
 
 	public static void main(String[] args) {

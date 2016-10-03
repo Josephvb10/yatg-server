@@ -26,7 +26,7 @@
 		
 		private Thread thread;
 
-		public static long targetTime =200;
+		public static long targetTime =300;
 		
 		public Screen1(){
 			setPreferredSize( new Dimension(MALLASIZE, MALLASIZE));
@@ -35,6 +35,7 @@
 			addKeyListener(this);
 			
 			this.matrix = new LinkedMatrix(MALLASIZE/20, MALLASIZE/20);
+			/*
 			Item item1 = new Item(ItemType.bomb, 1, 0);
 			Item item2 = new Item(ItemType.shield, 2, 1 );
 			Item item3 = new Item(ItemType.turbo, 3, 2);
@@ -64,11 +65,12 @@
 			this.matrix.setNodeItem(item11);
 			this.matrix.setNodeItem(item12);
 			this.matrix.setNodeItem(item13);
-			
+			*/
 			
 			
 			 this.player1 = new Troncycle(Player.player1, 0, 0);
 			 this.player1.setCurrentDirection(Direction.right);
+			 //player1.setSpeed(80);
 		
 			 
 			RIGHT=false;
@@ -78,6 +80,7 @@
 			RUN=true;
 			
 			repaint();
+			new ItemGenerator(matrix,10,2000).start();
 
 		}
 		
@@ -117,7 +120,7 @@
 
 					g.fillRect(x, y, NODOSIZE, NODOSIZE);
 					g.drawString("("+temp.getIndexI()+","+temp.getIndexJ()+")", x+10, y+10);
-					g.setColor(Color.magenta);
+					g.setColor(Color.cyan);
 					g.drawRect(x, y, NODOSIZE, NODOSIZE);
 					temp = temp.getNext();
 				}
@@ -130,7 +133,7 @@
 		@Override
 		public void addNotify(){
 			super.addNotify();
-			thread = new Thread(this);
+			this.thread = new Thread(this);
 		}
 		
 		@Override
@@ -142,6 +145,7 @@
 			long wait;
 			
 			while(RUN){
+
 
 				startTime = System.nanoTime();
 				
@@ -199,12 +203,14 @@
 		@Override
 		public void keyPressed(KeyEvent key) {
 			int k = key.getKeyCode();
-			if(k == KeyEvent.VK_ENTER) thread.start();
+			if(k == KeyEvent.VK_ENTER) this.thread.start();
 			if(k == KeyEvent.VK_RIGHT){RIGHT=true;DOWN=false;LEFT=false;UP=false;}
 			if(k == KeyEvent.VK_DOWN){DOWN=true;LEFT=false;UP=false;RIGHT=false;}
 			if(k == KeyEvent.VK_LEFT){LEFT=true;DOWN=false;UP=false;RIGHT=false;}
 			if(k == KeyEvent.VK_UP){UP=true;DOWN=false;LEFT=false;RIGHT=false;}
-			
+			if(k == KeyEvent.VK_P){player1.usePowerUp();}
+			if(k == KeyEvent.VK_C){player1.changePowerUp();
+			}
 			
 		}
 		@Override
