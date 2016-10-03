@@ -15,7 +15,7 @@ public class Troncycle {
 	private int extraTrail, powerUpSteps;
 	private GenericLinkedList<Item> trail;
 	private ItemsPriorityQueue itemsQueue = new ItemsPriorityQueue();
-	private boolean isDead, powerUpActivated, shieldActivated;
+	private boolean isDead, powerUpActivated, shieldActivated, speedActivated;
     private GenericStack<Item> powerUpStack = new GenericStack<>();
 
 
@@ -55,9 +55,6 @@ public class Troncycle {
 
 	public void setPowerUpActivated(boolean value) {
 		this.powerUpActivated = value;
-		if(value==false){
-			setShieldActivated(value);
-		}
 	}
 
 	public boolean getPowerUpActivated() {
@@ -93,7 +90,21 @@ public class Troncycle {
 		this.shieldActivated = shieldActivated;
 		if (!shieldActivated){
 			setPowerUpSteps(0);
+			setPowerUpActivated(false);
 		}
+	}
+	
+	public boolean isSpeedActivated(){
+		return this.speedActivated;
+	}
+	
+	public void setSpeedActivated(boolean value){
+		this.speedActivated=value;
+		if(!speedActivated){
+			setPowerUpSteps(0);
+			setPowerUpActivated(false);
+		}
+		
 	}
 
 	public Player getOwner() {
@@ -130,10 +141,12 @@ public class Troncycle {
 	
 	public void setSpeed(int speed) {
 		this.speed = speed;
+		System.out.println("Velocidad actual" + this.speed);
 	}
 	
 	public void resetSpeed() {
 		this.speed = normalSpeed;
+		System.out.println("Velocidad actual" + this.speed);
 	}
 
 	public int generateSpeed() {
@@ -215,31 +228,32 @@ public class Troncycle {
 	}
 	
 	public void usePowerUp(){
+		
 		if(!powerUpStack.isEmpty()){
+			if(!this.getPowerUpActivated()){
+			this.setPowerUpActivated(true);
+			this.setPowerUpSteps(60);
 			Item powerUpToUse = powerUpStack.pop();
 			switch (powerUpToUse.getType()){
 				case turbo:
 					int newSpeed = powerUpToUse.getValue();
 					this.setSpeed(newSpeed);
-					if (!this.getPowerUpActivated()) {
-						this.setPowerUpActivated(true);
-						this.setPowerUpSteps(60);
+						this.setSpeedActivated(true);
 						System.out.println("Cambie velocidad a " + this.getSpeed());
-					}
+					
 					break;
+					
 				case shield:
-					if (!this.getPowerUpActivated()) {
-						this.setPowerUpActivated(true);
-						this.setPowerUpSteps(60);
 						this.setShieldActivated(true);
 						System.out.println("Tengo escudo ");
-			}
 					break;
 					
 				default:
 					break;
+			}
 		}
 	}
+		System.out.println("No hay powerUps");
 	}
 	
 	
@@ -273,8 +287,11 @@ public class Troncycle {
 			}
 			System.out.println(this.getItemsQueue());
 		}
+		
 
 	}
+	
+	
 
 	public ItemsPriorityQueue getItemsQueue() {
 		return itemsQueue;

@@ -26,7 +26,7 @@
 		
 		private Thread thread;
 
-		public static long targetTime =200;
+		public static long targetTime =300;
 		
 		public Screen1(){
 			setPreferredSize( new Dimension(MALLASIZE, MALLASIZE));
@@ -117,7 +117,7 @@
 
 					g.fillRect(x, y, NODOSIZE, NODOSIZE);
 					g.drawString("("+temp.getIndexI()+","+temp.getIndexJ()+")", x+10, y+10);
-					g.setColor(Color.magenta);
+					g.setColor(Color.cyan);
 					g.drawRect(x, y, NODOSIZE, NODOSIZE);
 					temp = temp.getNext();
 				}

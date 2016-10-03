@@ -1,5 +1,6 @@
 package Structures.Malla;
 
+import GraphicMap.Screen1;
 import Structures.*;
 
 public class LinkedMatrix {
@@ -160,7 +161,8 @@ public class LinkedMatrix {
 	}
 
 	public void updatePlayer(Troncycle player) {
-
+		int threadTime = 300/player.getSpeed();
+		Screen1.targetTime = threadTime;
 		if (player.getIsDead() == false && checkPlayerFuel(player)) {
 			player.reducePowerUp();
 
