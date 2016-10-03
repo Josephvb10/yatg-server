@@ -15,7 +15,8 @@
 
 	@SuppressWarnings("serial")
 	public class Screen1 extends JPanel implements KeyListener, Runnable{
-		public static final int SIZE=800;
+		
+		public static final int MALLASIZE=680;
 		public static final int NODOSIZE = 20;
 		public static boolean RIGHT, LEFT, UP, DOWN, RUN, gameover;;
 		public LinkedMatrix matrix;
@@ -28,12 +29,12 @@
 		public static long targetTime =200;
 		
 		public Screen1(){
-			setPreferredSize( new Dimension(SIZE, SIZE));
+			setPreferredSize( new Dimension(MALLASIZE, MALLASIZE));
 			setFocusable(true);
 			requestFocus();
 			addKeyListener(this);
-			//this.cycleset = false;
-			this.matrix = new LinkedMatrix(SIZE/20, SIZE/20);
+			
+			this.matrix = new LinkedMatrix(MALLASIZE/20, MALLASIZE/20);
 			Item item1 = new Item(ItemType.bomb, 1, 0);
 			Item item2 = new Item(ItemType.shield, 2, 1 );
 			Item item3 = new Item(ItemType.turbo, 3, 2);
@@ -68,10 +69,7 @@
 			
 			 this.player1 = new Troncycle(Player.player1, 0, 0);
 			 this.player1.setCurrentDirection(Direction.right);
-			 
-			 //this.player2 = new Troncycle(Player.player2, 20,0);
-			 //this.player2.setCurrentDirection(Direction.right);
-
+		
 			 
 			RIGHT=false;
 			LEFT=false;
@@ -87,11 +85,11 @@
 		public void paint(Graphics g){
 
 			g.setColor(Color.white);
-			g.clearRect(0, 0, SIZE, SIZE);
+			g.clearRect(0, 0, MALLASIZE, MALLASIZE);
 			g.setColor(Color.BLACK);
 			Nodo temp = matrix.getHead();
-			for(int y =0; y < SIZE; y+=NODOSIZE){
-				for(int x=0; x<SIZE; x+=NODOSIZE){
+			for(int y =0; y < MALLASIZE; y+=NODOSIZE){
+				for(int x=0; x<MALLASIZE; x+=NODOSIZE){
 
 					if(temp.getItem() == null){
 						g.setColor(Color.BLACK);}

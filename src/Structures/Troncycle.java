@@ -1,8 +1,8 @@
 package Structures;
+
 import java.util.Random;
 
 import Structures.Item;
-
 
 public class Troncycle {
 	/**
@@ -15,15 +15,14 @@ public class Troncycle {
 	private int extraTrail, powerUpSteps;
 	private GenericLinkedList<Item> trail;
 	private ItemsPriorityQueue itemsQueue = new ItemsPriorityQueue();
-	private boolean isDead, powerUpActivated;
+	private boolean isDead, powerUpActivated, shieldActivated;
+    GenericStack<Item> powerUpStack = new GenericStack<>();
 
-	
 	public Troncycle() {
 		super();
 	}
 
-
-	public Troncycle(Player owner,int indexI, int indexJ) {
+	public Troncycle(Player owner, int indexI, int indexJ) {
 		this.isDead = false;
 		this.powerUpActivated = false;
 		this.owner = owner;
@@ -36,32 +35,49 @@ public class Troncycle {
 		;
 
 	}
-	
-	
-	public void setPowerUpSteps(int value){
-		this.powerUpSteps=value;
-	}
-	
-	public int getPowerUpSteps(){
-		return this.powerUpSteps;
-	}
-	
-	public void setPowerUpActivated(boolean value){
-		this.powerUpActivated=value;
-	}
-	
-	public boolean getPowerUpActivated(){
-		return this.powerUpActivated;
-	}
-	
-	public boolean getIsDead(){
-		return this.isDead;
-	}
-	
-	public void setIsDead(boolean value){
-		this.isDead = value;
+
+	public void setPowerUpSteps(int value) {
+		this.powerUpSteps = value;
 	}
 
+	public int getPowerUpSteps() {
+		return this.powerUpSteps;
+	}
+
+	public void setPowerUpActivated(boolean value) {
+		this.powerUpActivated = value;
+	}
+
+	public boolean getPowerUpActivated() {
+		return this.powerUpActivated;
+	}
+
+	public boolean getIsDead() {
+		return this.isDead;
+	}
+	public void setIsDead(boolean value) {
+			this.isDead = value;
+		
+	}
+	public boolean killPlayer() {
+			if (getIsDead()==false){
+				if(this.isShieldActivated()){
+					setShieldActivated(false);
+				}
+				else{
+					this.isDead = true;
+				}
+		}
+		return getIsDead();
+	}
+
+	public boolean isShieldActivated() {
+		return shieldActivated;
+	}
+
+	public void setShieldActivated(boolean shieldActivated) {
+		this.shieldActivated = shieldActivated;
+	}
 
 	public Player getOwner() {
 		return owner;
@@ -80,21 +96,20 @@ public class Troncycle {
 	}
 
 	public void addFuel(int fuel) {
-		if((this.fuel + fuel) > 100){
+		if ((this.fuel + fuel) > 100) {
 			this.fuel = 100;
+		} else {
+			this.fuel += fuel;
 		}
-		else{
-			this.fuel +=fuel;
-		}	
 	}
 
 	public int getSpeed() {
 		return speed;
 	}
-	
+
 	public int generateSpeed() {
 		Random rand = new Random();
-		int newSpeed = rand.nextInt(9)+1;
+		int newSpeed = rand.nextInt(9) + 1;
 		return newSpeed;
 	}
 
@@ -109,6 +124,7 @@ public class Troncycle {
 	public void setCurrentDirection(Direction currentDirection) {
 		this.currentDirection = currentDirection;
 	}
+
 	public GenericLinkedList<Item> getTrail() {
 		return trail;
 	}
@@ -128,23 +144,22 @@ public class Troncycle {
 	public void addExtraTrail(int extraTrail) {
 		this.extraTrail += extraTrail;
 	}
-/*
-	public GenericNode<Item> getHead() {
-		return trail.getHead();
-	}*/
+	/*
+	 * public GenericNode<Item> getHead() { return trail.getHead(); }
+	 */
 
 	public Item deleteTail() {
 		Item deleted = null;
 
-			if (getExtraTrail() > 0) {
-				addExtraTrail(-1);
-			} else {
-				deleted = trail.deleteLast();
-			}
-		
+		if (getExtraTrail() > 0) {
+			addExtraTrail(-1);
+		} else {
+			deleted = trail.deleteLast();
+		}
+
 		return deleted;
 	}
-	
+
 	public void addHead(int indexI, int indexJ) {
 		Item newItem = new Item(ItemType.tronTrail, indexI, indexJ, true, this.owner);
 		addHead(newItem);
@@ -152,13 +167,19 @@ public class Troncycle {
 
 	public void addHead(Item item) {
 		GenericNode<Item> newHead = new GenericNode<>(item);
-		if(!trail.isEmpty()){
-		trail.getHead().getData().setFirst(false);}
+		if (!trail.isEmpty()) {
+			trail.getHead().getData().setFirst(false);
+		}
 		trail.setHead(newHead);
 	}
 
-	public void addItem(Item newItem){
+	public void addItem(Item newItem) {
 		itemsQueue.add(newItem);
+		itemsQueue.displayQueue();
+	}
+	
+	public void addPowerUp(Item newPowerUp){
+		powerUpStack.push(newPowerUp);
 	}
 
 	public void useItem() {
@@ -176,29 +197,21 @@ public class Troncycle {
 				this.addExtraTrail(itemToUse.getValue());
 
 				break;
-			case shield:
-
-				break;
-			case turbo:
-
-				break;
-
 			default:
 				break;
+				
 			}
+			itemsQueue.displayQueue();
 		}
 
 	}
-
 
 	public ItemsPriorityQueue getItemsQueue() {
 		return itemsQueue;
 	}
 
-
 	public void setItemsQueue(ItemsPriorityQueue itemsQueue) {
 		this.itemsQueue = itemsQueue;
 	}
-	
 
 }
