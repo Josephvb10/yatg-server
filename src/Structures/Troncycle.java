@@ -40,8 +40,14 @@ public class Troncycle {
 	}
 
 	public void setPowerUpSteps(int value) {
+		if(value <= 0){
+			this.powerUpSteps = 0;
+
+		}
+		else{
 		this.powerUpSteps = value;
 	}
+		}
 
 	public int getPowerUpSteps() {
 		return this.powerUpSteps;
