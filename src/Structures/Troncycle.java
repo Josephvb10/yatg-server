@@ -71,6 +71,7 @@ public class Troncycle {
 		if (getIsDead() == false) {
 			if (this.isShieldActivated()) {
 				setShieldActivated(false);
+				setPowerUpActivated(false);
 			} else {
 				this.isDead = true;
 			}
@@ -84,6 +85,9 @@ public class Troncycle {
 
 	public void setShieldActivated(boolean shieldActivated) {
 		this.shieldActivated = shieldActivated;
+		if (!shieldActivated){
+			setPowerUpSteps(0);
+		}
 	}
 
 	public Player getOwner() {
