@@ -70,6 +70,80 @@ public class Troncycle {
 
 	}
 
+	public Player getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Player owner) {
+		this.owner = owner;
+	}
+
+	public double getFuel() {
+		return fuel;
+	}
+
+	public void setFuel(double fuel) {
+
+		this.fuel = fuel;
+	}
+	
+	public int getNormalSpeed(){
+		return normalSpeed;
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+	
+	public void setSpeed(int speed) {
+
+		this.speed = speed;
+		System.out.println("Velocidad actual" + this.speed);
+	}
+	
+	public Direction getCurrentDirection() {
+		return currentDirection;
+	}
+
+	public void setCurrentDirection(Direction currentDirection) {
+		this.currentDirection = currentDirection;
+	}
+
+	public GenericLinkedList<Item> getTrail() {
+		return trail;
+	}
+
+	public void setTrail(GenericLinkedList<Item> trail) {
+		this.trail = trail;
+	}
+
+	public int getExtraTrail() {
+		return extraTrail;
+	}
+
+	public void setExtraTrail(int extraTrail) {
+
+		this.extraTrail = extraTrail;
+	}
+	
+	public ItemsPriorityQueue getItemsQueue() {
+		return itemsQueue;
+	}
+
+	public void setItemsQueue(ItemsPriorityQueue itemsQueue) {
+		this.itemsQueue = itemsQueue;
+	}
+	
+	public GenericStack<Item> getPowerUpStack() {
+		return powerUpStack;
+	}
+
+	public void setPowerUpStack(GenericStack<Item> powerUpStack) {
+		this.powerUpStack = powerUpStack;
+	}
+
+	
+	
 	public boolean killPlayer() {
 		if (getIsDead() == false) {
 			if (this.isShieldActivated()) {
@@ -107,41 +181,12 @@ public class Troncycle {
 		
 	}
 
-	public Player getOwner() {
-		return owner;
-	}
-
-	public void setOwner(Player owner) {
-		this.owner = owner;
-	}
-
-	public double getFuel() {
-		return fuel;
-	}
-
-	public void setFuel(double fuel) {
-		this.fuel = fuel;
-	}
-
 	public void addFuel(int fuel) {
 		if ((this.fuel + fuel) > 100) {
 			this.fuel = 100;
 		} else {
 			this.fuel += fuel;
 		}
-	}
-	
-	public int getNormalSpeed(){
-		return normalSpeed;
-	}
-
-	public int getSpeed() {
-		return speed;
-	}
-	
-	public void setSpeed(int speed) {
-		this.speed = speed;
-		System.out.println("Velocidad actual" + this.speed);
 	}
 	
 	public void resetSpeed() {
@@ -155,38 +200,9 @@ public class Troncycle {
 		return newSpeed;
 	}
 
-	
-
-	public Direction getCurrentDirection() {
-		return currentDirection;
-	}
-
-	public void setCurrentDirection(Direction currentDirection) {
-		this.currentDirection = currentDirection;
-	}
-
-	public GenericLinkedList<Item> getTrail() {
-		return trail;
-	}
-
-	public void setTrail(GenericLinkedList<Item> trail) {
-		this.trail = trail;
-	}
-
-	public int getExtraTrail() {
-		return extraTrail;
-	}
-
-	public void setExtraTrail(int extraTrail) {
-		this.extraTrail = extraTrail;
-	}
-
 	public void addExtraTrail(int extraTrail) {
 		this.extraTrail += extraTrail;
 	}
-	/*
-	 * public GenericNode<Item> getHead() { return trail.getHead(); }
-	 */
 
 	public Item deleteTail() {
 		Item deleted = null;
@@ -227,6 +243,14 @@ public class Troncycle {
 		System.out.println("Pila actual" + getPowerUpStack());
 	}
 	
+	public void changePowerUp(){
+		if(!this.getPowerUpStack().isEmpty()){
+			Item powerUpChanged = this.getPowerUpStack().pop();
+			this.getPowerUpStack().addLast(powerUpChanged);
+			}
+		System.out.println(this.getPowerUpStack());
+	}
+	
 	public void usePowerUp(){
 		
 		if(!powerUpStack.isEmpty()){
@@ -256,8 +280,6 @@ public class Troncycle {
 		System.out.println("No hay powerUps");
 	}
 	
-	
-
 	public void useItem() {
 
 		if (!itemsQueue.isEmpty()) {
@@ -288,25 +310,6 @@ public class Troncycle {
 			System.out.println(this.getItemsQueue());
 		}
 		
-
-	}
-	
-	
-
-	public ItemsPriorityQueue getItemsQueue() {
-		return itemsQueue;
-	}
-
-	public void setItemsQueue(ItemsPriorityQueue itemsQueue) {
-		this.itemsQueue = itemsQueue;
-	}
-	
-	public GenericStack<Item> getPowerUpStack() {
-		return powerUpStack;
-	}
-
-	public void setPowerUpStack(GenericStack<Item> powerUpStack) {
-		this.powerUpStack = powerUpStack;
 	}
 	
 	public void reducePowerUp(){

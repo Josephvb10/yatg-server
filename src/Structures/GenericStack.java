@@ -1,5 +1,7 @@
 package Structures;
 
+
+
 public class GenericStack<T> {
 
 		private GenericNode<T> head;
@@ -43,6 +45,17 @@ public class GenericStack<T> {
 		
 		public boolean isEmpty(){
 			return head==null;			
+		}
+		
+		public void addLast(T data){	
+			if(this.head != null){
+				GenericNode<T> temp = this.head;
+				while(temp.getNext() != null){
+					temp = temp.getNext();
+				}
+				GenericNode<T> newNodo = new GenericNode<T>(data);
+				temp.setNext(newNodo);
+			}	
 		}
 		
 
