@@ -6,7 +6,8 @@ import java.util.Random;
 
 import Structures.*;
 
-public class ItemGenerator extends Thread {
+public class ItemGenerator implements  Runnable {
+	 
 	private LinkedMatrix matrix;
 	private int maxItems, numRows, numCols;
 	private GenericQueue<Item> currentItemQueue;
@@ -128,7 +129,7 @@ public class ItemGenerator extends Thread {
 			currentItemQueue.enqueue(tryPlaceItem());
 			removeMatrixItem(currentItemQueue.dequeue());
 			try {
-				this.sleep(waitTime);
+				Thread.sleep(waitTime);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
