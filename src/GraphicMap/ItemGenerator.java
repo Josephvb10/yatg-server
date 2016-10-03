@@ -7,7 +7,6 @@ import java.util.Random;
 import Structures.*;
 
 public class ItemGenerator extends Thread {
-	private ItemGenerator instance;
 	private LinkedMatrix matrix;
 	private int maxItems, numRows, numCols;
 	private GenericQueue<Item> currentItemQueue;
@@ -20,11 +19,18 @@ public class ItemGenerator extends Thread {
 		}
 	}
 
-	public ItemGenerator getInstance() {
-		if (instance == null) {
-			instance = new ItemGenerator();
+	public ItemGenerator(LinkedMatrix matrix, int maxItems, int waitTime) {
+		super();
+		this.matrix = matrix;
+		this.maxItems = maxItems;
+		this.waitTime = waitTime;
+		this.numRows = matrix.getNumRows();
+		this.numCols = matrix.getNumCols();
+
+		currentItemQueue = new GenericQueue<>();
+		for (int i = 0; i <= 5; i++) {
+			currentItemQueue.enqueue(randomItem());
 		}
-		return instance;
 	}
 
 	public LinkedMatrix getMatrix() {
