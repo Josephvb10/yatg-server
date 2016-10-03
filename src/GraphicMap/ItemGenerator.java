@@ -128,10 +128,9 @@ public class ItemGenerator extends Thread {
 			currentItemQueue.enqueue(tryPlaceItem());
 			removeMatrixItem(currentItemQueue.dequeue());
 			try {
-				this.wait(waitTime);
+				this.sleep(waitTime);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
-				System.out.println(e.getMessage());
 				e.printStackTrace();
 			}
 

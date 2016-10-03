@@ -35,6 +35,7 @@
 			addKeyListener(this);
 			
 			this.matrix = new LinkedMatrix(MALLASIZE/20, MALLASIZE/20);
+			/*
 			Item item1 = new Item(ItemType.bomb, 1, 0);
 			Item item2 = new Item(ItemType.shield, 2, 1 );
 			Item item3 = new Item(ItemType.turbo, 3, 2);
@@ -64,11 +65,12 @@
 			this.matrix.setNodeItem(item11);
 			this.matrix.setNodeItem(item12);
 			this.matrix.setNodeItem(item13);
-			
+			*/
 			
 			
 			 this.player1 = new Troncycle(Player.player1, 0, 0);
 			 this.player1.setCurrentDirection(Direction.right);
+			 //player1.setSpeed(80);
 		
 			 
 			RIGHT=false;
@@ -78,6 +80,7 @@
 			RUN=true;
 			
 			repaint();
+			new ItemGenerator(matrix,10,2000).start();
 
 		}
 		
