@@ -67,9 +67,13 @@ public class Screen1 extends JPanel implements KeyListener, Runnable {
 		RUN = true;
 
 		repaint();
-		ItemGenerator itemgenerator = new ItemGenerator(matrix, 10, 2000);
-		Thread thread1 = new Thread(itemgenerator);
+		ItemGenerator itemGenerator = new ItemGenerator(matrix, 10, 2000);
+		Thread thread1 = new Thread(itemGenerator);
 		thread1.start();
+		
+		BotGenerator botGenerator = new BotGenerator(matrix, 2, 500);
+		Thread thread2 = new Thread(botGenerator);
+		thread2.start();
 	}
 
 	public void paint(Graphics g) {
