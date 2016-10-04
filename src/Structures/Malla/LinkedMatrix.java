@@ -172,7 +172,7 @@ public class LinkedMatrix {
 			Item first = current.getData();
 			int indexI = first.getIndexI();
 			int indexJ = first.getIndexJ();
-			System.out.println(player.getCurrentDirection());
+			//System.out.println(player.getCurrentDirection());
 
 			Nodo nodoToCheck = getNextNode(indexI, indexJ, player.getCurrentDirection());
 			Item itemToCheck = nodoToCheck.getItem();
@@ -262,7 +262,7 @@ public class LinkedMatrix {
 	public Nodo getNextNode(int indexI, int indexJ, Direction direction) {
 		Nodo currentNodo = this.getNodo(indexI, indexJ);
 		Nodo result = null;
-		System.out.println(direction);
+		//System.out.println(direction);
 		switch (direction) {
 		case down:
 			result = currentNodo.getDown();
