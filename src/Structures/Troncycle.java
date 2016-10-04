@@ -3,11 +3,14 @@ package Structures;
 import java.util.Random;
 
 import Structures.Item;
-
+/**Clase principal Troncycle, encargada de toda la información de la moto
+ *  
+ * @author Jimena, Gustavo
+ * 
+ *
+ */
 public class Troncycle {
-	/**
-	 * 
-	 */
+
 	private Player owner;
 	private int speed, normalSpeed;
 	private double fuel;
@@ -18,12 +21,19 @@ public class Troncycle {
 	private boolean isDead, powerUpActivated, shieldActivated, speedActivated;
     private GenericStack<Item> powerUpStack = new GenericStack<>();
 
-
+/**
+ * Constructor
+ */
 	public Troncycle() {
 		super();
 	}
 
-
+/**
+ * 
+ * @param owner el jugador que está utilizando la moto
+ * @param indexI posición i de la matriz donde iniciará la primera vez
+ * @param indexJ posición j de la matriz donde iniciará la primera vez
+ */
 	public Troncycle(Player owner, int indexI, int indexJ) {
 		this.isDead = false;
 		this.powerUpActivated = false;
@@ -38,7 +48,10 @@ public class Troncycle {
 		;
 
 	}
-
+/**
+ * Asigna un valor determinado de pasos para la duración de los power ups
+ * @param value  cantidad de pasos para powerUps
+ */
 	public void setPowerUpSteps(int value) {
 		if(value <= 0){
 			this.powerUpSteps = 0;
@@ -48,36 +61,62 @@ public class Troncycle {
 		this.powerUpSteps = value;
 	}
 		}
-
+/**
+ * Obtiene el número de pasos de powerUps
+ * @return número de pasos de powerUps
+ */
 	public int getPowerUpSteps() {
 		return this.powerUpSteps;
 	}
+/**
+ * Activa o desactiva el powerUp según el valor de verdad
+ * @param value
+ */
 
 	public void setPowerUpActivated(boolean value) {
 		this.powerUpActivated = value;
 	}
-
+/**
+ * Obtiene si el powerUp está activado o no
+ * @return valor de verdad
+ */
 	public boolean getPowerUpActivated() {
 		return this.powerUpActivated;
 	}
-
+/**
+ * Obtiene si el jugador está muerto
+ * @return valor de verdad
+ */
 	public boolean getIsDead() {
 		return this.isDead;
 	}
-
+/**
+ * Define si el jugador está muerto o vivo según el valor de verdad
+ * @param value valor de verdad
+ */
 	public void setIsDead(boolean value) {
 		this.isDead = value;
 
 	}
+/**
+ * Obtiene el número de jugador al que corresponde la moto
+ * @return número de jugador
+ */
 
 	public Player getOwner() {
 		return owner;
 	}
-
+/**
+ * Asigna el número de jugador al que corresponde la moto
+ * @param owner número de jugador
+ */
 	public void setOwner(Player owner) {
 		this.owner = owner;
 	}
-
+/**
+ * Obtiene el valor del combustible actual de la moto
+ * @return valor del combustible actual de la moto
+ */
 	public double getFuel() {
 		return fuel;
 	}
@@ -86,11 +125,18 @@ public class Troncycle {
 
 		this.fuel = fuel;
 	}
+/**
+ * Obtiene la velocidad inicial con que la moto fue creada
+ * @return la velocidad normal de la moto
+ */
 	
 	public int getNormalSpeed(){
 		return normalSpeed;
 	}
-
+/**
+ * Obtiene la velocidad actual de la moto(puede ser cuando esté en turbo)
+ * @return velocidad actual de la moto
+ */
 	public int getSpeed() {
 		return speed;
 	}
