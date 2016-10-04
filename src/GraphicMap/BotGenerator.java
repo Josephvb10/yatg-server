@@ -98,7 +98,7 @@ public class BotGenerator implements Runnable {
 
 	private void fillBotList() {
 		int botsToAdd = this.maxBots - currentBotList.getSize();
-		for (int i = 0; i <= botsToAdd; i++) {
+		for (int i = 0; i < botsToAdd; i++) {
 			currentBotList.add(randomBot());
 		}
 
