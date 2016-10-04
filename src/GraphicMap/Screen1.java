@@ -35,42 +35,12 @@
 			addKeyListener(this);
 			
 			this.matrix = new LinkedMatrix(MALLASIZE/20, MALLASIZE/20);
-			/*
-			Item item1 = new Item(ItemType.bomb, 1, 0);
-			Item item2 = new Item(ItemType.shield, 2, 1 );
-			Item item3 = new Item(ItemType.turbo, 3, 2);
-			Item item4 = new Item(ItemType.bomb, 1, 1);
-			Item item5 = new Item(ItemType.increaseTail, 1, 2);
-			Item item6 = new Item(ItemType.fuel, 5, 3);
-			Item item7 = new Item(ItemType.increaseTail, 1, 3);
-			Item item8 = new Item(ItemType.turbo, 4, 2);
-			Item item9 = new Item(ItemType.turbo, 8, 2);
-			Item item10 = new Item(ItemType.turbo, 6, 2);
-			Item item11 = new Item(ItemType.turbo, 14, 2);
-			Item item12 = new Item(ItemType.fuel, 30, 2);
-			Item item13 = new Item(ItemType.fuel, 26, 20);
 
-			
-			
-			this.matrix.setNodeItem(item1);
-			this.matrix.setNodeItem(item2);
-			this.matrix.setNodeItem(item3);
-			this.matrix.setNodeItem(item4);
-			this.matrix.setNodeItem(item5);
-			this.matrix.setNodeItem(item6);
-			this.matrix.setNodeItem(item7);
-			this.matrix.setNodeItem(item8);
-			this.matrix.setNodeItem(item9);
-			this.matrix.setNodeItem(item10);
-			this.matrix.setNodeItem(item11);
-			this.matrix.setNodeItem(item12);
-			this.matrix.setNodeItem(item13);
-			*/
 			
 			
 			 this.player1 = new Troncycle(Player.player1, 0, 0);
 			 this.player1.setCurrentDirection(Direction.right);
-			 //player1.setSpeed(80);
+
 		
 			 
 			RIGHT=false;
