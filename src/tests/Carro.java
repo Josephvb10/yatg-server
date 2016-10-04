@@ -4,7 +4,9 @@ import Structures.ItemType;
 /****Clase Carro para pruebas
 */
 public class Carro implements Comparable<Carro>{
+
 		private int placa;
+		
 		private String marca;
 		private Importancia importancia;
 		private ItemType type;
@@ -21,6 +23,7 @@ public class Carro implements Comparable<Carro>{
 			this.marca = marca;
 			this.importancia=importancia;
 		}
+
 		public int getPlaca() {
 			return placa;
 		}

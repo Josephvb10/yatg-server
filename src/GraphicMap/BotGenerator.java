@@ -27,7 +27,9 @@ public class BotGenerator implements Runnable {
 	}
 
 	public Troncycle randomBot() {
-		Troncycle newBot = new Troncycle(Player.bot, 0, 0);
+		int indexI = randInt(0, numRows - 1);
+		int indexJ = randInt(0, numCols - 1);
+		Troncycle newBot = new Troncycle(Player.bot, indexI, indexJ);
 		tryPlaceHead(newBot.getTrail().getHead().getData());
 		newBot.setCurrentDirection(Direction.up);
 		setRandomDirection(newBot);
