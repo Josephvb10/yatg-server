@@ -140,56 +140,94 @@ public class Troncycle {
 	public int getSpeed() {
 		return speed;
 	}
+/**
+ * Cambia la velocidad de la moto
+ * @param speed nueva velocidad de la moto
+ */
 	
 	public void setSpeed(int speed) {
 
 		this.speed = speed;
 		System.out.println("Velocidad actual" + this.speed);
 	}
-	
+/**
+ * Obtiene la dirección actual del jugador
+ * @return dirección actual del jugador
+ */
 	public Direction getCurrentDirection() {
 		return currentDirection;
 	}
-
+/**
+ * Asigna una dirección a la moto
+ * @param currentDirection nueva dirección de la moto
+ */
 	public void setCurrentDirection(Direction currentDirection) {
 		this.currentDirection = currentDirection;
 	}
-
+/**
+ * Obtiene la estela de la moto
+ * @return una lista que representa la estela de la moto
+ */
 	public GenericLinkedList<Item> getTrail() {
 		return trail;
 	}
-
+/**
+ * Asigna una estela a la moto
+ * @param trail estela de la moto
+ */
 	public void setTrail(GenericLinkedList<Item> trail) {
 		this.trail = trail;
 	}
-
+/**
+ * Obtiene el valor de la cola extra que se está generando
+ * @return cola extra generándose
+ */
 	public int getExtraTrail() {
 		return extraTrail;
 	}
-
+/**
+ * Asigna el valor de la nueva cola que se generará
+ * @param extraTrail número de estelas que se agregaran a la moto
+ */
 	public void setExtraTrail(int extraTrail) {
 
 		this.extraTrail = extraTrail;
 	}
-	
+/**
+ * Obtiene la cola de items de la moto
+ * @return cola de items de la moto
+ */
 	public ItemsPriorityQueue getItemsQueue() {
 		return itemsQueue;
 	}
-
+/**
+ * Asigna una cola de items a la moto
+ * @param itemsQueue nueva cola de items para asignar
+ */
 	public void setItemsQueue(ItemsPriorityQueue itemsQueue) {
 		this.itemsQueue = itemsQueue;
 	}
-	
+/**
+ * Obtiene la pila de poderes de la moto	
+ * @return pila de poderes de la moto
+ */
 	public GenericStack<Item> getPowerUpStack() {
 		return powerUpStack;
 	}
-
+/**
+ * Asigna una pila de poderes al jugador
+ * @param powerUpStack pila de poderes para agregar
+ */
 	public void setPowerUpStack(GenericStack<Item> powerUpStack) {
 		this.powerUpStack = powerUpStack;
 	}
 
 	
-	
+/**
+ * Se encarga de matar al jugador cuando este pasa por una bomba o choca con una cola,
+ * además si este tiene un escudo no lo mata pero desactiva el escudo
+ * @return el valor de verdad de si el jugador está vivo o no 
+ */
 	public boolean killPlayer() {
 		if (getIsDead() == false) {
 			if (this.isShieldActivated()) {
@@ -201,11 +239,17 @@ public class Troncycle {
 		}
 		return getIsDead();
 	}
-
+/**
+ * Obtiene si el escudo está activo
+ * @return estado del escudo
+ */
 	public boolean isShieldActivated() {
 		return shieldActivated;
 	}
-
+/**
+ * Asigna si el escudo está activado y define el número de pasos por el cual se activará
+ * @param shieldActivated valor de verdad del estado de activación del escudo
+ */
 	public void setShieldActivated(boolean shieldActivated) {
 		this.shieldActivated = shieldActivated;
 		if (!shieldActivated){
@@ -213,11 +257,18 @@ public class Troncycle {
 			setPowerUpActivated(false);
 		}
 	}
-	
+/**
+ * Obtiene si el turbo está actuvo
+ * @return estado del turbo
+ */
 	public boolean isSpeedActivated(){
 		return this.speedActivated;
 	}
-	
+/**
+ * Asigna si el turbo está activado y define el número de pasos por el cual se activará
+ * @param value valor de verdad del estado de activación del turbo
+ */
+
 	public void setSpeedActivated(boolean value){
 		this.speedActivated=value;
 		if(!speedActivated){
@@ -226,7 +277,10 @@ public class Troncycle {
 		}
 		
 	}
-
+/**
+ * Aumenta el combustible hasta 100 o menos
+ * @param fuel valor que se le agregará al combustible
+ */
 	public void addFuel(int fuel) {
 		if ((this.fuel + fuel) > 100) {
 			this.fuel = 100;
@@ -234,22 +288,33 @@ public class Troncycle {
 			this.fuel += fuel;
 		}
 	}
-	
+/**
+ * 	Asigna la velocidad inicial a la moto
+ */
 	public void resetSpeed() {
 		this.speed = normalSpeed;
 		System.out.println("Velocidad actual" + this.speed);
 	}
-
+/**
+ * Genera un valor random para la nueva velocidad
+ * @return valor para nueva velocidad
+ */
 	public int generateSpeed() {
 		Random rand = new Random();
 		int newSpeed = rand.nextInt(9) + 1;
 		return newSpeed;
 	}
-
+/**
+ * Agrega una cantidad de estelas a la estela actual
+ * @param extraTrail cantidad de estelas a agregar
+ */
 	public void addExtraTrail(int extraTrail) {
 		this.extraTrail += extraTrail;
 	}
-
+/**
+ * Elimina la última estela de la moto
+ * @return la estela eliminada
+ */
 	public Item deleteTail() {
 		Item deleted = null;
 
@@ -261,12 +326,19 @@ public class Troncycle {
 
 		return deleted;
 	}
-
+/**
+ * Agrega una nueva cabeza a la moto(método que simula movimiento)
+ * @param indexI posición i en la que se pondrá la nueva cabeza
+ * @param indexJ posición j en la que se pondrá la nueva cabeza
+ */
 	public void addHead(int indexI, int indexJ) {
 		Item newItem = new Item(ItemType.tronTrail, indexI, indexJ, true, this.owner);
 		addHead(newItem);
 	}
-
+/**
+ * Agrega la cabeza como un tipo item a la estela
+ * @param item la nueva cabeza de la moto
+ */
 	public void addHead(Item item) {
 		GenericNode<Item> newHead = new GenericNode<>(item);
 		if (!trail.isEmpty()) {
@@ -274,21 +346,26 @@ public class Troncycle {
 		}
 		trail.setHead(newHead);
 	}
-
+/**
+ * Agrega un nuevo item a la cola de prioridad
+ * @param newItem el item que se agregará a la cola
+ */
 	public void addItem(Item newItem) {
 		itemsQueue.add(newItem);
 		System.out.println("Cola actual" + getItemsQueue());
-		useItem();
-		
-
-		
+		useItem();		
 	}
-
+/**
+ * Agrega un nuevo powerUp a la pila de poderes
+ * @param newPowerUp el powerUp que se agregará a la pila
+ */
 	public void addPowerUp(Item newPowerUp) {
 		powerUpStack.push(newPowerUp);
 		System.out.println("Pila actual" + getPowerUpStack());
 	}
-	
+/**
+ * 	Cambia el orden de la pila de poderes, todos se corren una posición para arriba
+ */
 	public void changePowerUp(){
 		if(!this.getPowerUpStack().isEmpty()){
 			Item powerUpChanged = this.getPowerUpStack().pop();
@@ -296,7 +373,10 @@ public class Troncycle {
 			}
 		System.out.println(this.getPowerUpStack());
 	}
-	
+/**
+ * Utiliza el powerUp que está en el top de la pila,  y activa sus respectivos flags,
+ * valida que si hay un powerUp activado no se pueda usar otro
+ */
 	public void usePowerUp(){
 		
 		if(!powerUpStack.isEmpty()){
@@ -325,7 +405,11 @@ public class Troncycle {
 	}
 		System.out.println("No hay powerUps");
 	}
-	
+/**
+ * Utiliza el item que está de primero en la cola de prioridad inmediatamente luego de que se agarra
+ * valida que si la moto tiene el combustible , entonces el combustible pasará a estar en la
+ * parte inferios de la cola	
+ */
 	public void useItem() {
 
 		if (!itemsQueue.isEmpty()) {
@@ -357,7 +441,10 @@ public class Troncycle {
 		}
 		
 	}
-	
+/**
+ * Se encarga de ir agotando los pasos restantes de powerUps que le quedan a la moto, sea
+ * de escudo o de turbo	
+ */
 	public void reducePowerUp(){
 	if (getPowerUpActivated()) {
 		setPowerUpSteps(getPowerUpSteps() - 1);
