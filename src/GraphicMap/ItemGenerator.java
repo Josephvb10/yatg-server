@@ -15,7 +15,7 @@ public class ItemGenerator implements  Runnable {
 
 	public ItemGenerator() {
 
-		for (int i = 0; i <= 5; i++) {
+		for (int i = 0; i <= maxItems; i++) {
 			currentItemQueue.enqueue(randomItem());
 		}
 	}
@@ -29,7 +29,7 @@ public class ItemGenerator implements  Runnable {
 		this.numCols = matrix.getNumCols();
 
 		currentItemQueue = new GenericQueue<>();
-		for (int i = 0; i <= 5; i++) {
+		for (int i = 0; i <= maxItems; i++) {
 			currentItemQueue.enqueue(randomItem());
 		}
 	}
