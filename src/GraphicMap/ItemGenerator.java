@@ -15,7 +15,7 @@ public class ItemGenerator implements  Runnable {
 
 	public ItemGenerator() {
 
-		for (int i = 0; i <= 5; i++) {
+		for (int i = 0; i <= maxItems; i++) {
 			currentItemQueue.enqueue(randomItem());
 		}
 	}
@@ -29,7 +29,7 @@ public class ItemGenerator implements  Runnable {
 		this.numCols = matrix.getNumCols();
 
 		currentItemQueue = new GenericQueue<>();
-		for (int i = 0; i <= 5; i++) {
+		for (int i = 0; i <= maxItems; i++) {
 			currentItemQueue.enqueue(randomItem());
 		}
 	}
@@ -64,24 +64,23 @@ public class ItemGenerator implements  Runnable {
 		Item newItem = new Item();
 		newItem.setIndexI(indexI);
 		newItem.setIndexJ(indexJ);
-		switch (randInt(1, 5)) {
+		switch (randInt(1, 8)) {
 		case 1:
 			newItem.setType(ItemType.bomb);
 			break;
 		case 2:
-			newItem.setType(ItemType.fuel);
+			newItem.setType(ItemType.turbo);
 			break;
+			
 		case 3:
 			newItem.setType(ItemType.increaseTail);
 			break;
 		case 4:
 			newItem.setType(ItemType.shield);
 			break;
-		case 5:
-			newItem.setType(ItemType.turbo);
-			break;
-
+		
 		default:
+			newItem.setType(ItemType.fuel);
 			break;
 		}
 

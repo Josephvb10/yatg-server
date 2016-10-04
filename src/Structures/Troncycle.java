@@ -290,7 +290,7 @@ public class Troncycle {
 				break;
 			case fuel:
 				if (this.getFuel() > 99) {
-					this.addItem(itemToUse);
+					//this.addItem(itemToUse);
 				}else{
 					System.out.println("Mi viejo combustible es" + this.fuel);
 					System.out.println("Obtuve un bonus de " + itemToUse.getValue());
