@@ -2,6 +2,10 @@ package Structures;
 
 import java.util.Random;
 
+/**
+ * @author gsegura96
+ *
+ */
 public class Item implements Comparable<Item> {
 	/**
 	 * 
