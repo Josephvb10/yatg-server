@@ -30,9 +30,9 @@ public class Troncycle {
 
 /**
  * 
- * @param owner el jugador que está utilizando la moto
- * @param indexI posición i de la matriz donde iniciará la primera vez
- * @param indexJ posición j de la matriz donde iniciará la primera vez
+ * @param owner player that uses the troncycle
+ * @param indexI i position where the troncycle will be placed
+ * @param indexJ j position where the troncycle will be placed
  */
 	public Troncycle(Player owner, int indexI, int indexJ) {
 		this.isDead = false;
@@ -48,10 +48,7 @@ public class Troncycle {
 		;
 
 	}
-/**
- * Asigna un valor determinado de pasos para la duración de los power ups
- * @param value  cantidad de pasos para powerUps
- */
+
 	public void setPowerUpSteps(int value) {
 		if(value <= 0){
 			this.powerUpSteps = 0;
@@ -61,62 +58,38 @@ public class Troncycle {
 		this.powerUpSteps = value;
 	}
 		}
-/**
- * Obtiene el número de pasos de powerUps
- * @return número de pasos de powerUps
- */
+
 	public int getPowerUpSteps() {
 		return this.powerUpSteps;
 	}
-/**
- * Activa o desactiva el powerUp según el valor de verdad
- * @param value
- */
+
 
 	public void setPowerUpActivated(boolean value) {
 		this.powerUpActivated = value;
 	}
-/**
- * Obtiene si el powerUp está activado o no
- * @return valor de verdad
- */
+
 	public boolean getPowerUpActivated() {
 		return this.powerUpActivated;
 	}
-/**
- * Obtiene si el jugador está muerto
- * @return valor de verdad
- */
+
 	public boolean getIsDead() {
 		return this.isDead;
 	}
-/**
- * Define si el jugador está muerto o vivo según el valor de verdad
- * @param value valor de verdad
- */
+
 	public void setIsDead(boolean value) {
 		this.isDead = value;
 
 	}
-/**
- * Obtiene el número de jugador al que corresponde la moto
- * @return número de jugador
- */
+
 
 	public Player getOwner() {
 		return owner;
 	}
-/**
- * Asigna el número de jugador al que corresponde la moto
- * @param owner número de jugador
- */
+
 	public void setOwner(Player owner) {
 		this.owner = owner;
 	}
-/**
- * Obtiene el valor del combustible actual de la moto
- * @return valor del combustible actual de la moto
- */
+
 	public double getFuel() {
 		return fuel;
 	}
@@ -125,108 +98,71 @@ public class Troncycle {
 
 		this.fuel = fuel;
 	}
-/**
- * Obtiene la velocidad inicial con que la moto fue creada
- * @return la velocidad normal de la moto
- */
+
 	
 	public int getNormalSpeed(){
 		return normalSpeed;
 	}
-/**
- * Obtiene la velocidad actual de la moto(puede ser cuando esté en turbo)
- * @return velocidad actual de la moto
- */
+
 	public int getSpeed() {
 		return speed;
 	}
-/**
- * Cambia la velocidad de la moto
- * @param speed nueva velocidad de la moto
- */
+
 	
 	public void setSpeed(int speed) {
 
 		this.speed = speed;
 		System.out.println("Velocidad actual" + this.speed);
 	}
-/**
- * Obtiene la dirección actual del jugador
- * @return dirección actual del jugador
- */
+
 	public Direction getCurrentDirection() {
 		return currentDirection;
 	}
-/**
- * Asigna una dirección a la moto
- * @param currentDirection nueva dirección de la moto
- */
+
 	public void setCurrentDirection(Direction currentDirection) {
 		this.currentDirection = currentDirection;
 	}
-/**
- * Obtiene la estela de la moto
- * @return una lista que representa la estela de la moto
- */
+
 	public GenericLinkedList<Item> getTrail() {
 		return trail;
 	}
-/**
- * Asigna una estela a la moto
- * @param trail estela de la moto
- */
+
 	public void setTrail(GenericLinkedList<Item> trail) {
 		this.trail = trail;
 	}
-/**
- * Obtiene el valor de la cola extra que se está generando
- * @return cola extra generándose
- */
+
 	public int getExtraTrail() {
 		return extraTrail;
 	}
-/**
- * Asigna el valor de la nueva cola que se generará
- * @param extraTrail número de estelas que se agregaran a la moto
- */
+
 	public void setExtraTrail(int extraTrail) {
 
 		this.extraTrail = extraTrail;
 	}
-/**
- * Obtiene la cola de items de la moto
- * @return cola de items de la moto
- */
+
 	public ItemsPriorityQueue getItemsQueue() {
 		return itemsQueue;
 	}
-/**
- * Asigna una cola de items a la moto
- * @param itemsQueue nueva cola de items para asignar
- */
+
 	public void setItemsQueue(ItemsPriorityQueue itemsQueue) {
 		this.itemsQueue = itemsQueue;
 	}
-/**
- * Obtiene la pila de poderes de la moto	
- * @return pila de poderes de la moto
- */
+
 	public GenericStack<Item> getPowerUpStack() {
 		return powerUpStack;
 	}
-/**
- * Asigna una pila de poderes al jugador
- * @param powerUpStack pila de poderes para agregar
- */
+
 	public void setPowerUpStack(GenericStack<Item> powerUpStack) {
 		this.powerUpStack = powerUpStack;
 	}
 
 	
 /**
- * Se encarga de matar al jugador cuando este pasa por una bomba o choca con una cola,
- * además si este tiene un escudo no lo mata pero desactiva el escudo
- * @return el valor de verdad de si el jugador está vivo o no 
+ * It kills the player once it steps into a bomb or the tail of another troncycle. Also, it
+ * validates if the player has or not a shield, if it does the player doesn't die but the shield
+ * is deactivated.
+ * 
+ * @return wheter the player is alive or not 
  */
 	public boolean killPlayer() {
 		if (getIsDead() == false) {
