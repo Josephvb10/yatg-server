@@ -47,7 +47,11 @@ public class LinkedMatrix {
 	public void setNumNodes(int numNodes) {
 		this.numNodes = numNodes;
 	}
-
+/**
+ * Creates a simple list and assigns one index to each node, then it calls the function that
+ * joins the nodes
+ * @return  the four-way linked list
+ */
 	public Nodo simpleUnlinkedList() {
 		int i, jj;
 		int nodos = 1;
