@@ -21,7 +21,9 @@ public class GenericStack<T> {
 
 	/**
 	 * Constructs a stack containing data as the first element.
-	 * @param data First element of the list to be created.
+	 * 
+	 * @param data
+	 *            First element of the list to be created.
 	 */
 	public GenericStack(T data) {
 		GenericNode<T> newNode = new GenericNode<>(data);
@@ -30,7 +32,9 @@ public class GenericStack<T> {
 
 	/**
 	 * Inserts an element at the first position of the stack.
-	 * @param data Element to be inserted.
+	 * 
+	 * @param data
+	 *            Element to be inserted.
 	 */
 	public void push(T data) {
 		GenericNode<T> newNode = new GenericNode<>(data);
@@ -39,7 +43,9 @@ public class GenericStack<T> {
 
 	/**
 	 * Inserts a node at the beginning if the stack.
-	 * @param newNode Node to be inserted.
+	 * 
+	 * @param newNode
+	 *            Node to be inserted.
 	 */
 	public void push(GenericNode<T> newNode) {
 		if (getHead() == null) {
@@ -52,6 +58,7 @@ public class GenericStack<T> {
 
 	/**
 	 * Deletes and returns the first element of the stack.
+	 * 
 	 * @return The first element of the stack.
 	 */
 	public T pop() {
@@ -65,6 +72,7 @@ public class GenericStack<T> {
 
 	/**
 	 * Returns the first node of the stack.
+	 * 
 	 * @return The first node of the stack
 	 */
 	public GenericNode<T> getHead() {
@@ -73,6 +81,7 @@ public class GenericStack<T> {
 
 	/**
 	 * Checks if the stack is empty, if it is returns true, else returns false.
+	 * 
 	 * @return true if the stack is empty, else returns false.
 	 */
 	public boolean isEmpty() {
@@ -81,7 +90,9 @@ public class GenericStack<T> {
 
 	/**
 	 * Adds an element at the end of the stack.
-	 * @param data Element to be added.
+	 * 
+	 * @param data
+	 *            Element to be added.
 	 */
 	public void addLast(T data) {
 		if (this.head != null) {
@@ -96,7 +107,9 @@ public class GenericStack<T> {
 
 	/**
 	 * Sets the stack head, unlinked to the previous head.
-	 * @param head Node to be set as the new head.
+	 * 
+	 * @param head
+	 *            Node to be set as the new head.
 	 */
 	public void setHead(GenericNode<T> head) {
 		this.head = head;
