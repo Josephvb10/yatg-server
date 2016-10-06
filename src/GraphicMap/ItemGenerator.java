@@ -6,7 +6,8 @@ import java.util.Random;
 
 import Structures.*;
 
-public class ItemGenerator extends Thread {
+public class ItemGenerator implements  Runnable {
+	 
 	private LinkedMatrix matrix;
 	private int maxItems, numRows, numCols;
 	private GenericQueue<Item> currentItemQueue;
@@ -14,7 +15,7 @@ public class ItemGenerator extends Thread {
 
 	public ItemGenerator() {
 
-		for (int i = 0; i <= 5; i++) {
+		for (int i = 0; i <= maxItems; i++) {
 			currentItemQueue.enqueue(randomItem());
 		}
 	}
@@ -28,7 +29,7 @@ public class ItemGenerator extends Thread {
 		this.numCols = matrix.getNumCols();
 
 		currentItemQueue = new GenericQueue<>();
-		for (int i = 0; i <= 5; i++) {
+		for (int i = 0; i <= maxItems; i++) {
 			currentItemQueue.enqueue(randomItem());
 		}
 	}
@@ -63,24 +64,23 @@ public class ItemGenerator extends Thread {
 		Item newItem = new Item();
 		newItem.setIndexI(indexI);
 		newItem.setIndexJ(indexJ);
-		switch (randInt(1, 5)) {
+		switch (randInt(1, 8)) {
 		case 1:
 			newItem.setType(ItemType.bomb);
 			break;
 		case 2:
-			newItem.setType(ItemType.fuel);
+			newItem.setType(ItemType.turbo);
 			break;
+			
 		case 3:
 			newItem.setType(ItemType.increaseTail);
 			break;
 		case 4:
 			newItem.setType(ItemType.shield);
 			break;
-		case 5:
-			newItem.setType(ItemType.turbo);
-			break;
-
+		
 		default:
+			newItem.setType(ItemType.fuel);
 			break;
 		}
 
@@ -128,7 +128,7 @@ public class ItemGenerator extends Thread {
 			currentItemQueue.enqueue(tryPlaceItem());
 			removeMatrixItem(currentItemQueue.dequeue());
 			try {
-				this.sleep(waitTime);
+				Thread.sleep(waitTime);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
