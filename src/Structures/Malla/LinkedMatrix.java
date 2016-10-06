@@ -2,11 +2,24 @@ package Structures.Malla;
 
 import GraphicMap.Screen1;
 import Structures.*;
+/**
+ * Matrix class that generates the map of the game
+ *  
+ *  
+ * @author Jimena
+ * @author gsegura96
+ * 
+ *
+ */
 
 public class LinkedMatrix {
 	private Nodo head;
 	private int numRows, numCols, numNodes;
-
+/**
+ * Constructor that takes the number of columns and rows of the matrix
+ * @param numRows
+ * @param numCols
+ */
 	public LinkedMatrix(int numRows, int numCols) {
 		this.head = null;
 		this.numRows = numRows;
@@ -48,7 +61,7 @@ public class LinkedMatrix {
 		this.numNodes = numNodes;
 	}
 /**
- * Creates a simple list and assigns one index to each node, then it calls the function that
+ * Creates a simple list and assigns one index to each (@Nodo), then it calls the function that
  * joins the nodes
  * @return  the four-way linked list
  */
@@ -81,7 +94,12 @@ public class LinkedMatrix {
 		fourWayLinkedList();
 		return this.head;
 	}
-
+/**
+ * It looks for a (@Nodo) in the matrix using its index  and returns it
+ * @param indexI position i in the matrix of the node
+ * @param indexJ position i in the matrix of the node
+ * @return the node that has the i and j index that was introduced in the parameters
+ */
 	public Nodo getNodo(int indexI, int indexJ) {
 		Nodo temp = this.head;
 		Nodo result = null;
@@ -97,7 +115,9 @@ public class LinkedMatrix {
 		}
 		return result;
 	}
-
+/**
+ * It is in charge of assigning the pointers that reference other (@Nodo) according to the direction and index
+ */
 	public void fourWayLinkedList() {
 		Nodo temp = this.head;
 		// up
@@ -147,23 +167,39 @@ public class LinkedMatrix {
 		}
 
 	}
-
+/**
+ * It assigns to a (@Nodo) an (@Item)
+ * @param item the item that will be assigned 
+ */
 	public void setNodeItem(Item item) {
 		int indexI = item.getIndexI();
 		int indexJ = item.getIndexJ();
 		getNodo(indexI, indexJ).setItem(item);
 	}
-
+/**
+ * Removes the item of a specific (@Nodo)
+ * @param indexI position i in the matrix of the node
+ * @param indexJ position j in the matrix of the node
+ */
 	public void resetNodeItem(int indexI, int indexJ) {
 		getNodo(indexI, indexJ).setItem(null);
 	}
 
+/**
+ * Removes the item of a specific (@Nodo)
+ * @item  item to be removed
+ */
 	public void resetNodeItem(Item item) {
 		int indexI = item.getIndexI();
 		int indexJ = item.getIndexJ();
-		getNodo(indexI, indexJ).setItem(null);
+		resetNodeItem(indexI, indexJ);
 	}
 
+/**
+ * It is in charge  of verifying the (@Nodo) in which the Troncycle step, it adds the powerUp
+ * or the item to the queue or the stack depending on the type.	
+ * @param player
+ */
 	public void updatePlayer(Troncycle player) {
 		int threadTime = 300/player.getSpeed();
 		Screen1.targetTime = threadTime;
@@ -227,6 +263,10 @@ public class LinkedMatrix {
 
 	}
 
+/**
+ * It removes the player of the screen.
+ * @param player player that's going to be removed
+ */
 	private void cleanDeadPlayer(Troncycle player) {
 		GenericNode<Item> current = player.getTrail().getHead();
 		while (current != null) {
@@ -236,6 +276,11 @@ public class LinkedMatrix {
 		}
 	}
 
+/**
+ * Checks the amount of fuel that the player has left, if it is less than zero, it cleans the dead player.
+ * @param player the (@SimplePlayer) that will be checked
+ * @return whether the player is out of fuel or not
+ */
 	private boolean checkPlayerFuel(Troncycle player) {
 		boolean result = true;
 		if (player.getFuel() <= 0) {
@@ -247,6 +292,7 @@ public class LinkedMatrix {
 		}
 		return result;
 	}
+
 
 	public GenericLinkedList<Item> getSimpleItemList() {
 		GenericLinkedList<Item> result = new GenericLinkedList<>();
