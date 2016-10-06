@@ -4,7 +4,8 @@ import java.util.Random;
 
 import Structures.Item;
 /**
- * Clase principal Troncycle, encargada de toda la informaci�n de la moto
+ * Main class Troncycle, in charge of all the information of the Troncycle
+ *  
  *  
  * @author Jimena
  * @author gsegura96
@@ -254,8 +255,9 @@ public class Troncycle {
 		
 	}
 /**
- * Aumenta el combustible hasta 100 o menos
- * @param fuel valor que se le agregar� al combustible
+ * Increases the fuel up to 100 or less
+ * 
+ * @param fuel value that will be added to the Troncycle
  */
 	public void addFuel(int fuel) {
 		if ((this.fuel + fuel) > 100) {
@@ -265,15 +267,16 @@ public class Troncycle {
 		}
 	}
 /**
- * 	Asigna la velocidad inicial a la moto
+ * 	Assigns the speed  which the Troncycle was created with
  */
 	public void resetSpeed() {
 		this.speed = normalSpeed;
 		System.out.println("Velocidad actual" + this.speed);
 	}
 /**
- * Genera un valor random para la nueva velocidad
- * @return valor para nueva velocidad
+ * Generates a random value for the new speed
+ * 
+ * @return value for the new speed
  */
 	public int generateSpeed() {
 		Random rand = new Random();
@@ -281,15 +284,16 @@ public class Troncycle {
 		return newSpeed;
 	}
 /**
- * Agrega una cantidad de estelas a la estela actual
- * @param extraTrail cantidad de estelas a agregar
+ * Adds an amount of tails to the current tail
+ * @param extraTrail amount of tails that will be added
  */
 	public void addExtraTrail(int extraTrail) {
 		this.extraTrail += extraTrail;
 	}
+	
 /**
- * Elimina la �ltima estela de la moto
- * @return la estela eliminada
+ * Deletes the last tail, of the Troncycle
+ * @return the deleted tail
  */
 	public Item deleteTail() {
 		Item deleted = null;
@@ -303,18 +307,21 @@ public class Troncycle {
 		return deleted;
 	}
 /**
- * Agrega una nueva cabeza a la moto(m�todo que simula movimiento)
- * @param indexI posici�n i en la que se pondr� la nueva cabeza
- * @param indexJ posici�n j en la que se pondr� la nueva cabeza
+ * Adds a new head to the Troncycle(method that simulates the movement)
+ * @param indexI i position where the new head will be placed
+ * @param indexJ j position where the new head will be placed
  */
 	public void addHead(int indexI, int indexJ) {
 		Item newItem = new Item(ItemType.tronTrail, indexI, indexJ, true, this.owner);
 		addHead(newItem);
 	}
+	
 /**
- * Agrega la cabeza como un tipo item a la estela
- * @param item la nueva cabeza de la moto
+ * Adds the head as an (@Item) to the tail
+ 
+ * @param item new head of the Troncycle
  */
+	
 	public void addHead(Item item) {
 		GenericNode<Item> newHead = new GenericNode<>(item);
 		if (!trail.isEmpty()) {
@@ -322,25 +329,31 @@ public class Troncycle {
 		}
 		trail.setHead(newHead);
 	}
+	
 /**
- * Agrega un nuevo item a la cola de prioridad
- * @param newItem el item que se agregar� a la cola
+ * Adds a new (@Item) to the (@ItemsPriorityQueue)
+ * 
+ * @param newItem the item that would be added
  */
+	
 	public void addItem(Item newItem) {
 		itemsQueue.add(newItem);
 		System.out.println("Cola actual" + getItemsQueue());
 		useItem();		
 	}
 /**
- * Agrega un nuevo powerUp a la pila de poderes
- * @param newPowerUp el powerUp que se agregar� a la pila
+ * Adds a new powerUp to the power (@GenericStack)
+ * 
+ * @param newPowerUp the power up that will be added to the stack 
  */
+	
 	public void addPowerUp(Item newPowerUp) {
 		powerUpStack.push(newPowerUp);
 		System.out.println("Pila actual" + getPowerUpStack());
 	}
 /**
- * 	Cambia el orden de la pila de poderes, todos se corren una posici�n para arriba
+ * Changes the order of the power (@GenericStack), all the power ups change to the up position
+ * 	
  */
 	public void changePowerUp(){
 		if(!this.getPowerUpStack().isEmpty()){
@@ -349,9 +362,11 @@ public class Troncycle {
 			}
 		System.out.println(this.getPowerUpStack());
 	}
+	
 /**
- * Utiliza el powerUp que est� en el top de la pila,  y activa sus respectivos flags,
- * valida que si hay un powerUp activado no se pueda usar otro
+ * Uses the power up that is in the top of the stack and activates the respective flags,
+ * validates if there's already an activated power up so that it can't use another
+
  */
 	public void usePowerUp(){
 		
@@ -382,9 +397,7 @@ public class Troncycle {
 		System.out.println("No hay powerUps");
 	}
 /**
- * Utiliza el item que est� de primero en la cola de prioridad inmediatamente luego de que se agarra
- * valida que si la moto tiene el combustible , entonces el combustible pasar� a estar en la
- * parte inferios de la cola	
+ * Uses the first item in the (@ItemsPriorityQueue") immediately after is picked up. Validates if the Troncycle has the fuel at top.	
  */
 	public void useItem() {
 
@@ -418,8 +431,8 @@ public class Troncycle {
 		
 	}
 /**
- * Se encarga de ir agotando los pasos restantes de powerUps que le quedan a la moto, sea
- * de escudo o de turbo	
+ * It reduces the powerUp steps that are left for the Troncycle, once they're 0, it deactivates the powerUp flag, so that the 
+ * effect no longer remains.
  */
 	public void reducePowerUp(){
 	if (getPowerUpActivated()) {
