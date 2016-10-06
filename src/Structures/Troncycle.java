@@ -162,7 +162,7 @@ public class Troncycle {
  * validates if the player has or not a shield, if it does the player doesn't die but the shield
  * is deactivated.
  * 
- * @return wheter the player is alive or not 
+ * @return if the player is alive or not 
  */
 	public boolean killPlayer() {
 		if (getIsDead() == false) {
@@ -175,16 +175,13 @@ public class Troncycle {
 		}
 		return getIsDead();
 	}
-/**
- * Obtiene si el escudo está activo
- * @return estado del escudo
- */
+
 	public boolean isShieldActivated() {
 		return shieldActivated;
 	}
 /**
- * Asigna si el escudo está activado y define el número de pasos por el cual se activará
- * @param shieldActivated valor de verdad del estado de activación del escudo
+ * Assigns if the shield is activated and sets the number of steps that it will last
+ * @param shieldActivated if the shield is activated or not
  */
 	public void setShieldActivated(boolean shieldActivated) {
 		this.shieldActivated = shieldActivated;
