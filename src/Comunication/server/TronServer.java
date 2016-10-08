@@ -78,7 +78,7 @@ public class TronServer {
 
 		BotGenerator botGenerator = new BotGenerator(matrix, 4, 500);
 		Thread thread2 = new Thread(botGenerator);
-		//thread2.start();
+		thread2.start();
 
 
 

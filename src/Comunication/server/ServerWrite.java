@@ -16,7 +16,8 @@ public class ServerWrite extends Thread {
 
 			String lista = "%C";
 			for (int i = 1; i <= 4; i++) {
-				lista = lista + "- Jugador " + i + ": " + TronServer.getClients().get(i).getName() + "@@#";
+				String name = (TronServer.getClients().get(i).getName() == null) ? "" : TronServer.getClients().get(i).getName();
+				lista = lista + "- Jugador " + i + ": " + name + "@@#";
 			}
 
 			TronServer.getClients().sendAll(lista);
