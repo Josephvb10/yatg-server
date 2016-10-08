@@ -7,6 +7,7 @@
     <list default="true" id="5f922630-279f-4aa4-b6c8-088ab8cbaaf9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Comunication/server/ServerRead.java" afterPath="$PROJECT_DIR$/src/Comunication/server/ServerRead.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Structures/Malla/LinkedMatrix.java" afterPath="$PROJECT_DIR$/src/Structures/Malla/LinkedMatrix.java" />
     </list>
     <ignored path="yatg-server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,8 +55,8 @@
       <file leaf-file-name="Troncycle.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Structures/Troncycle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+            <state relative-caret-position="141">
+              <caret line="213" column="23" selection-start-line="213" selection-start-column="19" selection-end-line="213" selection-end-column="23" />
               <folding>
                 <element signature="e#685#686#0" expanded="true" />
                 <element signature="e#699#700#0" expanded="true" />
@@ -127,8 +128,8 @@
       <file leaf-file-name="LinkedMatrix.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Structures/Malla/LinkedMatrix.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1100">
-              <caret line="214" column="55" selection-start-line="214" selection-start-column="55" selection-end-line="214" selection-end-column="55" />
+            <state relative-caret-position="110">
+              <caret line="271" column="10" selection-start-line="271" selection-start-column="10" selection-end-line="271" selection-end-column="10" />
               <folding>
                 <element signature="e#614#615#0" expanded="true" />
                 <element signature="e#632#633#0" expanded="true" />
@@ -176,8 +177,8 @@
       <file leaf-file-name="ServerRead.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Comunication/server/ServerRead.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="234" column="0" selection-start-line="234" selection-start-column="0" selection-end-line="234" selection-end-column="0" />
+            <state relative-caret-position="80">
+              <caret line="228" column="17" selection-start-line="228" selection-start-column="17" selection-end-line="228" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -206,6 +207,7 @@
         <option value="$PROJECT_DIR$/src/tests/testMalla.java" />
         <option value="$PROJECT_DIR$/src/Comunication/server/TronServer.java" />
         <option value="$PROJECT_DIR$/src/Structures/Troncycle.java" />
+        <option value="$PROJECT_DIR$/src/Structures/Malla/LinkedMatrix.java" />
         <option value="$PROJECT_DIR$/src/Comunication/server/ServerRead.java" />
       </list>
     </option>
@@ -913,7 +915,7 @@
       <option name="presentableId" value="Default" />
       <updated>1475188401061</updated>
       <workItem from="1475892901446" duration="5833000" />
-      <workItem from="1475901046081" duration="10343000" />
+      <workItem from="1475901046081" duration="10611000" />
     </task>
     <task id="LOCAL-00001" summary="Posibilidad de avisar cuando se murió">
       <created>1475912644651</created>
@@ -936,11 +938,25 @@
       <option name="project" value="LOCAL" />
       <updated>1475915314522</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Elimina el jugador cuando se desconecta">
+      <created>1475917081147</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1475917081147</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Mata el jugador cuando se desconecta">
+      <created>1475917115277</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1475917115277</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16176000" />
+    <option name="totallyTimeSpent" value="16444000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="730" extended-state="6" />
@@ -955,7 +971,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -988,7 +1004,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Posibilidad de avisar cuando se murió" />
     <MESSAGE value="Previene el suicidio" />
-    <option name="LAST_COMMIT_MESSAGE" value="Previene el suicidio" />
+    <MESSAGE value="Elimina el jugador cuando se desconecta" />
+    <MESSAGE value="Mata el jugador cuando se desconecta" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mata el jugador cuando se desconecta" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1182,46 +1200,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GraphicMap/Screen1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="88" column="0" selection-start-line="60" selection-start-column="8" selection-end-line="61" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Structures/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Structures/Malla/LinkedMatrix.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
-          <caret line="214" column="55" selection-start-line="214" selection-start-column="55" selection-end-line="214" selection-end-column="55" />
-          <folding>
-            <element signature="e#614#615#0" expanded="true" />
-            <element signature="e#632#633#0" expanded="true" />
-            <element signature="e#667#668#0" expanded="true" />
-            <element signature="e#690#691#0" expanded="true" />
-            <element signature="e#718#719#0" expanded="true" />
-            <element signature="e#739#740#0" expanded="true" />
-            <element signature="e#779#780#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
-            <element signature="e#836#837#0" expanded="true" />
-            <element signature="e#857#858#0" expanded="true" />
-            <element signature="e#897#898#0" expanded="true" />
-            <element signature="e#926#927#0" expanded="true" />
-            <element signature="e#955#956#0" expanded="true" />
-            <element signature="e#977#978#0" expanded="true" />
-            <element signature="e#1019#1020#0" expanded="true" />
-            <element signature="e#1050#1051#0" expanded="true" />
-            <element signature="e#4085#4086#0" expanded="true" />
-            <element signature="e#4129#4130#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1241,10 +1224,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Comunication/server/PlayerArray.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="57" column="16" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GraphicMap/Screen1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="88" column="0" selection-start-line="60" selection-start-column="8" selection-end-line="61" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Structures/Troncycle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+        <state relative-caret-position="141">
+          <caret line="213" column="23" selection-start-line="213" selection-start-column="19" selection-end-line="213" selection-end-column="23" />
           <folding>
             <element signature="e#685#686#0" expanded="true" />
             <element signature="e#699#700#0" expanded="true" />
@@ -1292,11 +1291,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Comunication/server/PlayerArray.java">
+    <entry file="file://$PROJECT_DIR$/src/Structures/Malla/LinkedMatrix.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="57" column="16" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
-          <folding />
+        <state relative-caret-position="110">
+          <caret line="271" column="10" selection-start-line="271" selection-start-column="10" selection-end-line="271" selection-end-column="10" />
+          <folding>
+            <element signature="e#614#615#0" expanded="true" />
+            <element signature="e#632#633#0" expanded="true" />
+            <element signature="e#667#668#0" expanded="true" />
+            <element signature="e#690#691#0" expanded="true" />
+            <element signature="e#718#719#0" expanded="true" />
+            <element signature="e#739#740#0" expanded="true" />
+            <element signature="e#779#780#0" expanded="true" />
+            <element signature="e#808#809#0" expanded="true" />
+            <element signature="e#836#837#0" expanded="true" />
+            <element signature="e#857#858#0" expanded="true" />
+            <element signature="e#897#898#0" expanded="true" />
+            <element signature="e#926#927#0" expanded="true" />
+            <element signature="e#955#956#0" expanded="true" />
+            <element signature="e#977#978#0" expanded="true" />
+            <element signature="e#1019#1020#0" expanded="true" />
+            <element signature="e#1050#1051#0" expanded="true" />
+            <element signature="e#4085#4086#0" expanded="true" />
+            <element signature="e#4129#4130#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1313,8 +1331,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Comunication/server/ServerRead.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="234" column="0" selection-start-line="234" selection-start-column="0" selection-end-line="234" selection-end-column="0" />
+        <state relative-caret-position="80">
+          <caret line="228" column="17" selection-start-line="228" selection-start-column="17" selection-end-line="228" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

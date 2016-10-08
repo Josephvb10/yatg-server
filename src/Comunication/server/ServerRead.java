@@ -232,7 +232,7 @@ public class ServerRead extends Thread {
 
 	public void logoutUser() {
 		playerCycle.setIsDead(true);
-		playerCycle.killPlayer();
+		TronServer.getMatrix().cleanDeadPlayer(playerCycle);
 
 		System.out.println(name + " se ha desconectado");
 
