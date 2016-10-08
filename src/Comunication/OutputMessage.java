@@ -13,32 +13,26 @@ public class OutputMessage {
 	private int id;
 	private static int nextid = 0;
 	private SimplePlayer player;
-	private ArrayList<Item> itemList;
-	
-	
+	private ArrayList<Item> itemList, powerupsList;
 
 	public OutputMessage() {
 		super();
 	}
 
-
-	public OutputMessage(SimplePlayer player, ArrayList<Item> itemList) {
+	public OutputMessage(SimplePlayer player, ArrayList<Item> itemList, ArrayList<Item> powerupsList) {
 		super();
 		this.player = player;
 		this.itemList = itemList;
+		this.powerupsList = powerupsList;
 	}
 
-
-	public OutputMessage(Troncycle player, GenericLinkedList<Item> itemList) {
+	public OutputMessage(Troncycle player, GenericLinkedList<Item> itemList, GenericLinkedList<Item> powerupsList) {
 		super();
 		id = getNextid();
 		importPlayer(player);
 		importItemList(itemList);
+		importPowerupsList(powerupsList);
 	}
-
-
-
-
 
 	public int getId() {
 		return id;
@@ -64,42 +58,64 @@ public class OutputMessage {
 		this.player = player;
 	}
 	
-	public void importPlayer(Troncycle player) {
-		SimplePlayer simplePlayer = new SimplePlayer(player.getOwner(), player.getSpeed(), player.getFuel(), player.getCurrentDirection(), player.getExtraTrail(), player.getPowerUpSteps(), player.getIsDead(), player.getPowerUpActivated());
-		importItemsPriorityQueue(player.getItemsQueue());
-		setPlayer(simplePlayer);
-		
+	
+
+	public ArrayList<Item> getPowerupsList() {
+		return powerupsList;
 	}
 
+	public void setPowerupsList(ArrayList<Item> powerupsList) {
+		this.powerupsList = powerupsList;
+	}
+
+	public void importPlayer(Troncycle player) {
+		SimplePlayer simplePlayer = new SimplePlayer(player.getOwner(), player.getSpeed(), player.getFuel(),
+				player.getCurrentDirection(), player.getExtraTrail(), player.getPowerUpSteps(), player.getIsDead(),
+				player.getPowerUpActivated());
+		importItemsPriorityQueue(player.getItemsQueue());
+		setPlayer(simplePlayer);
+
+	}
 
 	public ArrayList<Item> getItemList() {
 		return itemList;
 	}
-	public void  setItemList(ArrayList<Item> itemList) {
-		this.itemList=itemList;
-		
+
+	public void setItemList(ArrayList<Item> itemList) {
+		this.itemList = itemList;
+
 	}
 
-	public  void importItemList(GenericLinkedList<Item> itemList) {
+	public void importItemList(GenericLinkedList<Item> itemList) {
 		GenericNode<Item> current = itemList.getHead();
 		ArrayList<Item> newItemList = new ArrayList<>();
-		while(current != null){
+		while (current != null) {
 			newItemList.add(current.getData());
-			
+
 			current = current.getNext();
-			
+
 		}
 		this.itemList = newItemList;
 	}
-	
-	public  void importItemsPriorityQueue(ItemsPriorityQueue itemsPriorityQueue) {
+
+	public void importPowerupsList(GenericLinkedList<Item> powerupsList) {
+		GenericNode<Item> current = powerupsList.getHead();
+		ArrayList<Item> newPowerupsList = new ArrayList<>();
+		while (current != null) {
+			newPowerupsList.add(current.getData());
+			current = current.getNext();
+		}
+		this.powerupsList = newPowerupsList;
+	}
+
+	public void importItemsPriorityQueue(ItemsPriorityQueue itemsPriorityQueue) {
 		GenericNode<Item> current = itemsPriorityQueue.getHead();
 		ArrayList<Item> newItemsPriorityQueue = new ArrayList<>();
-		while(current != null){
+		while (current != null) {
 			newItemsPriorityQueue.add(current.getData());
-			
+
 			current = current.getNext();
-			
+
 		}
 		this.itemList = newItemsPriorityQueue;
 	}
@@ -108,10 +124,5 @@ public class OutputMessage {
 		String messageJson = JsonConverter.objectToJson(this);
 		return messageJson;
 	}
-	
 
 }
-
-
-
-
