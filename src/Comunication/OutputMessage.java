@@ -2,7 +2,6 @@ package Comunication;
 
 import java.util.ArrayList;
 
-
 import Structures.*;
 
 public class OutputMessage {
@@ -12,7 +11,7 @@ public class OutputMessage {
 	private int id;
 	private static int nextid = 0;
 	private SimplePlayer player;
-	private ArrayList<Item> itemList, powerupsList;
+	private ArrayList<Item> itemList;
 
 	public OutputMessage() {
 		super();
@@ -22,7 +21,6 @@ public class OutputMessage {
 		super();
 		this.player = player;
 		this.itemList = itemList;
-		this.powerupsList = powerupsList;
 	}
 
 	public OutputMessage(Troncycle player, GenericLinkedList<Item> itemList) {
@@ -30,7 +28,6 @@ public class OutputMessage {
 		id = getNextid();
 		importPlayer(player);
 		importItemList(itemList);
-		importPowerupsList(player.getPowerUpStack());
 	}
 
 	public int getId() {
@@ -56,22 +53,14 @@ public class OutputMessage {
 	public void setPlayer(SimplePlayer player) {
 		this.player = player;
 	}
-	
-	
-
-	public ArrayList<Item> getPowerupsList() {
-		return powerupsList;
-	}
-
-	public void setPowerupsList(ArrayList<Item> powerupsList) {
-		this.powerupsList = powerupsList;
-	}
 
 	public void importPlayer(Troncycle player) {
 		SimplePlayer simplePlayer = new SimplePlayer(player.getOwner(), player.getSpeed(), player.getFuel(),
 				player.getCurrentDirection(), player.getExtraTrail(), player.getPowerUpSteps(), player.getIsDead(),
 				player.getPowerUpActivated());
+		importPowerupsList(player.getPowerUpStack());
 		setPlayer(simplePlayer);
+		
 
 	}
 
@@ -99,16 +88,12 @@ public class OutputMessage {
 	public void importPowerupsList(GenericStack<Item> genericStack) {
 		GenericNode<Item> current = genericStack.getHead();
 		ArrayList<Item> newPowerupsList = new ArrayList<>();
-
-
 		while (current != null) {
 			newPowerupsList.add(current.getData());
 			current = current.getNext();
 		}
-		this.powerupsList = newPowerupsList;
+		this.player.setpowerupsList(newPowerupsList);
 	}
-
-
 
 	public String toJson() {
 		String messageJson = JsonConverter.objectToJson(this);

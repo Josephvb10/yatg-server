@@ -44,7 +44,7 @@ public class Troncycle {
 		this.speed = generateSpeed();
 		this.normalSpeed = this.speed;
 		this.trail = new GenericLinkedList<>();
-		this.extraTrail =7;
+		this.extraTrail =2;
 		this.powerUpSteps = 0;
 		this.addHead(indexI, indexJ);
 		;

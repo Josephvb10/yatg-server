@@ -9,7 +9,7 @@ public class SimplePlayer {
 	private Direction currentDirection;
 	private int extraTrail, powerUpSteps;
 	private boolean isDead, powerUpActivated;
-	private ArrayList<Item> ItemsPriorityQueue;
+	private ArrayList<Item> powerupsList;
 	
 	public SimplePlayer() {
 		super();
@@ -75,12 +75,13 @@ public class SimplePlayer {
 	public void setPowerUpActivated(boolean powerUpActivated) {
 		this.powerUpActivated = powerUpActivated;
 	}
-	public ArrayList<Item> getItemsPriorityQueue() {
-		return ItemsPriorityQueue;
+	public ArrayList<Item> getpowerupsList() {
+		return powerupsList;
 	}
-	public void setItemsPriorityQueue(ArrayList<Item> itemsPriorityQueue) {
-		ItemsPriorityQueue = itemsPriorityQueue;
+	public void setpowerupsList(ArrayList<Item> powerupsList) {
+		this.powerupsList = powerupsList;
 	}
+	
 
 
 }
