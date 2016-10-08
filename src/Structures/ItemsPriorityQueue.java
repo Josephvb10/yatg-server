@@ -1,5 +1,9 @@
 package Structures;
 
+/**
+ * @author gsegura96
+ *
+ */
 public class ItemsPriorityQueue extends GenericLinkedList<Item> {
 	@Override
 	public void add(Item newItem) {
@@ -7,6 +11,9 @@ public class ItemsPriorityQueue extends GenericLinkedList<Item> {
 		add(newNode);
 	}
 
+	/* (non-Javadoc)
+	 * @see Structures.GenericLinkedList#add(Structures.GenericNode)
+	 */
 	@Override
 
 	public void add(GenericNode<Item> newNode) {
@@ -31,26 +38,22 @@ public class ItemsPriorityQueue extends GenericLinkedList<Item> {
 
 	}
 
+	/**
+	 * Returns the first item of the queue.
+	 * @return The first item of the queue.
+	 */
 	public Item peek() {
 		return getAtPosition(0);
 	}
+	/**
+	 * Deletes and returns the first item of the queue.
+	 * @return The first item of the queue.
+	 */
 	public Item poll() {
 		Item headItem = getAtPosition(0);
 		deleteAtPosition(0);
 		return headItem;
 		
 	}
-	/*public void displayQueue(){
-		if(getHead()==null){
-			System.out.println("No hay items en la cola");
-		}else{
-		GenericNode<Item>  current = getHead();
-		while(current != null){
-			System.out.println(current.getData().getType());
-			current = current.getNext();
-		}
-		
-	}
-	}*/
 	
 }

@@ -1,7 +1,12 @@
 package Structures;
 
-import java.util.ArrayList;
+import Comunication.OutputMessage;
 
+/**
+ * Simplified version of {@link Troncycle} without the {@link GenericLinkedList} properties. Created to be used by {@link OutputMessage} and parsed without problems.
+ * @author gsegura96
+ *
+ */
 public class SimplePlayer {
 	private Player owner;
 	private int speed;
@@ -10,11 +15,17 @@ public class SimplePlayer {
 	private int extraTrail, powerUpSteps;
 	private boolean isDead, powerUpActivated, shieldActivated, speedActivated;
 
+	/**
+	 * Constructs an empty SimplePlayer.
+	 */
 	public SimplePlayer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * COntructs a SimplePlayer with all the properties.
+	 */
 	public SimplePlayer(Player owner, int speed, double fuel, Direction currentDirection, int extraTrail,
 			int powerUpSteps, boolean isDead, boolean powerUpActivated, boolean shieldActivated, boolean speedActivated) {
 		super();

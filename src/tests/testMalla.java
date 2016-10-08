@@ -24,7 +24,7 @@ public class testMalla {
 		Item item6 = new Item(ItemType.fuel, 5, 3);
 		Item item7 = new Item(ItemType.increaseTail, 1, 3);
 		
-		
+		System.out.println(item1.getType().toString());
 		malla.setNodeItem(item1);
 		malla.setNodeItem(item2);
 		malla.setNodeItem(item3);

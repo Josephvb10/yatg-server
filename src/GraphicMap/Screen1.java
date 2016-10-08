@@ -74,7 +74,7 @@ public class Screen1 extends JPanel implements KeyListener, Runnable {
 		Thread thread1 = new Thread(itemGenerator);
 		thread1.start();
 		
-		BotGenerator botGenerator = new BotGenerator(matrix, 2, 500);
+		BotGenerator botGenerator = new BotGenerator(matrix, 2, 100);
 		Thread thread2 = new Thread(botGenerator);
 		thread2.start();*/
 	}
@@ -147,7 +147,12 @@ public class Screen1 extends JPanel implements KeyListener, Runnable {
 		this.thread = new Thread(this);
 	}
 */
-
+	
+	@Override
+	public void addNotify() {
+		super.addNotify();
+		this.thread = new Thread(this);
+	}
 	@Override
 	public void run() {
 
