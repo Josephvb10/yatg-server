@@ -179,6 +179,18 @@ public class ServerRead extends Thread {
 					if (line.substring(0, 1).equals("%")) {
 						String cmd = line.substring(1, 2);
 						switch (cmd){
+							case "I":
+								String arg = line.substring(2,3);
+								switch (arg) {
+									case "U":
+										playerCycle.usePowerUp();
+										break;
+									case "N":
+										playerCycle.changePowerUp();
+										break;
+									default:
+										break;
+								}
 							case "D":
 								String dir = line.substring(2,3);
 								System.out.println("Direccion: " + dir);
