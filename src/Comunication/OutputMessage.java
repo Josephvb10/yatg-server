@@ -2,7 +2,6 @@ package Comunication;
 
 import java.util.ArrayList;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import Structures.*;
 
@@ -26,12 +25,12 @@ public class OutputMessage {
 		this.powerupsList = powerupsList;
 	}
 
-	public OutputMessage(Troncycle player, GenericLinkedList<Item> itemList, GenericLinkedList<Item> powerupsList) {
+	public OutputMessage(Troncycle player, GenericLinkedList<Item> itemList) {
 		super();
 		id = getNextid();
 		importPlayer(player);
 		importItemList(itemList);
-		importPowerupsList(powerupsList);
+		importPowerupsList(player.getPowerUpStack());
 	}
 
 	public int getId() {
@@ -98,8 +97,8 @@ public class OutputMessage {
 		this.itemList = newItemList;
 	}
 
-	public void importPowerupsList(GenericLinkedList<Item> powerupsList) {
-		GenericNode<Item> current = powerupsList.getHead();
+	public void importPowerupsList(GenericStack<Item> genericStack) {
+		GenericNode<Item> current = genericStack.getHead();
 		ArrayList<Item> newPowerupsList = new ArrayList<>();
 		while (current != null) {
 			newPowerupsList.add(current.getData());
