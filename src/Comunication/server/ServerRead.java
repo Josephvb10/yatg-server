@@ -232,6 +232,7 @@ public class ServerRead extends Thread {
 
 	public void logoutUser() {
 		playerCycle.setIsDead(true);
+		playerCycle.killPlayer();
 
 		System.out.println(name + " se ha desconectado");
 
