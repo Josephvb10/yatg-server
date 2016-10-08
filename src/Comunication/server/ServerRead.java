@@ -9,8 +9,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import static Structures.Player.player1;
-
+import Structures.Player;
 /** Clase encargada de leer los Sockets y procesarlos
  * Created by joseph on 10/2/16.
  */
@@ -40,6 +39,20 @@ public class ServerRead extends Thread {
 		}
 	}
 
+	private Player getPlayerNumber() {
+		int size = TronServer.getClients().getSize();
+
+		if (size == 1) {
+			return Player.player2;
+		} else if (size == 2) {
+			return Player.player3;
+		} else if (size == 3) {
+			return Player.player4;
+		} else {
+			return Player.player1;
+		}
+	}
+
 
 	private void addPlayer() {
 		synchronized (TronServer.getClients()) {
@@ -50,8 +63,9 @@ public class ServerRead extends Thread {
 		System.out.println("Cliente " + ip + " se ha unido al juego y se llama " + name);
 		System.out.println("Actualmente hay " + TronServer.getClients().getSize() + " clientes conectados");
 
-		this.playerCycle = new Troncycle(player1, 0, 0);
-		this.playerCycle.setCurrentDirection(Direction.right);
+		this.playerCycle = new Troncycle(getPlayerNumber(), 5, 5);
+		this.playerCycle.setCurrentDirection(Direction.down);
+		playerCycle.setSpeed(80);
 		//botGenerator.tryPlaceHead(playerCycle.getTrail().getHead().getData());
 
 
@@ -93,13 +107,12 @@ public class ServerRead extends Thread {
 
 				}
 			}
-
 			new Thread() {
 				public void run() {
 					long startTime;
 					long elapsed;
 					long wait;
-					long targetTime = 50;
+					long targetTime = 20;
 
 					while (running && joined) {
 						startTime = System.nanoTime();
@@ -127,10 +140,18 @@ public class ServerRead extends Thread {
 					long startTime;
 					long elapsed;
 					long wait;
-					long targetTime = 400;
+					long targetTime = 200;
 
 					while (running && joined) {
 						startTime = System.nanoTime();
+
+						if (playerCycle.getIsDead()) {
+							TronServer.getClients().sendTo(name, "%D");
+							running = false;
+							joined = false;
+							logoutUser();
+							return;
+						}
 
 						TronServer.getMatrix().updatePlayer(playerCycle);
 
@@ -172,6 +193,7 @@ public class ServerRead extends Thread {
 										playerCycle.setCurrentDirection(Direction.left);
 										break;
 									case "R":
+										System.out.println("Movido a la derecha");
 										playerCycle.setCurrentDirection(Direction.right);
 										break;
 									default:
@@ -190,6 +212,8 @@ public class ServerRead extends Thread {
 
 				}
 			}
+
+			logoutUser();
 
 
 		} catch (Exception e) {

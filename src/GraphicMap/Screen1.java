@@ -18,7 +18,7 @@ public class Screen1 extends JPanel implements KeyListener, Runnable {
 
 	public static final int MALLASIZE = 680;
 	public static final int NODOSIZE = 20;
-	public static boolean RIGHT, LEFT, UP, DOWN, RUN, gameover;;
+	public static boolean RIGHT, LEFT, UP, DOWN, RUN, gameover;
 	public LinkedMatrix matrix;
 	public Nodo currentNode;
 	public Troncycle player1, player2;
@@ -57,17 +57,19 @@ public class Screen1 extends JPanel implements KeyListener, Runnable {
 		 * this.matrix.setNodeItem(item13);
 		 */
 
-		this.player1 = new Troncycle(Player.player2, 15, 15);
+		/*this.player1 = new Troncycle(Player.player2, 15, 15);
 		this.player1.setCurrentDirection(Direction.right);
 		player1.setSpeed(80);
 
 		RIGHT = false;
 		LEFT = false;
 		DOWN = false;
-		UP = false;
+		UP = false;*/
 		this.RUN = true;
 
-		repaint();
+		this.thread = new Thread(this);
+		this.thread.start();
+
 		/*ItemGenerator itemGenerator = new ItemGenerator(matrix, 10, 2000);
 		Thread thread1 = new Thread(itemGenerator);
 		thread1.start();
@@ -82,37 +84,33 @@ public class Screen1 extends JPanel implements KeyListener, Runnable {
 		g.setColor(Color.white);
 		g.clearRect(0, 0, MALLASIZE, MALLASIZE);
 		g.setColor(Color.BLACK);
+
 		Nodo temp = TronServer.getMatrix().getHead();
-		for (int y = 0; y < MALLASIZE; y += NODOSIZE) {
-			for (int x = 0; x < MALLASIZE; x += NODOSIZE) {
 
-				if (temp.getItem() == null) {
-					g.setColor(Color.BLACK);
-				} else {
-					if (temp.getItem().getType() == ItemType.tronTrail) {
-						g.setColor(Color.red);
-					} else if (temp.getItem().getType() == ItemType.bomb) {
-						g.setColor(Color.blue);
-					} else if (temp.getItem().getType() == ItemType.shield) {
-						g.setColor(Color.orange);
-					} else if (temp.getItem().getType() == ItemType.turbo) {
-						g.setColor(Color.cyan);
-					} else if (temp.getItem().getType() == ItemType.increaseTail) {
-						g.setColor(Color.GRAY);
-					} else if (temp.getItem().getType() == ItemType.fuel) {
-						g.setColor(Color.GREEN);
-					}
+		while (temp != null) {
 
+			if (temp.getItem() == null) {
+				g.setColor(Color.BLACK);
+			} else {
+				if (temp.getItem().getType() == ItemType.tronTrail) {
+					g.setColor(Color.red);
+				} else if (temp.getItem().getType() == ItemType.bomb) {
+					g.setColor(Color.blue);
+				} else if (temp.getItem().getType() == ItemType.shield) {
+					g.setColor(Color.orange);
+				} else if (temp.getItem().getType() == ItemType.turbo) {
+					g.setColor(Color.cyan);
+				} else if (temp.getItem().getType() == ItemType.increaseTail) {
+					g.setColor(Color.GRAY);
+				} else if (temp.getItem().getType() == ItemType.fuel) {
+					g.setColor(Color.GREEN);
 				}
 
-				g.fillRect(x, y, NODOSIZE, NODOSIZE);
-				g.drawString("(" + temp.getIndexI() + "," + temp.getIndexJ() + ")", x + 10, y + 10);
-				g.setColor(Color.cyan);
-				g.drawRect(x, y, NODOSIZE, NODOSIZE);
-				temp = temp.getNext();
 			}
-
+			g.fillRect(temp.getIndexI()*NODOSIZE, temp.getIndexJ()*NODOSIZE, NODOSIZE, NODOSIZE);
+			temp = temp.getNext();
 		}
+
 
 	}
 
@@ -134,11 +132,11 @@ public class Screen1 extends JPanel implements KeyListener, Runnable {
 			startTime = System.nanoTime();
 
 
-			updateDirection();
+			/*updateDirection();
 
 			TronServer.getMatrix().updatePlayer(this.player1);
 			// this.matrix.updatePlayer(this.player2);
-
+*/
 			repaint();
 
 			elapsed = System.nanoTime() - startTime;
