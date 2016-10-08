@@ -71,7 +71,6 @@ public class OutputMessage {
 		SimplePlayer simplePlayer = new SimplePlayer(player.getOwner(), player.getSpeed(), player.getFuel(),
 				player.getCurrentDirection(), player.getExtraTrail(), player.getPowerUpSteps(), player.getIsDead(),
 				player.getPowerUpActivated());
-		importItemsPriorityQueue(player.getItemsQueue());
 		setPlayer(simplePlayer);
 
 	}
@@ -109,17 +108,7 @@ public class OutputMessage {
 		this.powerupsList = newPowerupsList;
 	}
 
-	public void importItemsPriorityQueue(ItemsPriorityQueue itemsPriorityQueue) {
-		GenericNode<Item> current = itemsPriorityQueue.getHead();
-		ArrayList<Item> newItemsPriorityQueue = new ArrayList<>();
-		while (current != null) {
-			newItemsPriorityQueue.add(current.getData());
 
-			current = current.getNext();
-
-		}
-		this.itemList = newItemsPriorityQueue;
-	}
 
 	public String toJson() {
 		String messageJson = JsonConverter.objectToJson(this);
