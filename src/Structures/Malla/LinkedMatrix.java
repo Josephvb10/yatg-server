@@ -250,6 +250,7 @@ public class LinkedMatrix {
 				default:
 					break;
 				}
+				System.out.println(player.getPowerUpStack());
 			}
 			if (player.getIsDead() == false) {
 				player.setFuel(player.getFuel() - 0.2);

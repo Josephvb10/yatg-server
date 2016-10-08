@@ -100,6 +100,8 @@ public class OutputMessage {
 	public void importPowerupsList(GenericStack<Item> genericStack) {
 		GenericNode<Item> current = genericStack.getHead();
 		ArrayList<Item> newPowerupsList = new ArrayList<>();
+		System.out.println( "output "+ genericStack);
+
 		while (current != null) {
 			newPowerupsList.add(current.getData());
 			current = current.getNext();

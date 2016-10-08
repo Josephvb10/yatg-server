@@ -366,8 +366,12 @@ public class Troncycle {
  */
 	public void changePowerUp(){
 		if(!this.getPowerUpStack().isEmpty()){
-			Item powerUpChanged = this.getPowerUpStack().pop();
-			this.getPowerUpStack().addLast(powerUpChanged);
+			if(this.getPowerUpStack().getHead().getNext() != null) {
+
+
+				Item powerUpChanged = this.getPowerUpStack().pop();
+				this.getPowerUpStack().addLast(powerUpChanged);
+			}
 			}
 		System.out.println(this.getPowerUpStack());
 	}

@@ -112,7 +112,7 @@ public class ServerRead extends Thread {
 					long startTime;
 					long elapsed;
 					long wait;
-					long targetTime = 20;
+					long targetTime = 200 / playerCycle.getSpeed();
 
 					while (running && joined) {
 						startTime = System.nanoTime();
