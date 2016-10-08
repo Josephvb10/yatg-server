@@ -94,6 +94,17 @@ public class PlayerArray {
 		}
 	}
 
+	public void sendPingAll() {
+		PlayerArrayNodo actual = this.head;
+		while (actual != null) {
+			if (actual.getOut() != null) {
+				actual.getOut().println("%L" + System.currentTimeMillis());
+				actual.getOut().flush();
+			}
+			actual = actual.getNext();
+		}
+	}
+
 	public void sendTo(int i, String msg) {
 		PlayerArrayNodo actual = get(i);
 		if (actual != null) {

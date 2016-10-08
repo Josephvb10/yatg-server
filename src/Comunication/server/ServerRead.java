@@ -25,6 +25,8 @@ public class ServerRead extends Thread {
 	private OutputMessage outMsg;
 	private Troncycle playerCycle;
 
+	private int playerNo;
+
 	ServerRead(Socket socket) {
 		try {
 			this.socket = socket;
@@ -40,24 +42,29 @@ public class ServerRead extends Thread {
 	}
 
 	private Player getPlayerNumber() {
-		int size = TronServer.getClients().getSize();
-
-		if (size == 1) {
-			return Player.player2;
-		} else if (size == 2) {
-			return Player.player3;
-		} else if (size == 3) {
-			return Player.player4;
-		} else {
-			return Player.player1;
+		switch (playerNo) {
+			case 1:
+				return Player.player1;
+			case 2:
+				return Player.player2;
+			case 3:
+				return Player.player3;
+			case 4:
+				return Player.player4;
+			default:
+				System.out.println("ESTO ES MALO");
+				break;
 		}
+
+		return null;
+
 	}
 
 
 	private void addPlayer() {
 		synchronized (TronServer.getClients()) {
 			if (!TronServer.getClients().contains(name)) {
-				TronServer.getClients().insertAvailable(name, out);
+				this.playerNo = TronServer.getClients().insertAvailable(name, out);
 			}
 		}
 		System.out.println("Cliente " + ip + " se ha unido al juego y se llama " + name);
@@ -111,7 +118,7 @@ public class ServerRead extends Thread {
 					long startTime;
 					long elapsed;
 					long wait;
-					long targetTime = 200;
+					long targetTime = 40;
 
 					while (running && joined) {
 
@@ -184,7 +191,8 @@ public class ServerRead extends Thread {
 							case "I":
 								String arg = line.substring(2,3);
 								switch (arg) {
-									case "U":
+									case "T":
+										System.out.print(100000000);
 										playerCycle.usePowerUp();
 										break;
 									case "N":

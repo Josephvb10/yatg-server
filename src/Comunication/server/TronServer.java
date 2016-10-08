@@ -86,7 +86,7 @@ public class TronServer {
 			// TODO: 10/2/16 Mostrar la IP visualmente
 			System.out.println("IP del server: " + getIP());
 
-			//new ServerWrite().start();
+			new ServerWrite().start();
 
 			try (ServerSocket listener = new ServerSocket(PORT)) {
 				System.out.println("Servidor iniciado");
