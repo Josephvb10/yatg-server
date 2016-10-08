@@ -1,6 +1,6 @@
 package Structures;
 /**
- * 
+ * Enum the contains the possible players tags(identifiers).
  * @author gsegura96
  *
  */

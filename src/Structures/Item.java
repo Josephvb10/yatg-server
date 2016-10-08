@@ -136,81 +136,53 @@ public class Item implements Comparable<Item> {
 		return randomNum;
 	}
 
-	/** 
-	 * 
-	 */
+	
 	@Override
 	public int compareTo(Item o) {
 		return this.type.compareTo(o.getType());
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
+	
 	public int getIndexI() {
 		return indexI;
 	}
 
-	/**
-	 * 
-	 * @param indexI
-	 */
+	
 	public void setIndexI(int indexI) {
 		this.indexI = indexI;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
+	
 	public int getIndexJ() {
 		return indexJ;
 	}
 
-	/**
-	 * 
-	 * @param indexJ
-	 */
+	
 	public void setIndexJ(int indexJ) {
 		this.indexJ = indexJ;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
+	
 	public boolean getFirst() {
 		return first;
 	}
 
-	/**
-	 * 
-	 * @param first
-	 */
+	
 	public void setFirst(boolean first) {
 		this.first = first;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
+	
 	public Player getOwner() {
 		return owner;
 	}
 
-	/**
-	 * 
-	 * @param owner
-	 */
+	
 	public void setOwner(Player owner) {
 		this.owner = owner;
 	}
 
-	/**
-	 * 
-	 */
+	
 	@Override
 	public String toString() {
 		String result = getType().name();
