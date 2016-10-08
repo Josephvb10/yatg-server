@@ -201,6 +201,7 @@ public class Troncycle {
 	public void setPowerUpStack(GenericStack<Item> powerUpStack) {
 		this.powerUpStack = powerUpStack;
 	}
+	
 
 	
 /**

@@ -57,10 +57,9 @@ public class OutputMessage {
 	public void importPlayer(Troncycle player) {
 		SimplePlayer simplePlayer = new SimplePlayer(player.getOwner(), player.getSpeed(), player.getFuel(),
 				player.getCurrentDirection(), player.getExtraTrail(), player.getPowerUpSteps(), player.getIsDead(),
-				player.getPowerUpActivated());
+				player.getPowerUpActivated(), player.isShieldActivated(), player.isSpeedActivated());
 		importPowerupsList(player.getPowerUpStack());
 		setPlayer(simplePlayer);
-		
 
 	}
 
