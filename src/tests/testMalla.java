@@ -91,9 +91,9 @@ public class testMalla {
 		System.out.println(Jsonlist);
 		System.out.println(malla.getSimpleItemList());
 		System.out.println("hola");
-		OutputMessage mensaje = new OutputMessage(player1,malla.getSimpleItemList());
-		String jsonMens = mensaje.toJson();
-		System.out.println(jsonMens);
+		//OutputMessage mensaje = new OutputMessage(player1,malla.getSimpleItemList());
+		//String jsonMens = mensaje.toJson();
+		//System.out.println(jsonMens);
 		
 	
 		
@@ -102,20 +102,20 @@ public class testMalla {
 		
 		
 		
-		String inputMessage = jsonMens;
-		System.out.println(inputMessage);
+	//	String inputMessage = jsonMens;
+		//System.out.println(inputMessage);
 		OutputMessage newMessage = new OutputMessage();
 		// IMPORTANT
 		// without this option set adding new fields breaks old code
 		//mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-		try {
-			newMessage = mapper.readValue(inputMessage, OutputMessage.class);
+		/*try {
+			//newMessage = mapper.readValue(inputMessage, OutputMessage.class);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 			//e.printStackTrace();
-		}
+		}*/
 		newMessage.getId();
 		System.out.println(newMessage.getId());
 		
