@@ -11,7 +11,7 @@ public class OutputMessage {
 	private int id;
 	private static int nextid = 0;
 	private SimplePlayer player;
-	private ArrayList<Item> itemList;
+	private ArrayList<Item> itemList, powerupsList;
 
 	public OutputMessage() {
 		super();
@@ -28,6 +28,8 @@ public class OutputMessage {
 		id = getNextid();
 		importPlayer(player);
 		importItemList(itemList);
+		importPowerupsList(player.getPowerUpStack());
+
 	}
 
 	public int getId() {
@@ -58,7 +60,6 @@ public class OutputMessage {
 		SimplePlayer simplePlayer = new SimplePlayer(player.getOwner(), player.getSpeed(), player.getFuel(),
 				player.getCurrentDirection(), player.getExtraTrail(), player.getPowerUpSteps(), player.getIsDead(),
 				player.getPowerUpActivated(), player.isShieldActivated(), player.isSpeedActivated());
-		importPowerupsList(player.getPowerUpStack());
 		setPlayer(simplePlayer);
 
 	}
@@ -91,12 +92,19 @@ public class OutputMessage {
 			newPowerupsList.add(current.getData());
 			current = current.getNext();
 		}
-		this.player.setpowerupsList(newPowerupsList);
+		this.setpowerupsList(newPowerupsList);
 	}
 
 	public String toJson() {
 		String messageJson = JsonConverter.objectToJson(this);
 		return messageJson;
+	}
+	public ArrayList<Item> getpowerupsList() {
+		return powerupsList;
+	}
+
+	public void setpowerupsList(ArrayList<Item> powerupsList) {
+		this.powerupsList = powerupsList;
 	}
 
 }

@@ -9,7 +9,6 @@ public class SimplePlayer {
 	private Direction currentDirection;
 	private int extraTrail, powerUpSteps;
 	private boolean isDead, powerUpActivated, shieldActivated, speedActivated;
-	private ArrayList<Item> powerupsList;
 
 	public SimplePlayer() {
 		super();
@@ -88,13 +87,7 @@ public class SimplePlayer {
 
 	}
 
-	public ArrayList<Item> getPowerupsList() {
-		return powerupsList;
-	}
-
-	public void setPowerupsList(ArrayList<Item> powerupsList) {
-		this.powerupsList = powerupsList;
-	}
+	
 
 	public boolean isShieldActivated() {
 		return shieldActivated;
@@ -120,12 +113,6 @@ public class SimplePlayer {
 		this.powerUpActivated = powerUpActivated;
 	}
 
-	public ArrayList<Item> getpowerupsList() {
-		return powerupsList;
-	}
-
-	public void setpowerupsList(ArrayList<Item> powerupsList) {
-		this.powerupsList = powerupsList;
-	}
+	
 
 }
