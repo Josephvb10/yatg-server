@@ -143,17 +143,26 @@ public class Troncycle {
 		this.speed = speed;
 		System.out.println("Velocidad actual" + this.speed);
 	}
-/**
- * Asigna una direcci�n a la moto
- * @param currentDirection nueva direcci�n de la moto
- */
+
 
 	public Direction getCurrentDirection() {
 		return currentDirection;
 	}
 
-	public void setCurrentDirection(Direction currentDirection) {
-		this.currentDirection = currentDirection;
+	/**
+	 * Asigna una direcci�n a la moto
+	 * @param newDirection nueva direcci�n de la moto
+	 */
+
+	public void setCurrentDirection(Direction newDirection) {
+		if ((this.currentDirection == Direction.down && newDirection == Direction.up)
+			|| (this.currentDirection == Direction.up && newDirection == Direction.down)
+			|| (this.currentDirection == Direction.left && newDirection == Direction.right)
+			|| (this.currentDirection == Direction.right && newDirection == Direction.left)
+			) {
+			return;
+		}
+		this.currentDirection = newDirection;
 	}
 
 	public GenericLinkedList<Item> getTrail() {
