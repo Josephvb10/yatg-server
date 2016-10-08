@@ -250,6 +250,7 @@ public class LinkedMatrix {
 				default:
 					break;
 				}
+				System.out.println(player.getPowerUpStack());
 			}
 			if (player.getIsDead() == false) {
 				player.setFuel(player.getFuel() - 0.2);
@@ -269,7 +270,7 @@ public class LinkedMatrix {
  * It removes the player of the screen.
  * @param player player that's going to be removed
  */
-	private void cleanDeadPlayer(Troncycle player) {
+	public void cleanDeadPlayer(Troncycle player) {
 		GenericNode<Item> current = player.getTrail().getHead();
 		while (current != null) {
 			this.resetNodeItem(current.getData());

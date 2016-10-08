@@ -44,7 +44,7 @@ public class Troncycle {
 		this.speed = generateSpeed();
 		this.normalSpeed = this.speed;
 		this.trail = new GenericLinkedList<>();
-		this.extraTrail =7;
+		this.extraTrail =2;
 		this.powerUpSteps = 0;
 		this.addHead(indexI, indexJ);
 		;
@@ -128,8 +128,20 @@ public class Troncycle {
 		return currentDirection;
 	}
 
-	public void setCurrentDirection(Direction currentDirection) {
-		this.currentDirection = currentDirection;
+	/**
+	 * Asigna una direcci�n a la moto
+	 * @param newDirection nueva direcci�n de la moto
+	 */
+
+	public void setCurrentDirection(Direction newDirection) {
+		if ((this.currentDirection == Direction.down && newDirection == Direction.up)
+			|| (this.currentDirection == Direction.up && newDirection == Direction.down)
+			|| (this.currentDirection == Direction.left && newDirection == Direction.right)
+			|| (this.currentDirection == Direction.right && newDirection == Direction.left)
+			) {
+			return;
+		}
+		this.currentDirection = newDirection;
 	}
 
 	public GenericLinkedList<Item> getTrail() {
@@ -165,6 +177,7 @@ public class Troncycle {
 	public void setPowerUpStack(GenericStack<Item> powerUpStack) {
 		this.powerUpStack = powerUpStack;
 	}
+	
 
 	
 /**
@@ -324,8 +337,12 @@ public class Troncycle {
  */
 	public void changePowerUp(){
 		if(!this.getPowerUpStack().isEmpty()){
-			Item powerUpChanged = this.getPowerUpStack().pop();
-			this.getPowerUpStack().addLast(powerUpChanged);
+			if(this.getPowerUpStack().getHead().getNext() != null) {
+
+
+				Item powerUpChanged = this.getPowerUpStack().pop();
+				this.getPowerUpStack().addLast(powerUpChanged);
+			}
 			}
 		System.out.println(this.getPowerUpStack());
 	}
