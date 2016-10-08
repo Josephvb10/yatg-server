@@ -72,7 +72,7 @@ public class BotGenerator implements Runnable {
 		return result;
 	}
 
-	private Item tryPlaceHead(Item headToPlace) {
+	public Item tryPlaceHead(Item headToPlace) {
 		// Item headToPlace = bot.getTrail().getHead().getData();
 		while (!addMatrixItem(headToPlace)) {
 			int indexI = randInt(0, numRows - 1);

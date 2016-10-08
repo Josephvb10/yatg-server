@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
+import Comunication.server.TronServer;
 import Structures.*;
 import Structures.Malla.*;
 
@@ -32,7 +33,7 @@ public class Screen1 extends JPanel implements KeyListener, Runnable {
 		requestFocus();
 		addKeyListener(this);
 
-		this.matrix = new LinkedMatrix(MALLASIZE / 20, MALLASIZE / 20);
+		//this.matrix = new LinkedMatrix(MALLASIZE / 20, MALLASIZE / 20);
 		/*
 		 * Item item1 = new Item(ItemType.bomb, 1, 0); Item item2 = new
 		 * Item(ItemType.shield, 2, 1 ); Item item3 = new Item(ItemType.turbo,
@@ -56,24 +57,24 @@ public class Screen1 extends JPanel implements KeyListener, Runnable {
 		 * this.matrix.setNodeItem(item13);
 		 */
 
-		this.player1 = new Troncycle(Player.player1, 0, 0);
+		this.player1 = new Troncycle(Player.player2, 15, 15);
 		this.player1.setCurrentDirection(Direction.right);
-		// player1.setSpeed(80);
+		player1.setSpeed(80);
 
 		RIGHT = false;
 		LEFT = false;
 		DOWN = false;
 		UP = false;
-		RUN = true;
+		this.RUN = true;
 
 		repaint();
-		ItemGenerator itemGenerator = new ItemGenerator(matrix, 10, 2000);
+		/*ItemGenerator itemGenerator = new ItemGenerator(matrix, 10, 2000);
 		Thread thread1 = new Thread(itemGenerator);
 		thread1.start();
 		
 		BotGenerator botGenerator = new BotGenerator(matrix, 2, 500);
 		Thread thread2 = new Thread(botGenerator);
-		thread2.start();
+		thread2.start();*/
 	}
 
 	public void paint(Graphics g) {
@@ -81,7 +82,7 @@ public class Screen1 extends JPanel implements KeyListener, Runnable {
 		g.setColor(Color.white);
 		g.clearRect(0, 0, MALLASIZE, MALLASIZE);
 		g.setColor(Color.BLACK);
-		Nodo temp = matrix.getHead();
+		Nodo temp = TronServer.getMatrix().getHead();
 		for (int y = 0; y < MALLASIZE; y += NODOSIZE) {
 			for (int x = 0; x < MALLASIZE; x += NODOSIZE) {
 
@@ -132,9 +133,10 @@ public class Screen1 extends JPanel implements KeyListener, Runnable {
 
 			startTime = System.nanoTime();
 
+
 			updateDirection();
 
-			this.matrix.updatePlayer(this.player1);
+			TronServer.getMatrix().updatePlayer(this.player1);
 			// this.matrix.updatePlayer(this.player2);
 
 			repaint();
