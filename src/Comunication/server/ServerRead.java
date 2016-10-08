@@ -65,7 +65,6 @@ public class ServerRead extends Thread {
 
 		this.playerCycle = new Troncycle(getPlayerNumber(), 5, 5);
 		this.playerCycle.setCurrentDirection(Direction.down);
-		playerCycle.setSpeed(80);
 		//botGenerator.tryPlaceHead(playerCycle.getTrail().getHead().getData());
 
 
@@ -112,9 +111,10 @@ public class ServerRead extends Thread {
 					long startTime;
 					long elapsed;
 					long wait;
-					long targetTime = 200 / playerCycle.getSpeed();
+					long targetTime = 200;
 
 					while (running && joined) {
+
 						startTime = System.nanoTime();
 						outMsg = new OutputMessage(playerCycle, TronServer.getMatrix().getSimpleItemList());
 						String jsonMens = outMsg.toJson();
@@ -140,9 +140,11 @@ public class ServerRead extends Thread {
 					long startTime;
 					long elapsed;
 					long wait;
-					long targetTime = 200;
+					long targetTime;
 
 					while (running && joined) {
+						targetTime = 500/playerCycle.getSpeed();
+
 						startTime = System.nanoTime();
 
 						if (playerCycle.getIsDead()) {
