@@ -219,19 +219,20 @@ public class ServerRead extends Thread {
 		} catch (Exception e) {
 			// TODO: 10/2/16 Mostrar error gráficamente por si se despicha el thread
 			System.out.println("Desconexión: " + e.getMessage());
+			logoutUser();
 		} finally {
-			if (running) {
 				logoutUser();
 				try {
 					socket.close();
 				} catch (IOException e) {
 					// No se hace nada si hay un error al cerrar el thread, ya que de verdad no importa
 				}
-			}
 		}
 	}
 
 	public void logoutUser() {
+		playerCycle.setIsDead(true);
+
 		System.out.println(name + " se ha desconectado");
 
 		TronServer.getClients().remove(name);
@@ -239,5 +240,8 @@ public class ServerRead extends Thread {
 		System.out.println("Actualmente hay " + TronServer.getClients().getSize() + " clientes conectados");
 
 		TronServer.getClients().sendAll("%P" + TronServer.getClients().getSize());
+
+		this.running = false;
+		this.joined = false;
 	}
 }
