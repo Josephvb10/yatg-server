@@ -50,10 +50,7 @@ public class Troncycle {
 		;
 
 	}
-/**
- * Asigna un valor determinado de pasos para la duraci�n de los power ups
- * @param value  cantidad de pasos para powerUps
- */
+
 
 	public void setPowerUpSteps(int value) {
 		if(value <= 0){
@@ -64,10 +61,7 @@ public class Troncycle {
 		this.powerUpSteps = value;
 	}
 		}
-/**
- * Obtiene el n�mero de pasos de powerUps
- * @return n�mero de pasos de powerUps
- */
+
 	public int getPowerUpSteps() {
 		return this.powerUpSteps;
 	}
@@ -76,17 +70,11 @@ public class Troncycle {
 	public void setPowerUpActivated(boolean value) {
 		this.powerUpActivated = value;
 	}
-/**
- * Obtiene si el powerUp est� activado o no
- * @return valor de verdad
- */
+
 	public boolean getPowerUpActivated() {
 		return this.powerUpActivated;
 	}
-/**
- * Obtiene si el jugador est� muerto
- * @return valor de verdad
- */
+
 	public boolean getIsDead() {
 		return this.isDead;
 	}
@@ -97,19 +85,13 @@ public class Troncycle {
 		this.isDead = value;
 
 	}
-/**
- * Obtiene el n�mero de jugador al que corresponde la moto
- * @return n�mero de jugador
- */
+
 
 
 	public Player getOwner() {
 		return owner;
 	}
-/**
- * Asigna el n�mero de jugador al que corresponde la moto
- * @param owner n�mero de jugador
- */
+
 
 	public void setOwner(Player owner) {
 		this.owner = owner;
@@ -128,10 +110,7 @@ public class Troncycle {
 	public int getNormalSpeed(){
 		return normalSpeed;
 	}
-/**
- * Obtiene la velocidad actual de la moto(puede ser cuando est� en turbo)
- * @return velocidad actual de la moto
- */
+
 
 	public int getSpeed() {
 		return speed;
@@ -143,10 +122,7 @@ public class Troncycle {
 		this.speed = speed;
 		System.out.println("Velocidad actual" + this.speed);
 	}
-/**
- * Asigna una direcci�n a la moto
- * @param currentDirection nueva direcci�n de la moto
- */
+
 
 	public Direction getCurrentDirection() {
 		return currentDirection;
@@ -163,10 +139,7 @@ public class Troncycle {
 	public void setTrail(GenericLinkedList<Item> trail) {
 		this.trail = trail;
 	}
-/**
- * Obtiene el valor de la cola extra que se est� generando
- * @return cola extra gener�ndose
- */
+
 	public int getExtraTrail() {
 		return extraTrail;
 	}
@@ -214,10 +187,7 @@ public class Troncycle {
 		return getIsDead();
 	}
 
-/**
- * Obtiene si el escudo est� activo
- * @return estado del escudo
- */
+
 
 	public boolean isShieldActivated() {
 		return shieldActivated;
@@ -234,16 +204,13 @@ public class Troncycle {
 			setPowerUpActivated(false);
 		}
 	}
-/**
- * Obtiene si el turbo est� actuvo
- * @return estado del turbo
- */
+
 	public boolean isSpeedActivated(){
 		return this.speedActivated;
 	}
 /**
- * Asigna si el turbo est� activado y define el n�mero de pasos por el cual se activar�
- * @param value valor de verdad del estado de activaci�n del turbo
+ * Assigns if the turbo is activated and sets the number of steps that it will last
+ * @param speedActivated if the turbo is activated or not
  */
 
 	public void setSpeedActivated(boolean value){
