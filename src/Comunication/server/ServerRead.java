@@ -116,7 +116,7 @@ public class ServerRead extends Thread {
 
 					while (running && joined) {
 						startTime = System.nanoTime();
-						outMsg = new OutputMessage(playerCycle, TronServer.getMatrix().getSimpleItemList(), new GenericLinkedList<Item>());
+						outMsg = new OutputMessage(playerCycle, TronServer.getMatrix().getSimpleItemList());
 						String jsonMens = outMsg.toJson();
 						TronServer.getClients().sendTo(name, jsonMens);
 
