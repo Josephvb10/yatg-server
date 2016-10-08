@@ -1,20 +1,28 @@
 package Structures;
 
-import java.io.Serializable;
+/**
+ * Generic node structure used by generic linked lists and other classes.
+ * @author gsegura96
+ * 
+ */
 
-public class GenericNode<T> implements Serializable  {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5356394639328185524L;
+public class GenericNode<T>  {
 	private T data;
 	private GenericNode<T> next;
 	
+	
+	/**
+	 * Constructs an empty node.
+	 */
 	public GenericNode(){
 		data=null;
 		next=null;
 	}
 	
+	/**
+	 * Constructs a node containing one element of the specified type..
+	 * @param data Element to be contained by the node.
+	 */
 	public GenericNode(T data) {
 		super();
 		this.data = data;

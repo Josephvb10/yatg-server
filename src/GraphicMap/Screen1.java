@@ -114,11 +114,39 @@ public class Screen1 extends JPanel implements KeyListener, Runnable {
 
 	}
 
+
+/*		public static long targetTime =300;
+		
+		public Screen1(){
+			setPreferredSize( new Dimension(MALLASIZE, MALLASIZE));
+			setFocusable(true);
+			requestFocus();
+			addKeyListener(this);
+			
+			this.matrix = new LinkedMatrix(MALLASIZE/20, MALLASIZE/20);
+
+			
+			
+			 this.player1 = new Troncycle(Player.player1, 0, 0);
+			 this.player1.setCurrentDirection(Direction.right);
+
+		
+			 
+			RIGHT=false;
+			LEFT=false;
+			DOWN=false;
+			UP=false;
+			RUN=true;
+			
+			repaint();
+			new ItemGenerator(matrix,10,2000).start();
+
 	@Override
 	public void addNotify() {
 		super.addNotify();
 		this.thread = new Thread(this);
 	}
+*/
 
 	@Override
 	public void run() {

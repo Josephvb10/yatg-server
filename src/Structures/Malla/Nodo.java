@@ -2,7 +2,11 @@ package Structures.Malla;
 
 
 import Structures.Item;
-
+/**
+ * Class Nodo, provides the nodes for (@LinkedMatrix)
+ * @author Jimena
+ *
+ */
 public class Nodo {
 	private Nodo up, down, left, right, next;
 	private int indexI, indexJ;
